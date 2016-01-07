@@ -91,5 +91,14 @@
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-auth:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard-bundles:dropwizard-configurable-assets-bundle:0.8.1-1" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: IIPSEN2:com.iipsen2:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/resources/LionsClub.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
