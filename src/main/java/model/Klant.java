@@ -1,5 +1,6 @@
 package model;
 
+import DAO.KlantDAO;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 /**
  * Created by Anton on 07/01/2016.
  */
-public class Klant extends iipsen2.model.Klant implements Principal {
+public class Klant extends KlantDAO implements Principal {
 
   @NotEmpty
   @Email
@@ -27,8 +28,8 @@ public class Klant extends iipsen2.model.Klant implements Principal {
   @JsonView(View.Private.class)
   private String[] roles;
 
-  public Klant(String email, String voornaam, String tussenvoegsel, String achternaam, String straatnaam, int huisNummer, String huisNummerToevoeging, int postcode, String postcodeToevoeging, String plaatsNaam, String telefoon, String gastLid, String notitie, int isActief, Timestamp creationDate) {
-    super(email, voornaam, tussenvoegsel, achternaam, straatnaam, huisNummer, huisNummerToevoeging, postcode, postcodeToevoeging, plaatsNaam, telefoon, gastLid, notitie, isActief, creationDate);
+  public Klant() {
+
   }
 
 

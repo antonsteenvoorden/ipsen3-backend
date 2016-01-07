@@ -32,10 +32,10 @@
         </dependency>
         <dependency>
             <groupId>IIPSEN2</groupId>
-            <artifactId>com.iipsen2</artifactId>
+            <artifactId>com.ipsen2</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/LionsClub.jar</systemPath>
+            <systemPath>${project.basedir}/libs/LionsClub.jar</systemPath>
         </dependency>
 
     </dependencies>
