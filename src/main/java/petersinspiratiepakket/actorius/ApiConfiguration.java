@@ -26,14 +26,7 @@ public class ApiConfiguration extends Configuration implements AssetsBundleConfi
     @JsonProperty
     private final AssetsConfiguration assets = new AssetsConfiguration();
     
-    public String getApiName()
-    {
-        return apiUser;
-    }
 
-    public void setApiUser(String apiUser) {
-        this.apiUser = apiUser;
-    }
     public String getApiName() {
         return apiName;
     }
