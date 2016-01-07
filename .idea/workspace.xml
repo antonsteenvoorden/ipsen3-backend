@@ -7,13 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce1a7f88-7a94-452c-8e97-711681f4b391" name="Default" comment="">
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\HelloWorldExample\HelloWorldApplication.java" afterPath="" />
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\HelloWorldExample\HelloWorldConfiguration.java" afterPath="" />
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\HelloWorldExample\HelloWorldResource.java" afterPath="" />
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\HelloWorldExample\Saying.java" afterPath="" />
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\HelloWorldExample\TemplateHealthCheck.java" afterPath="" />
-      <change type="DELETED" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\src\main\java\edu\groep6\ipsen3\Main.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/LionsClub.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/edu/groep6/ipsen3/newKlantDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IPSEN3.iml" afterPath="$PROJECT_DIR$/IPSEN3.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\.idea\workspace.xml" afterPath="X:\Anton\Documents\Workspaces\IdeaProjects\IPSEN3-BACKEND\.idea\workspace.xml" />
     </list>
     <ignored path="IPSEN3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -150,6 +149,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IPSEN3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IPSEN3-BACKEND" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -490,12 +503,12 @@
       <workItem from="1448046719280" duration="201000" />
       <workItem from="1448228166675" duration="3662000" />
       <workItem from="1449752734355" duration="17000" />
-      <workItem from="1452161706230" duration="139000" />
+      <workItem from="1452161706230" duration="333000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4555000" />
+    <option name="totallyTimeSpent" value="4749000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
