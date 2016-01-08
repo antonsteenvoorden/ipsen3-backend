@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class KlantController implements KlantHandler {
     /**
-     * KlantController bevat referenties naar klantDAO (voor het doorspelen van de functies)
+     * KlantController bevat referenties naar KlantDAO (voor het doorspelen van de functies)
      * en ordercontroller voor het doorspelen van de order-specifieke functies
      */
     private KlantDAO klantDAO;
@@ -69,7 +69,7 @@ public class KlantController implements KlantHandler {
     }
 
     /**
-     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien klantDAO.updateKlant telkens een enkele
+     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien KlantDAO.updateKlant telkens een enkele
      * klant verwacht
      *
      * @param klanten
@@ -82,7 +82,7 @@ public class KlantController implements KlantHandler {
     }
 
     /**
-     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien klantDAO.updateKlant telkens een enkele
+     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien KlantDAO.updateKlant telkens een enkele
      * klant verwacht
      *
      * @param klanten
@@ -96,7 +96,7 @@ public class KlantController implements KlantHandler {
     }
 
     /**
-     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien klantDAO.updateKlant telkens een enkele
+     * updateMultipleKlanten loopt door de gegeven arraylist heen aangezien KlantDAO.updateKlant telkens een enkele
      * klant verwacht
      * ook word in deze loop de klant.setIsActief op 1 gezet.
      *

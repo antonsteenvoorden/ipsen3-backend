@@ -11,6 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-auth:0.9.1" level="project" />
+    <orderEntry type="library" name="Maven: io.dropwizard-bundles:dropwizard-configurable-assets-bundle:0.8.1-1" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-core:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-util:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.0" level="project" />
