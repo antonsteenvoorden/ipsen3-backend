@@ -1,0 +1,1 @@
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password'
