@@ -9,3 +9,18 @@ assets:
 server:
   rootPath: /api/*
   adminContextPath: /admin
+
+# Database settings
+database:
+
+  # the name of the JDBC driver
+  driverClass: com.mysql.jdbc.Driver
+
+  # the username
+  user: dropwizzard
+
+  # the password
+  password: 12345
+
+  # the JDBC URL
+  url: jdbc:mysql://localhost:3306/testdatabase
