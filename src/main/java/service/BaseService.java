@@ -1,32 +1,25 @@
 package service;
 
-import petersinspiratiepakket.actorius.model.User;
-
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 
 /**
- *
- * @author Peter van Vliet
  * @param <T>
+ * @author Peter van Vliet
  */
-public class BaseService<T>
-{
-    public T requireResult(T model)
-    {
-        if (model == null)
-        {
+public class BaseService<T> {
+    public T requireResult(T model) {
+        if (model == null) {
             throw new NotFoundException();
         }
-        
         return model;
     }
-    
-    public void assertSelf(User user1, User user2)
-    {
-        if (!user1.equals(user2))
-        {
-            throw new ForbiddenException();
-        }
-    }
+//
+//    public void assertSelf(User user1, User user2)
+//    {
+//        if (!user1.equals(user2))
+//        {
+//            throw new ForbiddenException();
+//        }
+//    }
 }
