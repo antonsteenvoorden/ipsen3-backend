@@ -1,4 +1,4 @@
-package ViewKaas;
+package View;
 
 /**
  * Created by Anton on 07/01/2016.

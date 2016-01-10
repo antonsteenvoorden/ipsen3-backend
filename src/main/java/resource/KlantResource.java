@@ -3,7 +3,7 @@
 //import com.fasterxml.jackson.annotation.JsonView;
 //import io.dropwizard.auth.Auth;
 //import model.Klant;
-//import petersinspiratiepakket.actorius.ViewKaas.View;
+//import petersinspiratiepakket.actorius.View.View;
 //import petersinspiratiepakket.actorius.model.User;
 //import petersinspiratiepakket.actorius.service.UserService;
 //
@@ -29,7 +29,7 @@
 //    }
 //
 //    @GET
-//    @JsonView(ViewKaas.View.Public.class)
+//    @JsonView(View.View.Public.class)
 //    @RolesAllowed("GUEST")
 //    public Collection<User> retrieveAll() {
 //        return service.getAll();
@@ -37,7 +37,7 @@
 //
 //    @GET
 //    @Path("/{email}")
-//    @JsonView(ViewKaas.View.Public.class)
+//    @JsonView(View.View.Public.class)
 //    @RolesAllowed("GUEST")
 //    public User retrieve(@PathParam("email") String email) {
 //        return service.get(email);
@@ -45,7 +45,7 @@
 //
 //    @POST
 //    @Consumes(MediaType.APPLICATION_JSON)
-//    @JsonView(ViewKaas.View.Protected.class)
+//    @JsonView(View.View.Protected.class)
 //    public void create(User user) {
 //        service.add(user);
 //    }
@@ -53,7 +53,7 @@
 //    @PUT
 //    @Path("/{email}")
 //    @Consumes(MediaType.APPLICATION_JSON)
-//    @JsonView(ViewKaas.View.Protected.class)
+//    @JsonView(View.View.Protected.class)
 //    @RolesAllowed("GUEST")
 //    public void update(@PathParam("email") String email, @Auth Klant authenticator, Klant klant) {
 //        service.update(authenticator, email, klant);
@@ -68,7 +68,7 @@
 //
 //    @GET
 //    @Path("/me")
-//    @JsonView(ViewKaas.View.Private.class)
+//    @JsonView(View.View.Private.class)
 //    public User authenticate(@Auth User authenticator) {
 //        return authenticator;
 //    }

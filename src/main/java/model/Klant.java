@@ -5,7 +5,7 @@
 //import org.hibernate.validator.constraints.Email;
 //import org.hibernate.validator.constraints.Length;
 //import org.hibernate.validator.constraints.NotEmpty;
-//import petersinspiratiepakket.actorius.ViewKaas.View;
+//import petersinspiratiepakket.actorius.View.View;
 //
 //import java.security.Principal;
 //
@@ -16,60 +16,60 @@
 //
 //  @NotEmpty
 //  @Email
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String email;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String voornaam;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String tussenvoegsel;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String achternaam;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String straatnaam;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private int huisNummer;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String huisNummerToevoeging;
 //
 //  @Length(min = 4, max = 4)
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private int postcode;
 //
 //  @Length(min = 2, max = 2)
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String postcodeToevoeging;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String plaatsNaam;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String telefoon;
 //
 //  @NotEmpty
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String gastLid;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String notitie;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private int isActief;
 //
-//  @JsonView(ViewKaas.View.Public.class)
+//  @JsonView(View.View.Public.class)
 //  private String dateString;
 //
 //  @NotEmpty
 //  @Length(min = 8)
-//  @JsonView(ViewKaas.View.Protected.class)
+//  @JsonView(View.View.Protected.class)
 //  private String password;
 //
-//  @JsonView(ViewKaas.View.Private.class)
+//  @JsonView(View.View.Private.class)
 //  private String[] roles;
 //
 //  public Klant() {

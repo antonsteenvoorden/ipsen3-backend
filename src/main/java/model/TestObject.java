@@ -1,6 +1,6 @@
 package model;
 
-import ViewKaas.View;
+import View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.security.Principal;
