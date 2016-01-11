@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * Edited by:
  * - Roger
  */
-public abstract class Dao {
+public abstract class DAO {
 
     private String user = "admin";
     private String password = "12345";

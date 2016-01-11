@@ -1,13 +1,24 @@
+import dao.KlantDAO;
+import dao.WijnDAO;
 import io.dropwizard.Application;
 import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.bundles.assets.ConfiguredAssetsBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import model.Klant;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import _UnUsed.TestResource;
+import resource.KlantResource;
+import resource.WijnResource;
+import service.AuthenticationService;
+import service.KlantService;
+import service.WijnService;
 
 /**
  * Edited by:
@@ -15,69 +26,71 @@ import _UnUsed.TestResource;
  * - Roger
  */
 public class ApiApplication extends Application<ApiConfiguration> {
-  private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
+    private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
 
-  private String name;
+    private String name;
 
-  /**
-   * Entry point.
-   *
-   * @param args from command line
-   * @throws Exception if the server cannot start
-   */
-  public static void main(String[] args) throws Exception {
-    new ApiApplication().run(args);
-  }
+    /**
+     * Entry point.
+     *
+     * @param args from command line
+     * @throws Exception if the server cannot start
+     */
+    public static void main(String[] args) throws Exception {
+        new ApiApplication().run(args);
+    }
 
-  @Override
-  public String getName() {
-    return name;
-  }
+    @Override
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public void initialize(Bootstrap<ApiConfiguration> bootstrap) {
-    bootstrap.addBundle((ConfiguredBundle) new ConfiguredAssetsBundle("/assets/", "/client", "index.html"));
-  }
+    @Override
+    public void initialize(Bootstrap<ApiConfiguration> bootstrap) {
+        bootstrap.addBundle((ConfiguredBundle) new ConfiguredAssetsBundle("/assets/", "/client", "index.html"));
+    }
 
-  @Override
-  public void run(ApiConfiguration configuration, Environment environment) {
-    name = configuration.getApiName();
+    @Override
+    public void run(ApiConfiguration configuration, Environment environment) {
+        name = configuration.getApiName();
 
-    logger.info(String.format("Set API name to %s", name));
+        logger.info(String.format("Set API name to %s", name));
 
-    final DBIFactory dbiFactory = new DBIFactory();
-    final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
+        final DBIFactory dbiFactory = new DBIFactory();
+        final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
 
 //        final DBI jdbi = new DBI(String.format("jdbc:mysql://localhost/test", configuration.getUser(), configuration.getPassword()));
 
-//        WijnDao wijnDao = jdbi.onDemand(WijnDao.class);
-//        WijnService wijnService = new WijnService(wijnDao);
-//        WijnResource wijnResource = new WijnResource(wijnService);
-    TestResource testResource = new TestResource();
+        WijnDAO wijnDao = jdbi.onDemand(WijnDAO.class);
+        WijnService wijnService = new WijnService(wijnDao);
+        WijnResource wijnResource = new WijnResource(wijnService);
 
-//        setupAuthentication(environment, userDAO);
+        KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
+        KlantService klantService = new KlantService(klantDAO);
+        KlantResource klantResource = new KlantResource(klantService);
+
+        setupAuthentication(environment, klantDAO);
 //        configureClientFilter(environment);
+        environment.jersey().register(klantResource);
+        environment.jersey().register(wijnResource);
+    }
 
-//    environment.jersey().register(wijnResource);
-    environment.jersey().register(testResource);
-  }
+    private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
+        AuthenticationService authenticationService = new AuthenticationService(klantDAO);
+        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
 
-//    private void setupAuthentication(Environment environment, UserDAO userDAO) {
-//        AuthenticationService authenticationService = new AuthenticationService(userDAO);
-//        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
-//
-//        environment.jersey().register(new AuthDynamicFeature(
-//                new BasicCredentialAuthFilter.Builder<User>()
-//                        .setAuthenticator(authenticationService)
-//                        .setAuthorizer(authenticationService)
-//                        .setRealm("SUPER SECRET STUFF")
-//                        .setUnauthorizedHandler(unauthorizedHandler)
-//                        .buildAuthFilter())
-//        );
-//
-//        environment.jersey().register(RolesAllowedDynamicFeature.class);
-//        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
-//    }
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<Klant>()
+                        .setAuthenticator(authenticationService)
+                        .setAuthorizer(authenticationService)
+                        .setRealm("Niet zichtbaar voor allen")
+                        .setUnauthorizedHandler(unauthorizedHandler)
+                        .buildAuthFilter())
+        );
+
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
+    }
 
 //    private void configureClientFilter(Environment environment) {
 //        environment.getApplicationContext().addFilter(
