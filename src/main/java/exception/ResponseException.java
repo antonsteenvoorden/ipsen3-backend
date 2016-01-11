@@ -4,7 +4,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by roger on 10-1-2016.
+ * Edited by:
+ * - Roger
  */
 public class ResponseException {
 

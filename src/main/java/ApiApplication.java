@@ -1,5 +1,4 @@
-import dao.TestDao;
-import dao.WijnDAO2;
+import dao.WijnDao;
 import io.dropwizard.Application;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.bundles.assets.ConfiguredAssetsBundle;
@@ -9,15 +8,13 @@ import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import resource.TestObjectResource;
 import resource.WijnResource;
-import resource.WijnResource2;
-import service.TestObjectService;
 import service.WijnService;
-import service.WijnService2;
 
 /**
- * Created by Anton on 07/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class ApiApplication extends Application<ApiConfiguration> {
     private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
@@ -55,19 +52,14 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
 //        final DBI jdbi = new DBI(String.format("jdbc:mysql://localhost/test", configuration.getUser(), configuration.getPassword()));
 
-        WijnDAO2 wijnDAO = jdbi.onDemand(WijnDAO2.class);
-        WijnService2 wijnService = new WijnService2(wijnDAO);
-        WijnResource2 wijnResource = new WijnResource2(wijnService);
-
-        TestDao testDao = new TestDao();
-        TestObjectService testObjectService = new TestObjectService(testDao);
-        TestObjectResource testObjectResource = new TestObjectResource(testObjectService);
+        WijnDao wijnDao = jdbi.onDemand(WijnDao.class);
+        WijnService wijnService = new WijnService(wijnDao);
+        WijnResource wijnResource = new WijnResource(wijnService);
 
 //        setupAuthentication(environment, userDAO);
 //        configureClientFilter(environment);
 
         environment.jersey().register(wijnResource);
-        environment.jersey().register(testObjectResource);
     }
 
 //    private void setupAuthentication(Environment environment, UserDAO userDAO) {

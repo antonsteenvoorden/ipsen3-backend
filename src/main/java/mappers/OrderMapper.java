@@ -8,19 +8,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Anton on 10/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class OrderMapper implements ResultSetMapper<Order> {
   @Override
   public Order map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     Order order = new Order();
-    //TODO:SET PROPERTIES
+    order.setOrderID(resultSet.getInt(1));
+    order.setKlantEmail(resultSet.getString(2));
+    order.setFactuurAdres(resultSet.getString(3));
+    order.setOrderDatum(resultSet.getTimestamp(4));
+    order.setIsActief(resultSet.getInt(5));
     return order;
-  }
-  private boolean intToBool(int number) {
-    if (number == 1) {
-      return true;
-    }
-    return false;
   }
 }

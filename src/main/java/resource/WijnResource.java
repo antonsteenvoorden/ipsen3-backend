@@ -1,5 +1,6 @@
 package resource;
 
+import exception.ResponseException;
 import model.Wijn;
 import service.WijnService;
 
@@ -8,30 +9,37 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
+import javax.ws.rs.core.Response;
+import java.util.Set;
 
-/*********************************************
- * Created by roger and KAASANTON on 10-1-2016.
- * ik ben ook een comment
- *********************************************/
+/**
+ * Edited by:
+ * - Roger
+ * - Anton
+ */
 @Path("/wijnen")
 @Produces(MediaType.APPLICATION_JSON)
 public class WijnResource {
 
-    private final WijnService service;
+    private final WijnService wijnService;
 
-    public WijnResource(WijnService service) {
-        this.service = service;
+    public WijnResource(WijnService wijnService) {
+        this.wijnService = wijnService;
     }
 
     @GET
-    public Collection<Wijn> retrieveAll() {
-        return service.getAll();
+    public Set<Wijn> retrieveAll() {
+        Set<Wijn> wijnSet = wijnService.retrieveAll();
+        return wijnSet;
     }
 
     @GET
     @Path("/{id}")
     public Wijn retrieve(@PathParam("id") int id) {
-        return service.get(id);
+        Wijn bestaandeWijn = wijnService.retrieve(id);
+        if (bestaandeWijn == null) {
+            ResponseException.formatAndThrow(Response.Status.NOT_FOUND, "Content with id " + id + " does not exist");
+        }
+        return bestaandeWijn;
     }
 }

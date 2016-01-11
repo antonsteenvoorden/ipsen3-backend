@@ -1,14 +1,17 @@
 package model;
 
-import View.View;
+import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import javax.security.auth.Subject;
+import javax.annotation.Nullable;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
- * Created by Anton on 10/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class Order implements Principal {
   @JsonView(View.Public.class)
@@ -24,7 +27,11 @@ public class Order implements Principal {
   private Timestamp orderDatum;
 
   @JsonView(View.Public.class)
-  private boolean isActief;
+  private int isActief = -1;
+
+  @JsonView(View.Public.class)
+  @Nullable
+  private Set<OrderRegel> orderRegelSet;
 
   public int getOrderID() {
     return orderID;
@@ -58,27 +65,25 @@ public class Order implements Principal {
     this.orderDatum = orderDatum;
   }
 
-  public boolean isActief() {
+  public int getIsActief() {
     return isActief;
   }
 
-  public void setActief(boolean actief) {
-    isActief = actief;
+  public void setIsActief(int isActief) {
+    this.isActief = isActief;
+  }
+
+  @Nullable public Set<OrderRegel> getOrderRegelSet() {
+    return orderRegelSet;
+  }
+
+  public void setOrderRegelSet(@Nullable Set<OrderRegel> orderRegelSet) {
+    this.orderRegelSet = orderRegelSet;
   }
 
   @Override
   public String getName() {
     return null;
-  }
-
-  @Override
-  public boolean implies(Subject subject) {
-    return false;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
   }
 
 }
