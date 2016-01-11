@@ -20,7 +20,4 @@ public interface WijnDao {
 
     @SqlQuery("SELECT w.wijn_id, w.wijn_serie_id, w.wijn_naam, w.wijn_inkoopprijs, w.wijn_prijs, w.wijn_type, w.wijn_jaartal, w.wijn_isactief, w.wijn_afkomst_naam, w.wijn_category_naam FROM `wijn` w WHERE w.wijn_id = :wijnID")
     Wijn retrieve(@Bind("wijnID") int wijnID);
-
-
-
 }

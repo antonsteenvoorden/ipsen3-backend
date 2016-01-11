@@ -9,7 +9,7 @@ import java.util.Set;
  * Edited by:
  * - Roger
  */
-public interface OrderRegelDao {
+public interface OrderRegelDAO {
   @SqlQuery("SELECT orderregel_id, orderregel_wijnid, orderregel_wijnnaam, orderregel_wijnjaartal, " +
       "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +
       "FROM `orderregel`;")

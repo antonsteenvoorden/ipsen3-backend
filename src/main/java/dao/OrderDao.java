@@ -13,7 +13,7 @@ import java.util.Set;
  * - Roger
  */
 @RegisterMapper(OrderMapper.class)
-public interface OrderDao {
+public interface OrderDAO {
   @SqlQuery("SELECT order_id, order_klantemail, order_factuuradres, order_order_datum, order_isactief FROM `order`;")
   Set<Order> retrieveAll();
 
