@@ -1,29 +1,77 @@
 package service;
 
-import dao.OrderDAO;
+import dao.OrderDao;
 import model.Order;
 
 import java.util.Set;
 
 /**
- * Created by Anton on 10/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class OrderService extends BaseService<Order> {
-  private final OrderDAO dao;
+  private final OrderDao orderDao;
+  private final OrderRegelService orderRegelService;
 
-  public OrderService(OrderDAO orderDAO) {
-    this.dao = orderDAO;
+  public OrderService(OrderDao orderDao, OrderRegelService orderRegelService) {
+    this.orderDao = orderDao;
+    this.orderRegelService = orderRegelService;
   }
 
-  public Set<Order> retrieveAll() {
-    return dao.retrieveAll();
+  public Set<Order> retrieveEmptyOrders() {
+    return orderDao.retrieveAll();
   }
 
-  public Order retrieve(int id) {
-    return requireResult(dao.retrieve(id));
+  public Set<Order> retrieveOrdersWithOrderRegels() {
+    Set<Order> orders = retrieveEmptyOrders();
+    for (Order order : orders) {
+      orderRegelService.retrieveEmptyOrderRegelsForOrderID(order.getOrderID());
+    }
+    return orders;
   }
 
-  public void add(Order order) {
-    dao.add(order);
+  public Set<Order> retrieveOrdersWithOrderRegelsWithWijn() {
+    Set<Order> orders = retrieveEmptyOrders();
+    for (Order order : orders) {
+      orderRegelService.retrieveOrderRegelsWithWijn(order);
+    }
+    return orders;
+  }
+
+  public Order retrieveEmptyOrder(int id) {
+    return requireResult(orderDao.retrieve(id));
+  }
+
+  public Order retrieveOrderWithOrderRegels(int id) {
+    Order order = this.retrieveEmptyOrder(id);
+    order.setOrderRegelSet(orderRegelService.retrieveEmptyOrderRegelsForOrderID(order.getOrderID()));
+    return order;
+  }
+
+  public Order retrieveOrderWithOrderRegelsWithWijn(int id) {
+    Order order = this.retrieveEmptyOrder(id);
+    order.setOrderRegelSet(orderRegelService.retrieveEmptyOrderRegelsWithWijnForOrderID(order));
+    return order;
+  }
+
+  public Order add(Order order) {
+    int newOrderID = orderDao.add(order);
+    order.setOrderID(newOrderID);
+    return order;
+  }
+
+  public void update(Order newOrder) {
+    Order existingOrder = retrieveOrderWithOrderRegels(newOrder.getOrderID());
+    if (newOrder.getKlantEmail() != null) {
+      existingOrder.setKlantEmail(newOrder.getKlantEmail());
+    }
+    if (newOrder.getFactuurAdres() != null) {
+      existingOrder.setFactuurAdres(newOrder.getFactuurAdres());
+    }
+    if (newOrder.getIsActief() != -1) {
+      existingOrder.setIsActief(newOrder.getIsActief());
+    }
+    orderDao.update(existingOrder);
   }
 }

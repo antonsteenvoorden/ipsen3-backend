@@ -2,14 +2,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.bundles.assets.AssetsBundleConfiguration;
 import io.dropwizard.bundles.assets.AssetsConfiguration;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 /**
- * Created by Anton on 07/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class ApiConfiguration extends Configuration implements AssetsBundleConfiguration
 {

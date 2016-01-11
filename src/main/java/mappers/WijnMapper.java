@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by roger on 10-1-2016.
+ * Edited by:
+ * - Roger
  */
 public class WijnMapper implements ResultSetMapper<Wijn> {
     @Override
@@ -21,16 +22,9 @@ public class WijnMapper implements ResultSetMapper<Wijn> {
         wijn.setPrijs(resultSet.getDouble(5));
         wijn.setWijnType(resultSet.getInt(6));
         wijn.setWijnJaartal(resultSet.getInt(7));
-        wijn.setActief(intToBool(resultSet.getInt(8)));
+        wijn.setActief(resultSet.getInt(8));
         wijn.setWijnAfkomst(resultSet.getString(9));
         wijn.setWijnCategory(resultSet.getString(10));
         return wijn;
-    }
-
-    private boolean intToBool(int number) {
-        if (number == 1) {
-            return true;
-        }
-        return false;
     }
 }

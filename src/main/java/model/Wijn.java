@@ -1,14 +1,14 @@
 package model;
 
-import View.View;
+import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import java.security.Principal;
 
 
 /**
- * Created by roger on 10-1-2016.
- * DIT IS EEN BEAN
+ * Edited by:
+ * - Roger
  */
 public class Wijn implements Principal {
     @JsonView(View.Public.class)
@@ -33,15 +33,13 @@ public class Wijn implements Principal {
     private int wijnJaartal;
 
     @JsonView(View.Public.class)
-    private boolean actief;
+    private int actief;
 
     @JsonView(View.Public.class)
     private String wijnAfkomst;
 
     @JsonView(View.Public.class)
     private String wijnCategory;
-
-    public Wijn() {}
 
     public int getWijnID() {
         return wijnID;
@@ -99,11 +97,11 @@ public class Wijn implements Principal {
         this.wijnJaartal = wijnJaartal;
     }
 
-    public boolean isActief() {
+    public int getActief() {
         return actief;
     }
 
-    public void setActief(boolean actief) {
+    public void setActief(int actief) {
         this.actief = actief;
     }
 

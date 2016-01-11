@@ -1,13 +1,13 @@
 //package dao;
 //
-//import IIIPSEN2.DAO.DAO;
+//import IIIPSEN2.Dao.Dao;
 //import javafx.scene.control.Alert;
 //import model.Klant;
 //
 //import java.sql.*;
 //import java.util.ArrayList;
 //
-//public class KlantDAO extends DAO {
+//public class KlantDAO extends Dao {
 //    /**
 //     * KlantDAO bevat een aantal vooraf gedefinieerde statements:
 //     * selectEntireKlant:  hele klant selecteren

@@ -2,14 +2,9 @@ package resource;
 
 import exception.ResponseException;
 import model.Order;
-import model.Wijn;
 import service.OrderService;
-import service.WijnService2;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Set;
@@ -40,5 +35,13 @@ public class OrderResource {
             ResponseException.formatAndThrow(Response.Status.NOT_FOUND, "Content with id " + id + " does not exist");
         }
         return bestaandeOrder;
+    }
+
+    @POST
+    @Path("/single")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Order create(Order order)
+    {
+        return orderService.add(order);
     }
 }
