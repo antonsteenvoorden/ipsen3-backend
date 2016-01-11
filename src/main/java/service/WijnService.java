@@ -1,6 +1,6 @@
 package service;
 
-import dao.WijnDao;
+import dao.WijnDAO;
 import model.Wijn;
 
 import java.util.Set;
@@ -10,9 +10,9 @@ import java.util.Set;
  * - Roger
  */
 public class WijnService extends BaseService<Wijn> {
-    private final WijnDao dao;
+    private final WijnDAO dao;
 
-    public WijnService(WijnDao wijnDao) {
+    public WijnService(WijnDAO wijnDao) {
         this.dao = wijnDao;
     }
 

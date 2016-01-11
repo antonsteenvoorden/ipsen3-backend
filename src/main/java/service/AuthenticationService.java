@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
+import dao.KlantDAO;
 import io.dropwizard.auth.AuthenticationException;
+import io.dropwizard.auth.Authenticator;
+import io.dropwizard.auth.Authorizer;
 import io.dropwizard.auth.basic.BasicCredentials;
+import com.google.common.base.Optional;
+import model.Klant;
 
-import java.util.Optional;
 
 /**
  * @author Anton Steenvoorden
@@ -21,7 +20,8 @@ public class AuthenticationService
         this.klantDAO = klantDAO;
     }
 
-    @Override public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
+    @Override
+    public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
         Klant klant = klantDAO.get(credentials.getUsername());
 
         if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
@@ -31,7 +31,8 @@ public class AuthenticationService
         return Optional.absent();
     }
 
-    @Override public boolean authorize(Klant klant, String roleName) {
+    @Override
+    public boolean authorize(Klant klant, String roleName) {
         return klant.hasRole(roleName);
     }
 }

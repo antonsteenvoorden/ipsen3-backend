@@ -1,14 +1,23 @@
-import dao.WijnDao;
+import dao.KlantDAO;
+import dao.WijnDAO;
 import io.dropwizard.Application;
 import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.bundles.assets.ConfiguredAssetsBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import model.Klant;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import resource.KlantResource;
 import resource.WijnResource;
+import service.AuthenticationService;
+import service.KlantService;
 import service.WijnService;
 
 /**
@@ -52,32 +61,36 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
 //        final DBI jdbi = new DBI(String.format("jdbc:mysql://localhost/test", configuration.getUser(), configuration.getPassword()));
 
-        WijnDao wijnDao = jdbi.onDemand(WijnDao.class);
+        WijnDAO wijnDao = jdbi.onDemand(WijnDAO.class);
         WijnService wijnService = new WijnService(wijnDao);
         WijnResource wijnResource = new WijnResource(wijnService);
 
-//        setupAuthentication(environment, userDAO);
-//        configureClientFilter(environment);
+        KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
+        KlantService klantService = new KlantService(klantDAO);
+        KlantResource klantResource = new KlantResource(klantService);
 
+        setupAuthentication(environment, klantDAO);
+//        configureClientFilter(environment);
+        environment.jersey().register(klantResource);
         environment.jersey().register(wijnResource);
     }
 
-//    private void setupAuthentication(Environment environment, UserDAO userDAO) {
-//        AuthenticationService authenticationService = new AuthenticationService(userDAO);
-//        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
-//
-//        environment.jersey().register(new AuthDynamicFeature(
-//                new BasicCredentialAuthFilter.Builder<User>()
-//                        .setAuthenticator(authenticationService)
-//                        .setAuthorizer(authenticationService)
-//                        .setRealm("SUPER SECRET STUFF")
-//                        .setUnauthorizedHandler(unauthorizedHandler)
-//                        .buildAuthFilter())
-//        );
-//
-//        environment.jersey().register(RolesAllowedDynamicFeature.class);
-//        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
-//    }
+    private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
+        AuthenticationService authenticationService = new AuthenticationService(klantDAO);
+        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
+
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<Klant>()
+                        .setAuthenticator(authenticationService)
+                        .setAuthorizer(authenticationService)
+                        .setRealm("Niet zichtbaar voor allen")
+                        .setUnauthorizedHandler(unauthorizedHandler)
+                        .buildAuthFilter())
+        );
+
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
+    }
 
 //    private void configureClientFilter(Environment environment) {
 //        environment.getApplicationContext().addFilter(
