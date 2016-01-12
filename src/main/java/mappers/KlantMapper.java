@@ -32,7 +32,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     klant.setIsActief(resultSet.getInt(14));
     klant.setDateString(resultSet.getString(15));
     klant.setPassword(resultSet.getString(16));
-    klant.setRole(resultSet.getInt(17));
+    klant.setRoles(new String[]={resultSet.getInt(17)});
     //TODO: ?????
     klant.setInMailingList(resultSet.getBoolean(18));
     return klant;
