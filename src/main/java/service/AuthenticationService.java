@@ -1,11 +1,13 @@
 package service;
 
+import dao.AccountDAO;
 import dao.KlantDAO;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.Authorizer;
 import io.dropwizard.auth.basic.BasicCredentials;
 import com.google.common.base.Optional;
+import model.Account;
 import model.Klant;
 
 
@@ -13,26 +15,26 @@ import model.Klant;
  * @author Anton Steenvoorden
  */
 public class AuthenticationService
-    implements Authenticator<BasicCredentials, Klant>, Authorizer<Klant> {
-    private final KlantDAO klantDAO;
+    implements Authenticator<BasicCredentials, Account>, Authorizer<Account> {
+    private final AccountDAO accountDAO;
 
-    public AuthenticationService(KlantDAO klantDAO) {
-        this.klantDAO = klantDAO;
+    public AuthenticationService(AccountDAO accountDAO) {
+        this.accountDAO = accountDAO;
     }
 
     @Override
-    public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
-        Klant klant = klantDAO.get(credentials.getUsername());
+    public Optional<Account> authenticate(BasicCredentials credentials) throws AuthenticationException {
+        Account account = accountDAO.getCredentials(credentials.getUsername());
 
-        if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
-            return Optional.of(klant);
+        if (account != null && account.getPassword().equals(credentials.getPassword())) {
+            return Optional.of(account);
         }
 
         return Optional.absent();
     }
 
     @Override
-    public boolean authorize(Klant klant, String roleName) {
-        return klant.hasRole(roleName);
+    public boolean authorize(Account account, String roleName) {
+        return account.hasRole(roleName);
     }
 }

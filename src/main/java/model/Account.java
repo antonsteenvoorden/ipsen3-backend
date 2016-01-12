@@ -19,7 +19,7 @@ public class Account implements Principal {
     private String email;
 
     @NotEmpty
-    @Length(min = 8)
+    @Length(min = 6)
     @JsonView(View.Protected.class)
     private String password;
 
@@ -63,6 +63,7 @@ public class Account implements Principal {
         this.roles = roles;
     }
 
+
     @Override
     public String getName() {
         return email;
@@ -76,5 +77,18 @@ public class Account implements Principal {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
+    }
+
+
+    public boolean hasRole(String roleName) {
+        if (roles != null) {
+            for (String role : roles) {
+                if (roleName.equals(role)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

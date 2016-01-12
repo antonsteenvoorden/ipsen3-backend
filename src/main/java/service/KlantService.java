@@ -1,6 +1,7 @@
 package service;
 
 import dao.KlantDAO;
+import model.Account;
 import model.Klant;
 import service.BaseService;
 
@@ -26,12 +27,12 @@ public class KlantService extends BaseService<Klant> {
     }
 
     public void add(Klant klant) {
-        klant.setRoles(new String[] { "GUEST" });
+        account.setRoles(new String[] { "GUEST" });
 
         dao.add(klant);
     }
 
-    public void update(Klant authenticator, String email, Klant klant) {
+    public void update(Account authenticator, String email, Klant klant) {
         // Controleren of deze gebruiker wel bestaat
         Klant oldUser = get(email);
 

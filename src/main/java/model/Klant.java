@@ -64,15 +64,14 @@ public class Klant implements Principal {
     @JsonView(_View.View.Public.class)
     private String dateString;
 
-    @NotEmpty
-    @Length(min = 8)
-    @JsonView(_View.View.Protected.class)
-    private String password;
-
-    @JsonView(_View.View.Private.class)
-    private int role;
-    //TODO: convert to enum
-    
+//    @NotEmpty
+//    @Length(min = 8)
+//    @JsonView(_View.View.Protected.class)
+//    private String password;
+//
+//    @JsonView(_View.View.Private.class)
+//    private String[] roles;
+//
     @JsonView(_View.View.Public.class)
     private boolean inMailingList;
 
@@ -196,21 +195,21 @@ public class Klant implements Principal {
         this.dateString = dateString;
     }
 
-    public String getPassword() {
-        return password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
+//    public String[] getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(String[] roles) {
+//        this.roles = roles;
+//    }
 
     public boolean isInMailingList() {
         return inMailingList;
@@ -219,14 +218,18 @@ public class Klant implements Principal {
     public void setInMailingList(boolean inMailingList) {
         this.inMailingList = inMailingList;
     }
-
-    public boolean hasRole(int role) {
-            if(this.role == role) {
-                return true;
-            }
-
-        return false;
-    }
+//
+//    public boolean hasRole(String roleName) {
+//        if (roles != null) {
+//            for (String role : roles) {
+//                if (roleName.equals(role)) {
+//                    return true;
+//                }
+//            }
+//        }
+//
+//        return false;
+//    }
 
     @Override public String getName() {
         if (tussenvoegsel == null) {

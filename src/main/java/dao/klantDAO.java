@@ -15,8 +15,8 @@ public interface KlantDAO {
     @SqlQuery("SELECT klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
                   + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
                   + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
-                  + " klant_gastlid, klant_notitie, klant_isactief , klant_date , account_password, account_mail, account_role FROM klant, account "
-                  + "WHERE klant_email = :email")
+                  + " klant_gastlid, klant_notitie, klant_isactief , klant_date , account_wantsmail FROM `klant`, `account` "
+                  + "WHERE klant_email = :email AND account_email = klant_email")
     Klant get(@Bind("klant_email") String username);
 
     Collection<Klant> getAll();
@@ -26,4 +26,5 @@ public interface KlantDAO {
     void update(@Bind("klant_email") String email, @BindBean Klant klant);
 
     void delete(@Bind("klant_email")String email);
+
 }

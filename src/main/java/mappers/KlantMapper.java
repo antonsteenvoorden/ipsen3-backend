@@ -31,10 +31,9 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     klant.setNotitie(resultSet.getString(13));
     klant.setIsActief(resultSet.getInt(14));
     klant.setDateString(resultSet.getString(15));
-    klant.setPassword(resultSet.getString(16));
-    klant.setRole(resultSet.getInt(17));
-    //TODO: ?????
-    klant.setInMailingList(resultSet.getBoolean(18));
+//    klant.setPassword(resultSet.getString(16));
+//    klant.setRoles(resultSet.getArray(17));
+//    klant.setInMailingList(resultSet.getBoolean(18));
     return klant;
   }
 }
