@@ -1,6 +1,5 @@
 package service;
 
-import model.Account;
 import model.Klant;
 
 import javax.ws.rs.ForbiddenException;
@@ -14,7 +13,7 @@ public class BaseService<T> {
         return model;
     }
 
-    public void assertSelf(Account klant1, Account klant2) {
+    public void assertSelf(Klant klant1, Klant klant2) {
         if (!klant1.equals(klant2)) {
             throw new ForbiddenException();
         }

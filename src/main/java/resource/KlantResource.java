@@ -1,6 +1,5 @@
 package resource;
 
-import model.Account;
 import service.KlantService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
@@ -21,7 +20,8 @@ import java.util.Collection;
 public class KlantResource {
     private final KlantService service;
 
-    public KlantResource(KlantService service) {
+    public KlantResource(KlantService service)
+    {
         this.service = service;
     }
 
@@ -52,7 +52,7 @@ public class KlantResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
     @RolesAllowed("GUEST")
-    public void update(@PathParam("email") String email, @Auth Account authenticator, Klant klant) {
+    public void update(@PathParam("email") String email, @Auth Klant authenticator, Klant klant) {
         service.update(authenticator, email, klant);
     }
 
