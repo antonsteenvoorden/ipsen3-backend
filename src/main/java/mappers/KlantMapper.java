@@ -17,6 +17,9 @@ public class KlantMapper implements ResultSetMapper<Klant> {
   public Klant map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     Klant klant = new Klant();
     //wacht een idee
+    if(resultSet.getString("klant_email") != null) {
+      klant.setEmail(resultSet.getString("klant_email"));
+    }
     klant.setEmail(resultSet.getString("klant_email"));
     klant.setVoornaam(resultSet.getString(2));
     klant.setTussenvoegsel(resultSet.getString(3));
