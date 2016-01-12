@@ -31,11 +31,9 @@
             <version>0.8.1-1</version>
         </dependency>
         <dependency>
-            <groupId>IPSEN2</groupId>
-            <artifactId>ipsen2</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/LionsClub.jar</systemPath>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-jdbi</artifactId>
+            <version>${dropwizard.version}</version>
         </dependency>
 
     </dependencies>

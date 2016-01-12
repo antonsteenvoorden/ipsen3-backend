@@ -5,12 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author Sidney de Geus
- *         <p>
- *         In de abstract IIIPSEN2.DAO class staat een algemene methode die alle IIIPSEN2.DAO's kunnen gebruiken
- *         om een connectie te maken met de database.
+ * Edited by:
+ * - Roger
  */
-
 public abstract class DAO {
 
     private String user = "admin";
