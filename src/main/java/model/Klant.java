@@ -70,9 +70,18 @@ public class Klant implements Principal {
     private String password;
 
     @JsonView(_View.View.Private.class)
-    private int role;
-    //TODO: convert to enum
-    
+    private boolean isKlant;
+
+    @JsonView(_View.View.Private.class)
+    private boolean isLid;
+
+    @JsonView(_View.View.Private.class)
+    private boolean isMKaas;
+
+    @JsonView(_View.View.Private.class)
+    private boolean isKlant;
+
+
     @JsonView(_View.View.Public.class)
     private boolean inMailingList;
 
@@ -204,20 +213,36 @@ public class Klant implements Principal {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
     public boolean isInMailingList() {
         return inMailingList;
     }
 
     public void setInMailingList(boolean inMailingList) {
         this.inMailingList = inMailingList;
+    }
+
+    public boolean isKlant() {
+        return isKlant;
+    }
+
+    public void setKlant(boolean klant) {
+        isKlant = klant;
+    }
+
+    public boolean isLid() {
+        return isLid;
+    }
+
+    public void setLid(boolean lid) {
+        isLid = lid;
+    }
+
+    public boolean isMKaas() {
+        return isMKaas;
+    }
+
+    public void setMKaas(boolean MKaas) {
+        isMKaas = MKaas;
     }
 
     public boolean hasRole(int role) {
