@@ -70,7 +70,7 @@ public class Klant implements Principal {
     private String password;
 
     @JsonView(_View.View.Private.class)
-    private String[] roles;
+    private int role;
     //TODO: convert to enum
     
     @JsonView(_View.View.Public.class)
@@ -204,22 +204,26 @@ public class Klant implements Principal {
         this.password = password;
     }
 
-    public String[] getRoles() {
-        return roles;
+    public int getRole() {
+        return role;
     }
 
-    public void setRoles(String[] roles) {
-        this.roles = roles;
+    public void setRole(int role) {
+        this.role = role;
     }
 
-    public boolean hasRole(String roleName) {
-        if (roles != null) {
-            for (String role : roles) {
-                if (roleName.equals(role)) {
-                    return true;
-                }
+    public boolean isInMailingList() {
+        return inMailingList;
+    }
+
+    public void setInMailingList(boolean inMailingList) {
+        this.inMailingList = inMailingList;
+    }
+
+    public boolean hasRole(int role) {
+            if(this.role == role) {
+                return true;
             }
-        }
 
         return false;
     }
