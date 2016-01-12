@@ -16,7 +16,8 @@ public class KlantMapper implements ResultSetMapper<Klant> {
   @Override
   public Klant map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     Klant klant = new Klant();
-    klant.setEmail(resultSet.getString(1));
+    //wacht een idee
+    klant.setEmail(resultSet.getString("klant_email"));
     klant.setVoornaam(resultSet.getString(2));
     klant.setTussenvoegsel(resultSet.getString(3));
     klant.setAchternaam(resultSet.getString(4));
@@ -32,7 +33,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     klant.setIsActief(resultSet.getInt(14));
     klant.setDateString(resultSet.getString(15));
     klant.setPassword(resultSet.getString(16));
-    klant.setRoles(new String[]={resultSet.getInt(17)});
+    //klant.setRoles(new String[]={resultSet.getInt(17)});
     //TODO: ?????
     klant.setInMailingList(resultSet.getBoolean(18));
     return klant;

@@ -12,18 +12,21 @@ import java.util.Collection;
  */
 public interface KlantDAO {
 
-    @SqlQuery("SELECT klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
-                  + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
-                  + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
-                  + " klant_gastlid, klant_notitie, klant_isactief , klant_date , account_wantsmail FROM `klant`, `account` "
-                  + "WHERE klant_email = :email AND account_email = klant_email")
-    Klant get(@Bind("klant_email") String username);
+  @SqlQuery("SELECT klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
+      + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
+      + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
+      + " klant_gastlid, klant_notitie, klant_isactief , klant_date , account_wantsmail FROM `klant`, `account` "
+      + "WHERE klant_email = :email AND account_email = klant_email")
+  Klant get(@Bind("klant_email") String username);
 
-    Collection<Klant> getAll();
+  @SqlQuery("SELECT account_email, account_password, account_isKlant, account_isLid, account_isMS, account_isAdmin FROM account WHERE account_email = :klant_email AND;")
+  Klant getAuthStub(@Bind("klant_email") String username);
 
-    void add(Klant klant);
+  Collection<Klant> getAll();
 
-    void update(@Bind("klant_email") String email, @BindBean Klant klant);
+  void add(Klant klant);
 
-    void delete(@Bind("klant_email")String email);
+  void update(@Bind("klant_email") String email, @BindBean Klant klant);
+
+  void delete(@Bind("klant_email") String email);
 }
