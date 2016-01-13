@@ -26,7 +26,7 @@ public class KlantService extends BaseService<Klant> {
     }
 
     public void add(Klant klant) {
-        klant.setKlant(true);
+        klant.setIsKlant(true);
 
         dao.add(klant);
     }
