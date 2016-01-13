@@ -103,7 +103,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     if(String.valueOf(resultSet.getBoolean("account_isadmin")).isEmpty()) {
       klant.setIsAdmin((resultSet.getBoolean("account_isadmin")));
     }
-    
+
 
 //    klant.setEmail(resultSet.getString("klant_email"));
 //    klant.setVoornaam(resultSet.getString(2));
