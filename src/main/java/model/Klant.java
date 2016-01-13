@@ -224,24 +224,32 @@ public class Klant implements Principal {
     return isKlant;
   }
 
-  public void setKlant(boolean klant) {
-    isKlant = klant;
-  }
-
   public boolean isLid() {
     return isLid;
-  }
-
-  public void setLid(boolean lid) {
-    isLid = lid;
   }
 
   public boolean isMS() {
     return isMS;
   }
 
-  public void setMS(boolean MS) {
-    isMS = MS;
+  public void setIsKlant(boolean isKlant) {
+    this.isKlant = isKlant;
+  }
+
+  public void setIsLid(boolean isLid) {
+    this.isLid = isLid;
+  }
+
+  public void setIsMS(boolean isMS) {
+    this.isMS = isMS;
+  }
+
+  public boolean isAdmin() {
+    return isAdmin;
+  }
+
+  public void setIsAdmin(boolean isAdmin) {
+    this.isAdmin = isAdmin;
   }
 
   public boolean hasRole(String role) {

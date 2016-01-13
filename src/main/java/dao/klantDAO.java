@@ -19,7 +19,8 @@ public interface KlantDAO {
       + "WHERE klant_email = :email AND account_email = klant_email")
   Klant get(@Bind("klant_email") String username);
 
-  @SqlQuery("SELECT account_email, account_password, account_isKlant, account_isLid, account_isMS, account_isAdmin FROM account WHERE account_email = :klant_email AND;")
+  @SqlQuery("SELECT account_email, account_password, account_isklant, " +
+          "account_islid, account_isms, account_isadmin FROM account WHERE account_email = :klant_email AND;")
   Klant getAuthStub(@Bind("klant_email") String username);
 
   Collection<Klant> getAll();
