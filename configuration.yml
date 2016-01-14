@@ -21,10 +21,10 @@ database:
   driverClass: com.mysql.jdbc.Driver
 
   # the username
-  user: dropwizzard
+  user: ISPEN3G6
 
   # the password
-  password: 12345
+  password: ISPEN3G6
 
   # the JDBC URL
-  url: jdbc:mysql://localhost:3306/testdatabase
+  url: jdbc:mysql://145.97.16.190:3306/ISPEN3G6
