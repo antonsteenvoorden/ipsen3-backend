@@ -17,7 +17,7 @@ import java.util.Set;
 public interface WijnDAO {
     @SqlQuery("SELECT w.wijn_id, w.wijn_serie_id, w.wijn_naam, w.wijn_inkoopprijs, w.wijn_prijs, "
                   + "w.wijn_type, w.wijn_jaartal, w.wijn_isactief, w.wijn_afkomst_naam,"
-                  + " w.wijn_category_naam FROM `wijn` w")
+                  + " w.wijn_category_naam FROM `wijn` w, wijn_category")
     Set<Wijn> retrieveAll();
 
     @SqlQuery("SELECT w.wijn_id, w.wijn_serie_id, w.wijn_naam, w.wijn_inkoopprijs, w.wijn_prijs,"

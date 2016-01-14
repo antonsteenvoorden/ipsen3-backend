@@ -21,10 +21,10 @@ database:
   driverClass: com.mysql.jdbc.Driver
 
   # the username
-  user: ISPEN3G6
+  user: DropWizard
 
   # the password
-  password: ISPEN3G6
+  password: Groep6SWAG
 
   # the JDBC URL
-  url: jdbc:mysql://145.97.16.190:3306/ISPEN3G6
+  url: jdbc:mysql://145.97.16.190:3306/IPSEN3G6
