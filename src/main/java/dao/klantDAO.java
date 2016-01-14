@@ -4,6 +4,7 @@ import model.Klant;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
 import java.util.Collection;
 
@@ -25,7 +26,7 @@ public interface KlantDAO {
 
   Collection<Klant> getAll();
 
-  @SqlQuery("BEGIN;" +
+  @SqlUpdate("BEGIN;" +
           "INSERT INTO klant (klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, klant_straatnaam, " +
           "klant_huisnummer, klant_huisnummer_toevoeging,klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, "+
           "klant_telefoon, klant_gastlid, klant_notitie, klant_isactief ) VALUES (:email, :voornaam, :tussenvoegsel, " +
