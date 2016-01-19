@@ -16,114 +16,103 @@ public class KlantMapper implements ResultSetMapper<Klant> {
   @Override
   public Klant map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     Klant klant = new Klant();
-    //wacht een idee
-    if(resultSet.getString("klant_email") != null) {
+
+    if(hasColumn(resultSet, "klant_email")) {
       klant.setEmail(resultSet.getString("klant_email"));
     }
-    if(resultSet.getString("klant_voornaam")!= null){
+    if(hasColumn(resultSet, "klant_voornaam")){
       klant.setVoornaam((resultSet.getString("klant_voornaam")));
     }
 
-    if(resultSet.getString("klant_tussenvoegsel")!= null){
+    if(hasColumn(resultSet, "klant_tussenvoegsel")){
       klant.setTussenvoegsel((resultSet.getString("klant_tussenvoegsel")));
     }
 
-    if(resultSet.getString("klant_achternaam")!= null){
+    if(hasColumn(resultSet, "klant_achternaam")){
       klant.setAchternaam((resultSet.getString("klant_achternaam")));
     }
 
-    if(resultSet.getString("klant_straatnaam")!= null){
+    if(hasColumn(resultSet, "klant_straatnaam")){
       klant.setStraatnaam((resultSet.getString("klant_straatnaam")));
     }
 
-    if(resultSet.getInt("klant_huisnummer")!= 0){
+    if(hasColumn(resultSet, "klant_huisnummer")){
       klant.setHuisNummer((resultSet.getInt("klant_huisnummer")));
     }
 
-    if(resultSet.getString("klant_huisnummer_toevoeging")!= null){
+    if(hasColumn(resultSet, "klant_huisnummer_toevoeging")){
       klant.setHuisNummerToevoeging((resultSet.getString("klant_huisnummer_toevoeging")));
     }
 
-    if(resultSet.getInt("klant_postcode")!= 0){
+    if(hasColumn(resultSet, "klant_postcode")){
       klant.setVoornaam((resultSet.getString("klant_postcode")));
     }
 
-    if(resultSet.getString("klant_postcode_toevoeging")!= null){
+    if(hasColumn(resultSet, "klant_postcode_toevoeging")){
       klant.setPostcodeToevoeging((resultSet.getString("klant_postcode_toevoeging")));
     }
 
-    if(resultSet.getString("klant_plaatsnaam")!= null){
+    if(hasColumn(resultSet, "klant_plaatsnaam")){
       klant.setPlaatsNaam((resultSet.getString("klant_plaatsnaam")));
     }
 
-    if(resultSet.getString("klant_telefoon")!= null){
+    if(hasColumn(resultSet, "klant_telefoon")){
       klant.setTelefoon((resultSet.getString("klant_telefoon")));
     }
 
-    if(resultSet.getString("klant_gastlid")!= null){
+    if(hasColumn(resultSet, "klant_gastlid")){
       klant.setGastLid((resultSet.getString("klant_gastlid")));
     }
 
-    if(resultSet.getString("klant_notitie")!= null){
+    if(hasColumn(resultSet, "klant_notitie")){
       klant.setNotitie((resultSet.getString("klant_notitie")));
     }
 
-    if(resultSet.getInt("klant_isactief") < 0){
+    if(hasColumn(resultSet, "klant_isactief")){
       klant.setIsActief((resultSet.getInt("klant_isactief")));
     }
 
-    if(resultSet.getString("klant_date")!= null){
+    if(hasColumn(resultSet, "klant_date")){
       klant.setDateString((resultSet.getString("klant_date")));
     }
 
-    if(resultSet.getString("account_password")!= null){
+    if(hasColumn(resultSet, "account_password")){
       klant.setPassword((resultSet.getString("account_password")));
     }
 
-    if(String.valueOf(resultSet.getBoolean("acount_email")).isEmpty()) {
+    if(hasColumn(resultSet, "acount_email")) {
       klant.setInMailingList((resultSet.getBoolean("acount_email")));
     }
 
     //ROLES
-    if(String.valueOf(resultSet.getBoolean("acount_isgast")).isEmpty()) {
+    if(hasColumn(resultSet, "acount_isgast")) {
       klant.setIsKlant((resultSet.getBoolean("acount_isgast")));
     }
 
 
-    if(String.valueOf(resultSet.getBoolean("account_islid")).isEmpty()) {
+    if(hasColumn(resultSet, "account_islid")) {
       klant.setIsLid((resultSet.getBoolean("account_islid")));
     }
 
 
-    if(String.valueOf(resultSet.getBoolean("account_isms")).isEmpty()) {
+    if(hasColumn(resultSet, "account_isms")) {
       klant.setIsMS((resultSet.getBoolean("account_isms")));
     }
 
 
-    if(String.valueOf(resultSet.getBoolean("account_isadmin")).isEmpty()) {
+    if(hasColumn(resultSet, "account_isadmin")) {
       klant.setIsAdmin((resultSet.getBoolean("account_isadmin")));
     }
-
-
-//    klant.setEmail(resultSet.getString("klant_email"));
-//    klant.setVoornaam(resultSet.getString(2));
-//    klant.setTussenvoegsel(resultSet.getString(3));
-//    klant.setAchternaam(resultSet.getString(4));
-//    klant.setStraatnaam(resultSet.getString(5));
-//    klant.setHuisNummer(resultSet.getInt(6));
-//    klant.setHuisNummerToevoeging(resultSet.getString(7));
-//    klant.setPostcode(resultSet.getInt(8));
-//    klant.setPostcodeToevoeging(resultSet.getString(9));
-//    klant.setPlaatsNaam(resultSet.getString(10));
-//    klant.setTelefoon(resultSet.getString(11));
-//    klant.setGastLid(resultSet.getString(12));
-//    klant.setNotitie(resultSet.getString(13));
-//    klant.setIsActief(resultSet.getInt(14));
-//    klant.setDateString(resultSet.getString(15));
-//    klant.setPassword(resultSet.getString(16));
-//    //klant.setRoles(new String[]={resultSet.getInt(17)});
-//    //TODO: ?????
-//    klant.setInMailingList(resultSet.getBoolean(18));
+    
     return klant;
+  }
+
+  private boolean hasColumn(ResultSet resultSet, String columnName) {
+    try {
+        resultSet.getObject(columnName);
+        return true;
+    } catch (SQLException e) {
+      return false;
+    }
   }
 }

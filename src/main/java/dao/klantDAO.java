@@ -1,16 +1,20 @@
 package dao;
 
+import mappers.KlantMapper;
+import mappers.OrderMapper;
 import model.Klant;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Collection;
 
 /**
  * Created by Anton on 11/01/2016.
  */
+@RegisterMapper(KlantMapper.class)
 public interface KlantDAO {
 
   @SqlQuery("SELECT klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
@@ -21,8 +25,9 @@ public interface KlantDAO {
   Klant get(@Bind("klant_email") String username);
 
 
-  Collection<Klant> getAll();  @SqlQuery("SELECT account_email, account_password, account_isklant, " +
-                                             "account_islid, account_isms, account_isadmin FROM account WHERE account_email = :klant_email AND;")
+  Collection<Klant> getAll();  @SqlQuery("SELECT klant_email, account_password, account_isklant, " +
+                                             "account_islid, account_isms, account_isadmin FROM account " +
+          "WHERE account.klant_email = :klant_email")
   Klant getAuthStub(@Bind("klant_email") String username);
 
 

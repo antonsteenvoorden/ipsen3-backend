@@ -15,13 +15,16 @@ import java.util.Set;
 
 @RegisterMapper(WijnMapper.class)
 public interface WijnDAO {
-    @SqlQuery("SELECT w.wijn_id, w.wijn_serie_id, w.wijn_naam, w.wijn_inkoopprijs, w.wijn_prijs, "
-                  + "w.wijn_type, w.wijn_jaartal, w.wijn_isactief, w.wijn_afkomst_naam,"
-                  + " w.wijn_category_naam FROM `wijn` w, wijn_category")
+    @SqlQuery("SELECT wijn_id, wijn_serie_id, wijn_naam, wijn_inkoopprijs, wijn_prijs, "
+                  + "wijn_type, wijn_jaartal, wijn_isactief, afkomst_naam,"
+                  + " category_naam FROM `wijn`, `wijn_afkomst`, `wijn_category`"
+                  + "WHERE wijn.wijn_afkomst = wijn_afkomst.afkomst_id AND wijn_afkomst.category_id = wijn_category.category_id")
     Set<Wijn> retrieveAll();
 
-    @SqlQuery("SELECT w.wijn_id, w.wijn_serie_id, w.wijn_naam, w.wijn_inkoopprijs, w.wijn_prijs,"
-                  + " w.wijn_type, w.wijn_jaartal, w.wijn_isactief, w.wijn_afkomst_naam, "
-                  + "w.wijn_category_naam FROM `wijn` w WHERE w.wijn_id = :wijnID")
+  @SqlQuery("SELECT wijn_id, wijn_serie_id, wijn_naam, wijn_inkoopprijs, wijn_prijs, "
+          + "wijn_type, wijn_jaartal, wijn_isactief, afkomst_naam,"
+          + " category_naam FROM `wijn`, `wijn_afkomst`, `wijn_category`"
+          + "WHERE wijn.wijn_afkomst = wijn_afkomst.afkomst_id AND "
+          + "wijn_afkomst.category_id = wijn_category.category_id AND wijn_id = :wijnID")
     Wijn retrieve(@Bind("wijnID") int wijnID);
 }

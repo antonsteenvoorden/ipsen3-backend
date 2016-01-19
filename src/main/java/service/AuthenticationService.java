@@ -22,12 +22,15 @@ public class AuthenticationService
 
     @Override
     public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
-        Klant klant = klantDAO.get(credentials.getUsername());
+        System.out.println("AuthenticationService.authenticate");
+        Klant klant = klantDAO.getAuthStub(credentials.getUsername());
 
         if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
+            System.out.println("AuthenticationService.authenticate: returnging filed user");
+            System.out.println("Is klant " + klant.isLid());
             return Optional.of(klant);
         }
-
+        System.out.println("AuthenticationService.authenticate: returning empty user");
         return Optional.absent();
     }
 
