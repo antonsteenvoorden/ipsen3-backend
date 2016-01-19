@@ -46,7 +46,7 @@ public interface KlantDAO {
           ":achternaam, :straatnaam, :huisNummer, :huisNummerToevoeging, :postcode, :postcodeToevoeging,:plaatsNaam, :telefoon, " +
           ":gastLid, :notitie, :isActief)" +
           "INSERT INTO account a (a.klant_email, account_password, account_isklant, account_islid, account_isms, " +
-          "account_isadmin, account_wantsmail, account_isactief)"+
+          "account_isadmin, account_isactief, account_wantsmail)"+
           "VALUES(:klant_email,:password, :isKlant, :isLid, :isMS, :isAdmin, :isAccountActief, :wantsMail)" +
           "COMMIT;")
   void add(@BindBean Klant klant);
