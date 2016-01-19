@@ -82,7 +82,7 @@ public class Klant implements Principal {
   private boolean isAdmin;
 
   @JsonView(_View.View.Public.class)
-  private boolean inMailingList;
+  private boolean wantsMail;
 
   public String getEmail() {
     return email;
@@ -212,12 +212,12 @@ public class Klant implements Principal {
     this.password = password;
   }
 
-  public boolean isInMailingList() {
-    return inMailingList;
+  public boolean isWantsMail() {
+    return wantsMail;
   }
 
-  public void setInMailingList(boolean inMailingList) {
-    this.inMailingList = inMailingList;
+  public void setWantsMail(boolean wantsMail) {
+    this.wantsMail = wantsMail;
   }
 
   public boolean isKlant() {
@@ -253,6 +253,7 @@ public class Klant implements Principal {
   }
 
   public boolean hasRole(String role) {
+    System.out.println("Klant.hasRole: role = " + role);
     switch (role) {
       case "GUEST":
         return isKlant;

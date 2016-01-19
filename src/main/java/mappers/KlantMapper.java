@@ -81,12 +81,12 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     }
 
     if(hasColumn(resultSet, "acount_email")) {
-      klant.setInMailingList((resultSet.getBoolean("acount_email")));
+      klant.setWantsMail((resultSet.getBoolean("acount_email")));
     }
 
     //ROLES
-    if(hasColumn(resultSet, "acount_isgast")) {
-      klant.setIsKlant((resultSet.getBoolean("acount_isgast")));
+    if(hasColumn(resultSet, "account_isklant")) {
+      klant.setIsKlant((resultSet.getBoolean("account_isklant")));
     }
 
 
@@ -103,7 +103,11 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     if(hasColumn(resultSet, "account_isadmin")) {
       klant.setIsAdmin((resultSet.getBoolean("account_isadmin")));
     }
-    
+
+    if(hasColumn(resultSet, "account_wantsmail")) {
+      klant.setWantsMail(resultSet.getBoolean("account_wantsMail"));
+    }
+
     return klant;
   }
 

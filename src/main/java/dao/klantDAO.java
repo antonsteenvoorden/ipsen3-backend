@@ -17,15 +17,18 @@ import java.util.Collection;
 @RegisterMapper(KlantMapper.class)
 public interface KlantDAO {
 
-  @SqlQuery("SELECT klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
+  @SqlQuery("SELECT klant.klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
       + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
       + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
-      + " klant_gastlid, klant_notitie, klant_isactief , klant_date , account_wantsmail FROM `klant`, `account` "
-      + "WHERE klant_email = :email AND account_email = klant_email")
+      + " klant_gastlid, klant_notitie, klant_isactief, klant_date, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
+      + "FROM `klant`, `account` WHERE klant.klant_email = :klant_email AND account.klant_email = klant.klant_email")
   Klant get(@Bind("klant_email") String username);
 
+  //todo een fucking query
+  Collection<Klant> getAll();
 
-  Collection<Klant> getAll();  @SqlQuery("SELECT klant_email, account_password, account_isklant, " +
+
+  @SqlQuery("SELECT klant_email, account_password, account_isklant, " +
                                              "account_islid, account_isms, account_isadmin FROM account " +
           "WHERE account.klant_email = :klant_email")
   Klant getAuthStub(@Bind("klant_email") String username);
