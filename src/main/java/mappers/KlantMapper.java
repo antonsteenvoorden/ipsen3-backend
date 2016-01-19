@@ -69,7 +69,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     }
 
     if(hasColumn(resultSet, "klant_isactief")){
-      klant.setIsActief((resultSet.getInt("klant_isactief")));
+      klant.setIsKlantActief((resultSet.getInt("klant_isactief")));
     }
 
     if(hasColumn(resultSet, "klant_date")){

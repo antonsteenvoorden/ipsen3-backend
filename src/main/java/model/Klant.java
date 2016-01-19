@@ -59,7 +59,10 @@ public class Klant implements Principal {
   private String notitie;
 
   @JsonView(_View.View.Public.class)
-  private int isActief;
+  private int isKlantActief;
+
+  @JsonView(_View.View.Public.class)
+  private int isAccountActief;
 
   @JsonView(_View.View.Public.class)
   private String dateString;
@@ -188,12 +191,20 @@ public class Klant implements Principal {
     this.notitie = notitie;
   }
 
-  public int getIsActief() {
-    return isActief;
+  public int getIsKlantActief() {
+    return isKlantActief;
   }
 
-  public void setIsActief(int isActief) {
-    this.isActief = isActief;
+  public void setIsKlantActief(int isKlantActief) {
+    this.isKlantActief = isKlantActief;
+  }
+
+  public int getIsAccountActief() {
+    return isAccountActief;
+  }
+
+  public void setIsAccountActief(int isAccountActief) {
+    this.isAccountActief = isAccountActief;
   }
 
   public String getDateString() {
