@@ -20,11 +20,11 @@ public interface KlantDAO {
       + "WHERE klant_email = :email AND account_email = klant_email")
   Klant get(@Bind("klant_email") String username);
 
-  @SqlQuery("SELECT account_email, account_password, account_isklant, " +
-          "account_islid, account_isms, account_isadmin FROM account WHERE account_email = :klant_email AND;")
+
+  Collection<Klant> getAll();  @SqlQuery("SELECT account_email, account_password, account_isklant, " +
+                                             "account_islid, account_isms, account_isadmin FROM account WHERE account_email = :klant_email AND;")
   Klant getAuthStub(@Bind("klant_email") String username);
 
-  Collection<Klant> getAll();
 
   @SqlUpdate("BEGIN;" +
           "INSERT INTO klant (klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, klant_straatnaam, " +
