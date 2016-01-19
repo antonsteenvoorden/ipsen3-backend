@@ -24,7 +24,12 @@ public interface KlantDAO {
       + "FROM `klant`, `account` WHERE klant.klant_email = :klant_email AND account.klant_email = klant.klant_email")
   Klant get(@Bind("klant_email") String username);
 
-  //todo een fucking query
+
+  @SqlQuery("SELECT klant.klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
+          + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
+          + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
+          + " klant_gastlid, klant_notitie, klant_isactief, klant_date, account.klant_email, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
+          + "FROM `klant`, `account`")
   Collection<Klant> getAll();
 
 
@@ -40,9 +45,9 @@ public interface KlantDAO {
           "klant_telefoon, klant_gastlid, klant_notitie, klant_isactief ) VALUES (:email, :voornaam, :tussenvoegsel, " +
           ":achternaam, :straatnaam, :huisNummer, :huisNummerToevoeging, :postcode, :postcodeToevoeging,:plaatsNaam, :telefoon, " +
           ":gastLid, :notitie, :isActief)" +
-          "INSERT INTO account (klant_email,account_password, account_isklant, account_islid, account_isms, " +
-          "account_isadmin, account_isactief)"+
-          "VALUES(:klant_email,:password, :isKlant, :isLid, :isMS, :isAdmin, :inMailingList)" +
+          "INSERT INTO account a (a.klant_email, account_password, account_isklant, account_islid, account_isms, " +
+          "account_isadmin, account_wantsmail, account_isactief)"+
+          "VALUES(:klant_email,:password, :isKlant, :isLid, :isMS, :isAdmin, :isAccountActief, :wantsMail)" +
           "COMMIT;")
   void add(@BindBean Klant klant);
 
