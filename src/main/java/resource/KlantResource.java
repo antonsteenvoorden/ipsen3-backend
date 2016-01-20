@@ -43,8 +43,10 @@ public class KlantResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
-    public void create(Klant Klant) {
-        service.add(Klant);
+    @RolesAllowed("GUEST")
+    public void create(Klant klant) {
+        System.out.println("KlantResource.create" + klant.toString());
+        service.add(klant);
     }
 
     @PUT
