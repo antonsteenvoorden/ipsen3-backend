@@ -1,6 +1,8 @@
 package resource;
 
+import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.dropwizard.auth.Auth;
 import model.Actie;
 import model.Klant;
 import service.ActieService;
@@ -47,5 +49,14 @@ public class ActieResource {
   @JsonView(_View.View.Public.class)
   public void update(Actie actie) {
     service.update(actie);
+  }
+
+  @GET
+  @Path("/{id}/aanmelden")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @RolesAllowed("GUEST")
+  @JsonView(_View.View.Public.class)
+  public void aanmelden(@PathParam("id") int actie ,@Auth Klant authenticator){
+    service.aanmelden(actie, authenticator);
   }
 }
