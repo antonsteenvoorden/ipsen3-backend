@@ -62,9 +62,6 @@ public class Klant implements Principal {
   private int isKlantActief;
 
   @JsonView(_View.View.Public.class)
-  private int isAccountActief;
-
-  @JsonView(_View.View.Public.class)
   private String dateString;
 
   @NotEmpty
@@ -89,14 +86,6 @@ public class Klant implements Principal {
 
   @JsonView(_View.View.Public.class)
   private boolean wantsMail;
-
-  public boolean isAccountActief() {
-    return isAccountActief;
-  }
-
-  public void setIsAccountActief(boolean isAccountActief) {
-    this.isAccountActief = isAccountActief;
-  }
 
   public String getEmail() {
     return email;
@@ -210,11 +199,11 @@ public class Klant implements Principal {
     this.isKlantActief = isKlantActief;
   }
 
-  public int getIsAccountActief() {
+  public boolean getIsAccountActief() {
     return isAccountActief;
   }
 
-  public void setIsAccountActief(int isAccountActief) {
+  public void setIsAccountActief(boolean isAccountActief) {
     this.isAccountActief = isAccountActief;
   }
 

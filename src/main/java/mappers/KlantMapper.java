@@ -104,6 +104,10 @@ public class KlantMapper implements ResultSetMapper<Klant> {
       klant.setIsAdmin((resultSet.getBoolean("account_isadmin")));
     }
 
+    if(hasColumn(resultSet, "account_isactief")) {
+      klant.setIsAccountActief((resultSet.getBoolean("account_isactief")));
+    }
+
     if(hasColumn(resultSet, "account_wantsmail")) {
       klant.setWantsMail(resultSet.getBoolean("account_wantsMail"));
     }
