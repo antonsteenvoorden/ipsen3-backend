@@ -2,7 +2,6 @@ package service;
 
 import dao.KlantDAO;
 import model.Klant;
-import service.BaseService;
 
 import java.util.Collection;
 
@@ -26,8 +25,7 @@ public class KlantService extends BaseService<Klant> {
     }
 
     public void add(Klant klant) {
-        klant.setIsKlant(true);
-
+        klant.setKlantRechten(true);
         dao.add(klant);
     }
 

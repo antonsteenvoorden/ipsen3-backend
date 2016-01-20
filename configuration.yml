@@ -12,7 +12,7 @@ assets:
 
 server:
   rootPath: /api/*
-  adminContextPath: /admin
+  adminContextPath: /adminRechten
 
 # Database settings
 database:

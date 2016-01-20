@@ -69,7 +69,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     }
 
     if(hasColumn(resultSet, "klant_isactief")){
-      klant.setIsKlantActief((resultSet.getInt("klant_isactief")));
+      klant.setKlantActief((resultSet.getInt("klant_isactief")));
     }
 
     if(hasColumn(resultSet, "klant_date")){
@@ -86,32 +86,32 @@ public class KlantMapper implements ResultSetMapper<Klant> {
 
     //ROLES
     if(hasColumn(resultSet, "account_isklant")) {
-      klant.setIsKlant((resultSet.getBoolean("account_isklant")));
+      klant.setKlantRechten((resultSet.getBoolean("account_isklant")));
     }
 
 
     if(hasColumn(resultSet, "account_islid")) {
-      klant.setIsLid((resultSet.getBoolean("account_islid")));
+      klant.setLidRechten((resultSet.getBoolean("account_islid")));
     }
 
 
     if(hasColumn(resultSet, "account_isms")) {
-      klant.setIsMS((resultSet.getBoolean("account_isms")));
+      klant.setMsRechten((resultSet.getBoolean("account_isms")));
     }
 
 
     if(hasColumn(resultSet, "account_isadmin")) {
-      klant.setIsAdmin((resultSet.getBoolean("account_isadmin")));
+      klant.setAdminRechten((resultSet.getBoolean("account_isadmin")));
     }
 
     if(hasColumn(resultSet, "account_isactief")) {
-      klant.setIsAccountActief((resultSet.getBoolean("account_isactief")));
+      klant.setAccountActief((resultSet.getBoolean("account_isactief")));
     }
 
     if(hasColumn(resultSet, "account_wantsmail")) {
       klant.setWantsMail(resultSet.getBoolean("account_wantsMail"));
     }
-
+    System.out.println("KlantMapper.map returning klant: "+ klant.getEmail());
     return klant;
   }
 
