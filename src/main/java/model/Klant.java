@@ -82,7 +82,18 @@ public class Klant implements Principal {
   private boolean isAdmin;
 
   @JsonView(_View.View.Public.class)
+  private boolean isAccountActief;
+
+  @JsonView(_View.View.Public.class)
   private boolean wantsMail;
+
+  public boolean isAccountActief() {
+    return isAccountActief;
+  }
+
+  public void setIsAccountActief(boolean isAccountActief) {
+    this.isAccountActief = isAccountActief;
+  }
 
   public String getEmail() {
     return email;
