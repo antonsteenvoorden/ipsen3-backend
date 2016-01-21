@@ -18,8 +18,8 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
-@Path("/wijnen")
 @Api("Wijnen")
+@Path("/wijnen")
 @Produces(MediaType.APPLICATION_JSON)
 public class WijnResource {
 
@@ -37,7 +37,6 @@ public class WijnResource {
   }
 
   @GET
-  @ApiOperation("KaasDude")
   @Path("/{id}")
   @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
