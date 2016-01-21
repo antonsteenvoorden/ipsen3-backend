@@ -28,3 +28,9 @@ database:
 
   # the JDBC URL
   url: jdbc:mysql://145.97.16.190:3306/IPSEN3G6
+
+swagger:
+  resourcePackage: resource
+  title: KAAS
+  version: 9001
+  decription: It's over 9000!
