@@ -18,7 +18,7 @@ public interface OrderDAO {
   Set<Order> retrieveAll();
 
   @SqlQuery("SELECT order_id, order_klantemail, order_factuuradres, order_order_datum, order_isactief " +
-      "FROM `order`WHERE order_id = :orderID")
+          "FROM `order`WHERE order_id = :orderID")
   Order retrieve(@Bind("orderID") int orderID);
 
   @SqlUpdate("INSERT INTO `order` (order_klantemail, order_factuuradres, order_isactief ) VALUES (:klantEmail, :factuurAdres, :isActief);")

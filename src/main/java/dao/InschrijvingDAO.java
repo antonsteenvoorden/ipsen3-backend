@@ -1,7 +1,6 @@
 package dao;
 
 import mappers.InschrijvingMapper;
-import model.Actie;
 import model.Inschrijving;
 import model.Klant;
 import org.skife.jdbi.v2.sqlobject.Bind;

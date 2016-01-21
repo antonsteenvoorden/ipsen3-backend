@@ -14,6 +14,7 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import model.Klant;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
@@ -25,6 +26,9 @@ import service.ActieService;
 import service.AuthenticationService;
 import service.KlantService;
 import service.WijnService;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 /**
  * Edited by:
@@ -88,37 +92,37 @@ public class ApiApplication extends Application<ApiConfiguration> {
     ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
     ActieResource actieResource = new ActieResource(actieService);
 
-    setupAuthentication(environment, klantDAO);
-//        configureClientFilter(environment);
-    environment.jersey().register(klantResource);
-    environment.jersey().register(wijnResource);
-    environment.jersey().register(actieResource);
-  }
+        setupAuthentication(environment, klantDAO);
+        configureClientFilter(environment);
+        environment.jersey().register(klantResource);
+        environment.jersey().register(wijnResource);
+        environment.jersey().register(actieResource);
+    }
 
-  private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
-    AuthenticationService authenticationService = new AuthenticationService(klantDAO);
-    ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
+    private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
+        AuthenticationService authenticationService = new AuthenticationService(klantDAO);
+        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
 
-    environment.jersey().register(new AuthDynamicFeature(
-        new BasicCredentialAuthFilter.Builder<Klant>()
-            .setAuthenticator(authenticationService)
-            .setAuthorizer(authenticationService)
-            .setRealm("Niet zichtbaar voor allen")
-            .setUnauthorizedHandler(unauthorizedHandler)
-            .buildAuthFilter())
-    );
+        environment.jersey().register(new AuthDynamicFeature(
+                new BasicCredentialAuthFilter.Builder<Klant>()
+                        .setAuthenticator(authenticationService)
+                        .setAuthorizer(authenticationService)
+                        .setRealm("Niet zichtbaar voor allen")
+                        .setUnauthorizedHandler(unauthorizedHandler)
+                        .buildAuthFilter())
+        );
 
-    environment.jersey().register(RolesAllowedDynamicFeature.class);
-    environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
-  }
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
+    }
 
-//    private void configureClientFilter(Environment environment) {
-//        environment.getApplicationContext().addFilter(
-//                new FilterHolder(new ClientFilter()),
-//                "/*",
-//                EnumSet.allOf(DispatcherType.class)
-//        );
-//    }
+    private void configureClientFilter(Environment environment) {
+        environment.getApplicationContext().addFilter(
+                new FilterHolder(new ClientFilter()),
+                "/*",
+                EnumSet.allOf(DispatcherType.class)
+        );
+    }
 
 
 }

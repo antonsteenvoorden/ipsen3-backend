@@ -263,6 +263,13 @@ public class Klant implements Principal {
     this.wantsMail = wantsMail;
   }
 
+  public String toString() {
+    return "Email: " +email
+            + " Rechten: " + "GUEST" + isKlantRechten()
+            + " LID" + isLidRechten() + " MS " + isMsRechten()
+            + " ADMIN" + isAdminRechten();
+  }
+
   public boolean hasRole(String role) {
     System.out.println("Klant.hasRole: role = " + role);
     switch (role) {

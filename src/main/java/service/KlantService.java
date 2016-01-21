@@ -21,7 +21,13 @@ public class KlantService extends BaseService<Klant> {
         return dao.getAll();
     }
 
-    public Klant get(String email) {
+    public Klant get(String email, Klant authenticator) {
+        Klant klant = dao.get(email);
+        if (!authenticator.hasRole("ADMIN")) {
+            // Vaststellen dat de geauthenticeerde gebruiker
+            // zichzelf aan het aanpassen is, tenzij het een admin is
+            assertSelf(authenticator, klant);
+        }
         return requireResult(dao.get(email));
     }
 
@@ -43,10 +49,10 @@ public class KlantService extends BaseService<Klant> {
         }
     }
 
-    public void delete(String email) {
-        // Controleren of deze gebruiker wel bestaat
-        Klant klant = get(email);
-        //TODO: METHODE AANMAKEN OM KLANTEN INACTIEF TE STELLEN
-        dao.delete(email);
-    }
+//    public void delete(String email) {
+//        // Controleren of deze gebruiker wel bestaat
+//        Klant klant = get(email, authenticator);
+//        //TODO: METHODE AANMAKEN OM KLANTEN INACTIEF TE STELLEN
+//        dao.delete(email);
+//    }
 }

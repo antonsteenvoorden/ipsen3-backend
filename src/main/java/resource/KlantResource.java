@@ -1,10 +1,11 @@
 package resource;
 
-import io.swagger.annotations.Api;
-import service.KlantService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
+import io.swagger.annotations.Api;
 import model.Klant;
+import service.KlantService;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -38,8 +39,8 @@ public class KlantResource {
     @Path("/{email}")
     @JsonView(_View.View.Public.class)
     @RolesAllowed("GUEST")
-    public Klant retrieve(@PathParam("email") String email) {
-        return service.get(email);
+    public Klant retrieve(@PathParam("email") String email, @Auth Klant authenticator) {
+        return service.get(email, authenticator);
     }
 
     @POST
@@ -60,17 +61,11 @@ public class KlantResource {
         service.update(email, authenticator, klant);
     }
 
-    @DELETE
-    @Path("/{email}")
-    @RolesAllowed("ADMIN")
-    public void delete(@PathParam("email") String email) {
-        service.delete(email);
-    }
+//    @DELETE
+//    @Path("/{email}")
+//    @RolesAllowed("ADMIN")
+//    public void delete(@PathParam("email") String email) {
+//        service.delete(email);
+//    }
 
-    @GET
-    @Path("/me")
-    @JsonView(_View.View.Private.class)
-    public Klant authenticate(@Auth Klant authenticator) {
-        return authenticator;
-    }
 }

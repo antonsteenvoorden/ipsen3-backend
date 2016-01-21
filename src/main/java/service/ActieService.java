@@ -2,7 +2,6 @@ package service;
 
 import dao.ActieDAO;
 import dao.InschrijvingDAO;
-import dao.KlantDAO;
 import model.Actie;
 import model.Inschrijving;
 import model.Klant;
@@ -19,6 +18,10 @@ public class ActieService extends BaseService<Actie> {
   public ActieService(ActieDAO dao, InschrijvingDAO inschrijvingDAO) {
     this.dao = dao;
     this.inschrijvingDAO = inschrijvingDAO;
+  }
+
+  public Actie get(int id) {
+    return dao.get(id);
   }
 
   public Collection<Actie> getAll() {
@@ -45,5 +48,9 @@ public class ActieService extends BaseService<Actie> {
     }
 
     inschrijvingDAO.add(id, klant);
+  }
+
+  public Collection<Actie> getActive() {
+    return dao.getActive();
   }
 }

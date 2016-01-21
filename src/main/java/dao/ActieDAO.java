@@ -1,7 +1,6 @@
 package dao;
 
 import mappers.ActieMapper;
-import mappers.KlantMapper;
 import model.Actie;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
@@ -33,5 +32,9 @@ public interface ActieDAO {
           "actie_eind_timestamp = :eindTimestamp, actie_referentie_naam = :referentieNaam," +
           "actie_beschrijving = :beschrijving WHERE actie_id = :id")
   void update(@BindBean Actie actie);
+
+  @SqlQuery("SELECT actie_id, actie_isactief, actie_start_timestamp, actie_eind_timestamp, actie_referentie_naam, " +
+          "actie_beschrijving FROM actie WHERE actie_isactief = 1")
+  Collection<Actie> getActive();
 
 }
