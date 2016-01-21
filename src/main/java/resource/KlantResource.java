@@ -65,10 +65,4 @@ public class KlantResource {
         service.delete(email);
     }
 
-    @GET
-    @Path("/me")
-    @JsonView(_View.View.Private.class)
-    public Klant authenticate(@Auth Klant authenticator) {
-        return authenticator;
-    }
 }

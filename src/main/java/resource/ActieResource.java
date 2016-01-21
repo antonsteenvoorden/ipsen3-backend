@@ -29,6 +29,15 @@ public class ActieResource {
   }
 
   @GET
+  @Path("/{id}")
+  @JsonView(_View.View.Public.class)
+  @RolesAllowed("GUEST")
+  public Actie retreive(@PathParam("id") int id) {
+    return service.get(id);
+  }
+
+
+  @GET
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")
   public Collection<Actie> retrieveAll() {

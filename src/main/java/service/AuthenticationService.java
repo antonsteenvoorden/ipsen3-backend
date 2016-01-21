@@ -26,8 +26,7 @@ public class AuthenticationService
         Klant klant = klantDAO.getAuthStub(credentials.getUsername());
 
         if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
-            System.out.println("AuthenticationService.authenticate: returnging filed user");
-            System.out.println("Is klant " + klant.isKlantRechten());
+            System.out.println("AuthenticationService.authenticate: returning " + klant.toString());
             return Optional.of(klant);
         }
         System.out.println("AuthenticationService.authenticate: returning empty user");
