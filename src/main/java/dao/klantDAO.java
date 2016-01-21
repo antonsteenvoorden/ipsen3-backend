@@ -44,10 +44,10 @@ public interface KlantDAO {
           "klant_huisnummer, klant_huisnummer_toevoeging,klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, "+
           "klant_telefoon, klant_gastlid, klant_notitie, klant_isactief ) VALUES (:email, :voornaam, :tussenvoegsel, " +
           ":achternaam, :straatnaam, :huisNummer, :huisNummerToevoeging, :postcode, :postcodeToevoeging,:plaatsNaam, :telefoon, " +
-          ":gastLid, :notitie, :isActief)" +
+          ":gastLid, :notitie, :isActief); " +
           "INSERT INTO account a (a.klant_email, account_password, account_isklant, account_islid, account_isms, " +
           "account_isadmin, account_isactief, account_wantsmail)"+
-          "VALUES(:klant_email,:password, :isKlant, :isLid, :isMS, :isAdmin, :isAccountActief, :wantsMail)" +
+          "VALUES(:klant_email,:password, :isKlant, :isLid, :isMS, :isAdmin, :isAccountActief, :wantsMail) ;" +
           "COMMIT;")
   void add(@BindBean Klant klant);
 
