@@ -34,4 +34,8 @@ public interface ActieDAO {
           "actie_beschrijving = :beschrijving WHERE actie_id = :id")
   void update(@BindBean Actie actie);
 
+  @SqlQuery("SELECT actie_id, actie_isactief, actie_start_timestamp, actie_eind_timestamp, actie_referentie_naam, " +
+          "actie_beschrijving FROM actie WHERE actie_isactief = 1")
+  Collection<Actie> getActive();
+
 }

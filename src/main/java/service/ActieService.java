@@ -50,4 +50,8 @@ public class ActieService extends BaseService<Actie> {
 
     inschrijvingDAO.add(id, klant);
   }
+
+  public Collection<Actie> getActive() {
+    return dao.getActive();
+  }
 }

@@ -29,6 +29,14 @@ public class ActieResource {
   }
 
   @GET
+  @Path("/actief")
+  @JsonView(_View.View.Public.class)
+  @RolesAllowed("GUEST")
+  public Collection<Actie> retreiveActive() {
+    return service.getActive();
+  }
+
+  @GET
   @Path("/{id}")
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")

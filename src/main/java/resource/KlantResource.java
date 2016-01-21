@@ -38,8 +38,8 @@ public class KlantResource {
     @Path("/{email}")
     @JsonView(_View.View.Public.class)
     @RolesAllowed("GUEST")
-    public Klant retrieve(@PathParam("email") String email) {
-        return service.get(email);
+    public Klant retrieve(@PathParam("email") String email, @Auth Klant authenticator) {
+        return service.get(email, authenticator);
     }
 
     @POST
@@ -60,11 +60,11 @@ public class KlantResource {
         service.update(email, authenticator, klant);
     }
 
-    @DELETE
-    @Path("/{email}")
-    @RolesAllowed("ADMIN")
-    public void delete(@PathParam("email") String email) {
-        service.delete(email);
-    }
+//    @DELETE
+//    @Path("/{email}")
+//    @RolesAllowed("ADMIN")
+//    public void delete(@PathParam("email") String email) {
+//        service.delete(email);
+//    }
 
 }
