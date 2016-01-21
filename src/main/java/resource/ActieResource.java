@@ -1,8 +1,9 @@
 package resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.ApiOperation;
 import io.dropwizard.auth.Auth;
-import io.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.Api;
 import model.Actie;
 import model.Inschrijving;
 import model.Klant;
@@ -28,6 +29,7 @@ public class ActieResource {
   }
 
   @GET
+  @ApiOperation("Get all active acties")
   @Path("/actief")
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")
@@ -37,6 +39,7 @@ public class ActieResource {
 
   @GET
   @Path("/{id}")
+  @ApiOperation("Get actie by id")
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")
   public Actie retreive(@PathParam("id") int id) {
@@ -47,6 +50,7 @@ public class ActieResource {
   @GET
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")
+  @ApiOperation("Get all acties")
   public Collection<Actie> retrieveAll() {
     return service.getAll();
   }
@@ -55,12 +59,14 @@ public class ActieResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Public.class)
   @RolesAllowed("LID")
+  @ApiOperation("Create actie")
   public void create(Actie actie) {
     service.add(actie);
   }
 
   @PUT
   @Path("/{id}")
+  @ApiOperation("Update actie")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("LID")
   @JsonView(_View.View.Public.class)
@@ -70,6 +76,7 @@ public class ActieResource {
 
   @POST
   @Path("/{id}/aanmeldingen")
+  @ApiOperation("Klanten aanmelden")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
@@ -79,6 +86,7 @@ public class ActieResource {
 
   @GET
   @Path("/{id}/aanmeldingen")
+  @ApiOperation("Get all inschrijvingen")
   @RolesAllowed("LID")
   @JsonView(_View.View.Public.class)
   public Collection<Inschrijving> getAll(@PathParam("id")int id) {

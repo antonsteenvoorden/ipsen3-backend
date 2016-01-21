@@ -1,8 +1,9 @@
 package resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.ApiOperation;
 import io.dropwizard.auth.Auth;
-import io.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.Api;
 import model.Klant;
 import service.KlantService;
 
@@ -29,6 +30,7 @@ public class KlantResource {
     }
 
     @GET
+    @ApiOperation("Get all klanten")
     @JsonView(_View.View.Public.class)
     @RolesAllowed("GUEST")
     public Collection<Klant> retrieveAll() {
@@ -37,6 +39,7 @@ public class KlantResource {
 
     @GET
     @Path("/{email}")
+    @ApiOperation("Get klant by email")
     @JsonView(_View.View.Public.class)
     @RolesAllowed("GUEST")
     public Klant retrieve(@PathParam("email") String email, @Auth Klant authenticator) {
@@ -46,6 +49,7 @@ public class KlantResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
+    @ApiOperation("Create klant")
     @RolesAllowed("LID")
     public void create(Klant klant) {
         System.out.println("KlantResource.create" + klant.toString());
@@ -54,6 +58,7 @@ public class KlantResource {
 
     @PUT
     @Path("/{email}")
+    @ApiOperation("Update klant")
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
     @RolesAllowed("GUEST")

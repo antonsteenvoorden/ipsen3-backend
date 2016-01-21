@@ -1,6 +1,7 @@
 package resource;
 
-import io.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import model.Nieuwsbrief;
 import service.LionsService;
 
@@ -21,6 +22,7 @@ public class LionsResource {
   }
 
   @POST
+  @ApiOperation("Verstuur de nieuwsbrief")
   @Path("/verstuurnieuwsbrief")
   @Consumes(MediaType.APPLICATION_JSON)
   public Nieuwsbrief create(Nieuwsbrief nieuwsbrief) {
