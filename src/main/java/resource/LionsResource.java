@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Anton on 13/01/2016.
  */
-@Api("/Lions")
+@Api("Lions")
 @Path("/lions")
 @Produces(MediaType.APPLICATION_JSON)
 public class LionsResource {

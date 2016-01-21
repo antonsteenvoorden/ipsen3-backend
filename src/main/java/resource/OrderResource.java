@@ -1,6 +1,7 @@
 package resource;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import model.Order;
 import service.OrderService;
 
@@ -15,7 +16,7 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
-@Api("/Orders")
+@Api("Orders")
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {
@@ -26,6 +27,7 @@ public class OrderResource {
   }
 
   @GET
+  @ApiOperation("KaasDude")
   public Set<Order> retrieveAll(@QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     if (wijnFill) {
       return orderService.retrieveOrdersWithOrderRegelsWithWijn();
@@ -37,6 +39,7 @@ public class OrderResource {
   }
 
   @GET
+  @ApiOperation("KaasDude")
   @Path("/{id}")
   public Order retrieve(@PathParam("id") int id, boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     if (wijnFill) {
@@ -49,6 +52,7 @@ public class OrderResource {
   }
 
   @POST
+  @ApiOperation("KaasDude")
   @Path("/single")
   @Consumes(MediaType.APPLICATION_JSON)
   public Order create(Order order) {
@@ -56,6 +60,7 @@ public class OrderResource {
   }
 
   @POST
+  @ApiOperation("KaasDude")
   @Consumes(MediaType.APPLICATION_JSON)
   public List<Order> create(Set<Order> orders) {
     List<Order> updatedList = new ArrayList<>();
@@ -66,6 +71,7 @@ public class OrderResource {
   }
 
   @PUT
+  @ApiOperation("KaasDude")
   @Path("/single")
   @Consumes(MediaType.APPLICATION_JSON)
   public void update(Order order) {
@@ -73,6 +79,7 @@ public class OrderResource {
   }
 
   @PUT
+  @ApiOperation("KaasDude")
   @Consumes(MediaType.APPLICATION_JSON)
   public void update(Set<Order> orders) {
     for (Order order : orders) {

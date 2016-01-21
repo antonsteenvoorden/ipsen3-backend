@@ -1,14 +1,14 @@
 package resource;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import exception.ResponseException;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import model.Wijn;
 import service.WijnService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Set;
@@ -18,8 +18,8 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
-@Api("/Wijnen")
 @Path("/wijnen")
+@Api("Wijnen")
 @Produces(MediaType.APPLICATION_JSON)
 public class WijnResource {
 
@@ -30,13 +30,17 @@ public class WijnResource {
   }
 
   @GET
+  @RolesAllowed("GUEST")
   public Set<Wijn> retrieveAll() {
     Set<Wijn> wijnSet = wijnService.retrieveAll();
     return wijnSet;
   }
 
   @GET
+  @ApiOperation("KaasDude")
   @Path("/{id}")
+  @RolesAllowed("GUEST")
+  @JsonView(_View.View.Public.class)
   public Wijn retrieve(@PathParam("id") int id) {
     Wijn bestaandeWijn = wijnService.retrieve(id);
     if (bestaandeWijn == null) {
