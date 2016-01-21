@@ -4,6 +4,7 @@ import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
 import model.Actie;
+import model.Inschrijving;
 import model.Klant;
 import service.ActieService;
 import service.KlantService;
@@ -47,7 +48,7 @@ public class ActieResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("LID")
   @JsonView(_View.View.Public.class)
-  public void update(Actie actie) {
+  public void update(@PathParam("id") int id, Actie actie) {
     service.update(actie);
   }
 
@@ -56,7 +57,15 @@ public class ActieResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
-  public void aanmelden(@PathParam("id") int actie ,@Auth Klant authenticator, Klant klant){
-    service.aanmelden(actie, authenticator, klant);
+  public void aanmelden(@PathParam("id") int id ,@Auth Klant authenticator, Klant klant){
+    service.aanmelden(id, authenticator, klant);
+  }
+
+  @GET
+  @Path("/{id}/aanmeldingen")
+  @RolesAllowed("LID")
+  @JsonView(_View.View.Public.class)
+  public Collection<Inschrijving> getAll(@PathParam("id")int id) {
+    return service.getInschrijvingen(id);
   }
 }

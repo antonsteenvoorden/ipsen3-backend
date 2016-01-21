@@ -77,7 +77,7 @@ public abstract class KlantDAO {
                    + "klant_notitie = :notitie, "
                    + "klant_isactief = :klantActief "
                    + "WHERE klant_email = :email;")
-    public abstract void updateKlant(@Bind("klant_email") String email, @BindBean Klant klant);
+    public abstract void updateKlant(@BindBean Klant klant);
 
     @SqlUpdate("UPDATE account"
                    + "SET klant_email = :email,"
@@ -88,7 +88,7 @@ public abstract class KlantDAO {
                    + "account_isadmin = :adminRechten,"
                    + "account_isactief =:inMailingList"
                    + "WHERE klant_email = :email;")
-    public abstract void updateAccount(@Bind("klant_email") String email, @BindBean Klant klant);
+    public abstract void updateAccount(@BindBean Klant klant);
 
     public abstract void delete(@Bind("klant_email") String email);
 }

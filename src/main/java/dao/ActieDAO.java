@@ -23,7 +23,8 @@ public interface ActieDAO {
 
   @SqlQuery("SELECT actie_id, actie_isactief, actie_start_timestamp, actie_eind_timestamp, actie_referentie_naam, " +
           "actie_beschrijving FROM actie WHERE actie_id = :id")
-  Actie get(@Bind int id);
+  Actie get(@Bind("id") int id);
+
   @SqlQuery("SELECT actie_id, actie_isactief, actie_start_timestamp, actie_eind_timestamp, actie_referentie_naam, " +
           "actie_beschrijving FROM actie")
   Collection<Actie> getAll();

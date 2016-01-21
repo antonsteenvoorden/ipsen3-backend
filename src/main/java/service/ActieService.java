@@ -4,6 +4,7 @@ import dao.ActieDAO;
 import dao.InschrijvingDAO;
 import dao.KlantDAO;
 import model.Actie;
+import model.Inschrijving;
 import model.Klant;
 
 import java.util.Collection;
@@ -14,16 +15,18 @@ import java.util.Collection;
 public class ActieService extends BaseService<Actie> {
   private final ActieDAO dao;
   private final InschrijvingDAO inschrijvingDAO;
-  private final KlantDAO klantDAO;
 
-  public ActieService(ActieDAO dao, InschrijvingDAO inschrijvingDAO, KlantDAO klantDAO) {
+  public ActieService(ActieDAO dao, InschrijvingDAO inschrijvingDAO) {
     this.dao = dao;
     this.inschrijvingDAO = inschrijvingDAO;
-    this.klantDAO = klantDAO;
   }
 
   public Collection<Actie> getAll() {
     return dao.getAll();
+  }
+
+  public Collection<Inschrijving> getInschrijvingen(int id) {
+    return inschrijvingDAO.getAll(id);
   }
   public void add(Actie actie) {
     dao.add(actie);
@@ -33,7 +36,7 @@ public class ActieService extends BaseService<Actie> {
     dao.update(actie);
   }
 
-  public void aanmelden(int actie, Klant authenticator, Klant klant) {
+  public void aanmelden(int id, Klant authenticator, Klant klant) {
 
     if (!authenticator.hasRole("ADMIN")) {
       // Vaststellen dat de geauthenticeerde gebruiker
@@ -41,6 +44,6 @@ public class ActieService extends BaseService<Actie> {
       assertSelf(authenticator, klant);
     }
 
-    inschrijvingDAO.add(actie, authenticator);
+    inschrijvingDAO.add(id, klant);
   }
 }

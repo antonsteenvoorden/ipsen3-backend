@@ -1,4 +1,5 @@
 import dao.ActieDAO;
+import dao.InschrijvingDAO;
 import dao.KlantDAO;
 import dao.WijnDAO;
 import io.dropwizard.Application;
@@ -72,8 +73,10 @@ public class ApiApplication extends Application<ApiConfiguration> {
         KlantService klantService = new KlantService(klantDAO);
         KlantResource klantResource = new KlantResource(klantService);
 
+        InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
+
         ActieDAO actieDAO = jdbi.onDemand(ActieDAO.class);
-        ActieService actieService = new ActieService(actieDAO);
+        ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
         ActieResource actieResource = new ActieResource(actieService);
 
         setupAuthentication(environment, klantDAO);
