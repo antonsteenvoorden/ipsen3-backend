@@ -1,16 +1,13 @@
 package resource;
 
-import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
 import model.Actie;
 import model.Inschrijving;
 import model.Klant;
 import service.ActieService;
-import service.KlantService;
 
 import javax.annotation.security.RolesAllowed;
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;

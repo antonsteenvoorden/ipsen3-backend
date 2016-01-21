@@ -1,10 +1,11 @@
 package resource;
 
-import io.swagger.annotations.Api;
-import service.KlantService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
+import io.swagger.annotations.Api;
 import model.Klant;
+import service.KlantService;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

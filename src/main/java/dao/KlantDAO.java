@@ -1,7 +1,6 @@
 package dao;
 
 import mappers.KlantMapper;
-import mappers.OrderMapper;
 import model.Klant;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;

@@ -11,18 +11,18 @@ import java.util.Set;
  */
 public interface OrderRegelDAO {
   @SqlQuery("SELECT orderregel_id, orderregel_wijnid, orderregel_wijnnaam, orderregel_wijnjaartal, " +
-      "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +
-      "FROM `orderregel`;")
+          "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +
+          "FROM `orderregel`;")
   Set<OrderRegel> retrieveAll();
 
   @SqlQuery("SELECT orderregel_id, orderregel_wijnid, orderregel_wijnnaam, orderregel_wijnjaartal, " +
-      "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +
-      "FROM `orderregel` WHERE orderregel_orderid = :orderID;")
+          "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +
+          "FROM `orderregel` WHERE orderregel_orderid = :orderID;")
   Set<OrderRegel> retrieve(@Bind("orderID") int orderID);
 
   @SqlUpdate("INSERT INTO orderregel (orderregel_wijnid, orderregel_wijnnaam, orderregel_wijnjaartal, " +
-      "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs) " +
-      "VALUES (:wijnID, :wijnNaam, :wijnJaartal, :aantal, :orderID, :isActief, :wijnPrijs);")
+          "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs) " +
+          "VALUES (:wijnID, :wijnNaam, :wijnJaartal, :aantal, :orderID, :isActief, :wijnPrijs);")
   @GetGeneratedKeys
   int add(@BindBean OrderRegel orderRegel);
 }

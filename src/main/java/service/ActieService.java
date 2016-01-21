@@ -2,7 +2,6 @@ package service;
 
 import dao.ActieDAO;
 import dao.InschrijvingDAO;
-import dao.KlantDAO;
 import model.Actie;
 import model.Inschrijving;
 import model.Klant;

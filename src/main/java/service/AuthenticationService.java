@@ -1,11 +1,11 @@
 package service;
 
+import com.google.common.base.Optional;
 import dao.KlantDAO;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.Authorizer;
 import io.dropwizard.auth.basic.BasicCredentials;
-import com.google.common.base.Optional;
 import model.Klant;
 
 

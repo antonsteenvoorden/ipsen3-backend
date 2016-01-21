@@ -1,7 +1,6 @@
 package dao;
 
 import mappers.ActieMapper;
-import mappers.KlantMapper;
 import model.Actie;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
