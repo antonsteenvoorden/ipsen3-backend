@@ -22,12 +22,12 @@ public abstract class KlantDAO {
   public abstract Klant get(@Bind("klant_email") String username);
 
 
-  @SqlQuery("SELECT klant.klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
-          + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
-          + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
-          + "klant_gastlid, klant_notitie, klant_isactief, klant_date, account.klant_email, "
-          + "account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
-          + "FROM klant, account")
+  @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
+          + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
+          + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
+          + "klant.klant_gastlid, klant.klant_notitie, klant.klant_isactief, klant.klant_date, "
+          + "account.account_wantsmail, account.account_isklant, account.account_islid, account.account_isms, account.account_isadmin "
+          + "FROM klant INNER JOIN account ON klant.klant_email = account.klant_email")
   public abstract Collection<Klant> getAll();
 
 
