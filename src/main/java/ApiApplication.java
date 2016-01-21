@@ -12,6 +12,7 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import model.Klant;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
@@ -23,6 +24,9 @@ import service.ActieService;
 import service.AuthenticationService;
 import service.KlantService;
 import service.WijnService;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 /**
  * Edited by:
@@ -80,7 +84,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
         ActieResource actieResource = new ActieResource(actieService);
 
         setupAuthentication(environment, klantDAO);
-//        configureClientFilter(environment);
+        configureClientFilter(environment);
         environment.jersey().register(klantResource);
         environment.jersey().register(wijnResource);
         environment.jersey().register(actieResource);
@@ -103,13 +107,13 @@ public class ApiApplication extends Application<ApiConfiguration> {
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
     }
 
-//    private void configureClientFilter(Environment environment) {
-//        environment.getApplicationContext().addFilter(
-//                new FilterHolder(new ClientFilter()),
-//                "/*",
-//                EnumSet.allOf(DispatcherType.class)
-//        );
-//    }
+    private void configureClientFilter(Environment environment) {
+        environment.getApplicationContext().addFilter(
+                new FilterHolder(new ClientFilter()),
+                "/*",
+                EnumSet.allOf(DispatcherType.class)
+        );
+    }
 
 
 }
