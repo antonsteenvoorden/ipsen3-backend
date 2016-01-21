@@ -18,7 +18,7 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
-@Api("/wijnen")
+@Api("/Wijnen")
 @Path("/wijnen")
 @Produces(MediaType.APPLICATION_JSON)
 public class WijnResource {

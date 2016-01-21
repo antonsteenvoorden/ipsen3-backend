@@ -15,7 +15,7 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
-@Api("/orders")
+@Api("/Orders")
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {
