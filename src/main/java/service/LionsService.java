@@ -7,7 +7,7 @@ import model.Nieuwsbrief;
  */
 public class LionsService {
   public void send(Nieuwsbrief nieuwsbrief) {
-  //doe sheit uit dennis's barf controller / model
+    //doe sheit uit dennis's barf controller / model
   }
 
 }
