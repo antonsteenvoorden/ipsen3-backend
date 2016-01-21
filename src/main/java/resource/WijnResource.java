@@ -1,9 +1,9 @@
 package resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.ApiOperation;
 import exception.ResponseException;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.Api;
 import model.Wijn;
 import service.WijnService;
 
@@ -30,6 +30,7 @@ public class WijnResource {
   }
 
   @GET
+  @ApiOperation("Get all wijnen")
   @RolesAllowed("GUEST")
   public Set<Wijn> retrieveAll() {
     Set<Wijn> wijnSet = wijnService.retrieveAll();
@@ -38,6 +39,7 @@ public class WijnResource {
 
   @GET
   @Path("/{id}")
+  @ApiOperation("Get wijn by id")
   @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
   public Wijn retrieve(@PathParam("id") int id) {

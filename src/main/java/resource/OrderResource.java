@@ -1,7 +1,7 @@
 package resource;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import model.Order;
 import service.OrderService;
 
@@ -27,7 +27,7 @@ public class OrderResource {
   }
 
   @GET
-  @ApiOperation("KaasDude")
+  @ApiOperation("Get all orders")
   public Set<Order> retrieveAll(@QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     if (wijnFill) {
       return orderService.retrieveOrdersWithOrderRegelsWithWijn();
@@ -39,7 +39,7 @@ public class OrderResource {
   }
 
   @GET
-  @ApiOperation("KaasDude")
+  @ApiOperation("Get specific order")
   @Path("/{id}")
   public Order retrieve(@PathParam("id") int id, boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     if (wijnFill) {
@@ -52,7 +52,7 @@ public class OrderResource {
   }
 
   @POST
-  @ApiOperation("KaasDude")
+  @ApiOperation("Create order")
   @Path("/single")
   @Consumes(MediaType.APPLICATION_JSON)
   public Order create(Order order) {
@@ -60,7 +60,7 @@ public class OrderResource {
   }
 
   @POST
-  @ApiOperation("KaasDude")
+  @ApiOperation("Create multiple orders")
   @Consumes(MediaType.APPLICATION_JSON)
   public List<Order> create(Set<Order> orders) {
     List<Order> updatedList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class OrderResource {
   }
 
   @PUT
-  @ApiOperation("KaasDude")
+  @ApiOperation("Update order")
   @Path("/single")
   @Consumes(MediaType.APPLICATION_JSON)
   public void update(Order order) {
@@ -79,7 +79,7 @@ public class OrderResource {
   }
 
   @PUT
-  @ApiOperation("KaasDude")
+  @ApiOperation("Update multiple orders")
   @Consumes(MediaType.APPLICATION_JSON)
   public void update(Set<Order> orders) {
     for (Order order : orders) {
