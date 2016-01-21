@@ -43,8 +43,10 @@ public class KlantResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
-    public void create(Klant Klant) {
-        service.add(Klant);
+    @RolesAllowed("LID")
+    public void create(Klant klant) {
+        System.out.println("KlantResource.create" + klant.toString());
+        service.add(klant);
     }
 
     @PUT
@@ -53,7 +55,7 @@ public class KlantResource {
     @JsonView(_View.View.Protected.class)
     @RolesAllowed("GUEST")
     public void update(@PathParam("email") String email, @Auth Klant authenticator, Klant klant) {
-        service.update(authenticator, email, klant);
+        service.update(email, authenticator, klant);
     }
 
     @DELETE

@@ -1,3 +1,5 @@
+import dao.ActieDAO;
+import dao.InschrijvingDAO;
 import dao.KlantDAO;
 import dao.WijnDAO;
 import io.dropwizard.Application;
@@ -14,8 +16,10 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import resource.ActieResource;
 import resource.KlantResource;
 import resource.WijnResource;
+import service.ActieService;
 import service.AuthenticationService;
 import service.KlantService;
 import service.WijnService;
@@ -69,10 +73,17 @@ public class ApiApplication extends Application<ApiConfiguration> {
         KlantService klantService = new KlantService(klantDAO);
         KlantResource klantResource = new KlantResource(klantService);
 
+        InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
+
+        ActieDAO actieDAO = jdbi.onDemand(ActieDAO.class);
+        ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
+        ActieResource actieResource = new ActieResource(actieService);
+
         setupAuthentication(environment, klantDAO);
 //        configureClientFilter(environment);
         environment.jersey().register(klantResource);
         environment.jersey().register(wijnResource);
+        environment.jersey().register(actieResource);
     }
 
     private void setupAuthentication(Environment environment, KlantDAO klantDAO) {

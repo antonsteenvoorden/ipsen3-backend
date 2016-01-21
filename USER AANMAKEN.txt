@@ -1,1 +1,26 @@
 CREATE USER 'username'@'localhost' IDENTIFIED BY 'password'
+
+{
+  "email": "thomasdas@boose.nl",
+  "voornaam": "2291",
+  "tussenvoegsel": "",
+  "achternaam": "boose",
+  "straatnaam": "Koningsspil ",
+  "huisNummer": 2,
+  "huisNummerToevoeging": null,
+  "postcode": 0,
+  "postcodeToevoeging": "MA",
+  "plaatsNaam": "Wateringen",
+  "telefoon": null,
+  "gastLid": "Gast",
+  "notitie": null,
+  "isActief": 1,
+  "password":"1234",
+  "isKlant": true,
+  "isLid": true,
+  "isMS": true,
+  "isAdmin": true,
+  "isAccountActief":true,
+  "wantsMail": true
+
+}

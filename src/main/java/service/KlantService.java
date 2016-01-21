@@ -2,8 +2,8 @@ package service;
 
 import dao.KlantDAO;
 import model.Klant;
-import service.BaseService;
 
+import javax.ws.rs.ForbiddenException;
 import java.util.Collection;
 
 /**
@@ -16,6 +16,7 @@ public class KlantService extends BaseService<Klant> {
     this.dao = dao;
   }
 
+<<<<<<< HEAD
   public Collection<Klant> getAll() {
     return dao.getAll();
   }
@@ -37,6 +38,24 @@ public class KlantService extends BaseService<Klant> {
       // Vaststellen dat de geauthenticeerde gebruiker
       // zichzelf aan het aanpassen is, tenzij het een admin is
       assertSelf(authenticator, oldUser);
+=======
+    public void add(Klant klant) {
+        klant.setKlantRechten(true);
+        dao.add(klant);
+    }
+
+    public void update(String email, Klant authenticator, Klant klant) {
+        if(email.equals(klant.getEmail())) {
+            if (!authenticator.hasRole("ADMIN")) {
+                // Vaststellen dat de geauthenticeerde gebruiker
+                // zichzelf aan het aanpassen is, tenzij het een admin is
+                assertSelf(authenticator, klant);
+            }
+            dao.update(klant);
+        } else {
+            throw new ForbiddenException();
+        }
+>>>>>>> b345c1f99880aaf9ee72136505d266ddc88a42ce
     }
 
     dao.update(email, klant);

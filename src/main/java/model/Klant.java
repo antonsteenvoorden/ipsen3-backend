@@ -59,10 +59,7 @@ public class Klant implements Principal {
   private String notitie;
 
   @JsonView(_View.View.Public.class)
-  private int isKlantActief;
-
-  @JsonView(_View.View.Public.class)
-  private int isAccountActief;
+  private int klantActief;
 
   @JsonView(_View.View.Public.class)
   private String dateString;
@@ -72,17 +69,20 @@ public class Klant implements Principal {
   @JsonView(_View.View.Protected.class)
   private String password;
 
-  @JsonView(_View.View.Private.class)
-  private boolean isKlant;
+  @JsonView(_View.View.Public.class)
+  private boolean klantRechten;
 
-  @JsonView(_View.View.Private.class)
-  private boolean isLid;
+  @JsonView(_View.View.Public.class)
+  private boolean lidRechten;
 
-  @JsonView(_View.View.Private.class)
-  private boolean isMS;
+  @JsonView(_View.View.Public.class)
+  private boolean msRechten;
 
-  @JsonView(_View.View.Private.class)
-  private boolean isAdmin;
+  @JsonView(_View.View.Public.class)
+  private boolean adminRechten;
+
+  @JsonView(_View.View.Public.class)
+  private boolean accountActief;
 
   @JsonView(_View.View.Public.class)
   private boolean wantsMail;
@@ -191,20 +191,12 @@ public class Klant implements Principal {
     this.notitie = notitie;
   }
 
-  public int getIsKlantActief() {
-    return isKlantActief;
+  public int getKlantActief() {
+    return klantActief;
   }
 
-  public void setIsKlantActief(int isKlantActief) {
-    this.isKlantActief = isKlantActief;
-  }
-
-  public int getIsAccountActief() {
-    return isAccountActief;
-  }
-
-  public void setIsAccountActief(int isAccountActief) {
-    this.isAccountActief = isAccountActief;
+  public void setKlantActief(int klantActief) {
+    this.klantActief = klantActief;
   }
 
   public String getDateString() {
@@ -223,6 +215,46 @@ public class Klant implements Principal {
     this.password = password;
   }
 
+  public boolean isKlantRechten() {
+    return klantRechten;
+  }
+
+  public void setKlantRechten(boolean klantRechten) {
+    this.klantRechten = klantRechten;
+  }
+
+  public boolean isLidRechten() {
+    return lidRechten;
+  }
+
+  public void setLidRechten(boolean lidRechten) {
+    this.lidRechten = lidRechten;
+  }
+
+  public boolean isMsRechten() {
+    return msRechten;
+  }
+
+  public void setMsRechten(boolean msRechten) {
+    this.msRechten = msRechten;
+  }
+
+  public boolean isAdminRechten() {
+    return adminRechten;
+  }
+
+  public void setAdminRechten(boolean adminRechten) {
+    this.adminRechten = adminRechten;
+  }
+
+  public boolean isAccountActief() {
+    return accountActief;
+  }
+
+  public void setAccountActief(boolean accountActief) {
+    this.accountActief = accountActief;
+  }
+
   public boolean isWantsMail() {
     return wantsMail;
   }
@@ -231,49 +263,17 @@ public class Klant implements Principal {
     this.wantsMail = wantsMail;
   }
 
-  public boolean isKlant() {
-    return isKlant;
-  }
-
-  public boolean isLid() {
-    return isLid;
-  }
-
-  public boolean isMS() {
-    return isMS;
-  }
-
-  public void setIsKlant(boolean isKlant) {
-    this.isKlant = isKlant;
-  }
-
-  public void setIsLid(boolean isLid) {
-    this.isLid = isLid;
-  }
-
-  public void setIsMS(boolean isMS) {
-    this.isMS = isMS;
-  }
-
-  public boolean isAdmin() {
-    return isAdmin;
-  }
-
-  public void setIsAdmin(boolean isAdmin) {
-    this.isAdmin = isAdmin;
-  }
-
   public boolean hasRole(String role) {
     System.out.println("Klant.hasRole: role = " + role);
     switch (role) {
       case "GUEST":
-        return isKlant;
+        return klantRechten;
       case "LID":
-        return isLid;
+        return lidRechten;
       case "M&S":
-        return isMS;
+        return msRechten;
       case "ADMIN":
-        return isAdmin;
+        return adminRechten;
       default:
         return false;
     }

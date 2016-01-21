@@ -14,9 +14,10 @@ public class BaseService<T> {
     }
 
     public void assertSelf(Klant klant1, Klant klant2) {
-        if (!klant1.equals(klant2)) {
+        if (!klant1.getEmail().equals(klant2.getEmail())) {
             throw new ForbiddenException();
         }
     }
+
 }
 

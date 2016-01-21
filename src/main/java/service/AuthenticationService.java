@@ -27,7 +27,7 @@ public class AuthenticationService
 
         if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
             System.out.println("AuthenticationService.authenticate: returnging filed user");
-            System.out.println("Is klant " + klant.isKlant());
+            System.out.println("Is klant " + klant.isKlantRechten());
             return Optional.of(klant);
         }
         System.out.println("AuthenticationService.authenticate: returning empty user");
