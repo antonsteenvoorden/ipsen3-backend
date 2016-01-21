@@ -1,18 +1,14 @@
 package resource;
 
-import _View.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import model.Actie;
 import model.Inschrijving;
 import model.Klant;
 import service.ActieService;
-import service.KlantService;
 
 import javax.annotation.security.RolesAllowed;
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
@@ -32,7 +28,23 @@ public class ActieResource {
   }
 
   @GET
-  @ApiOperation("KaasDude")
+  @Path("/actief")
+  @JsonView(_View.View.Public.class)
+  @RolesAllowed("GUEST")
+  public Collection<Actie> retreiveActive() {
+    return service.getActive();
+  }
+
+  @GET
+  @Path("/{id}")
+  @JsonView(_View.View.Public.class)
+  @RolesAllowed("GUEST")
+  public Actie retreive(@PathParam("id") int id) {
+    return service.get(id);
+  }
+
+
+  @GET
   @JsonView(_View.View.Public.class)
   @RolesAllowed("GUEST")
   public Collection<Actie> retrieveAll() {
@@ -40,7 +52,6 @@ public class ActieResource {
   }
 
   @POST
-  @ApiOperation("KaasDude")
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Public.class)
   @RolesAllowed("LID")
@@ -49,7 +60,6 @@ public class ActieResource {
   }
 
   @PUT
-  @ApiOperation("KaasDude")
   @Path("/{id}")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("LID")
@@ -59,7 +69,6 @@ public class ActieResource {
   }
 
   @POST
-  @ApiOperation("KaasDude")
   @Path("/{id}/aanmeldingen")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")
@@ -69,7 +78,6 @@ public class ActieResource {
   }
 
   @GET
-  @ApiOperation("KaasDude")
   @Path("/{id}/aanmeldingen")
   @RolesAllowed("LID")
   @JsonView(_View.View.Public.class)
