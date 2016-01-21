@@ -1,5 +1,6 @@
 package resource;
 
+import io.swagger.annotations.Api;
 import service.KlantService;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.dropwizard.auth.Auth;
@@ -15,6 +16,7 @@ import java.util.Collection;
  *
  * @author Peter van Vliet
  */
+@Api("Klanten")
 @Path("/klanten")
 @Produces(MediaType.APPLICATION_JSON)
 public class KlantResource {

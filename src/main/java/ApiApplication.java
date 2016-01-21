@@ -11,6 +11,8 @@ import io.dropwizard.bundles.assets.ConfiguredAssetsBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import model.Klant;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
@@ -34,54 +36,61 @@ import java.util.EnumSet;
  * - Roger
  */
 public class ApiApplication extends Application<ApiConfiguration> {
-    private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
+  private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
 
-    private String name;
+  private String name;
 
-    /**
-     * Entry point.
-     *
-     * @param args from command line
-     * @throws Exception if the server cannot start
-     */
-    public static void main(String[] args) throws Exception {
-        new ApiApplication().run(args);
-    }
+  /**
+   * Entry point.
+   *
+   * @param args from command line
+   * @throws Exception if the server cannot start
+   */
+  public static void main(String[] args) throws Exception {
+    new ApiApplication().run(args);
+  }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+  @Override
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public void initialize(Bootstrap<ApiConfiguration> bootstrap) {
-        bootstrap.addBundle((ConfiguredBundle) new ConfiguredAssetsBundle("/assets/", "/client", "index.html"));
-    }
+  @Override
+  public void initialize(Bootstrap<ApiConfiguration> bootstrap) {
+    bootstrap.addBundle((ConfiguredBundle) new ConfiguredAssetsBundle("/assets/", "/client", "index.html"));
 
-    @Override
-    public void run(ApiConfiguration configuration, Environment environment) {
-        name = configuration.getApiName();
+    bootstrap.addBundle(new SwaggerBundle<ApiConfiguration>() {
+      @Override
+      protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(ApiConfiguration configuration) {
+        return configuration.swaggerBundleConfiguration;
+      }
+    });
+  }
 
-        logger.info(String.format("Set API name to %s", name));
+  @Override
+  public void run(ApiConfiguration configuration, Environment environment) {
+    name = configuration.getApiName();
 
-        final DBIFactory dbiFactory = new DBIFactory();
-        final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
+    logger.info(String.format("Set API name to %s", name));
+
+    final DBIFactory dbiFactory = new DBIFactory();
+    final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
 
 //        final DBI jdbi = new DBI(String.format("jdbc:mysql://localhost/test", configuration.getUser(), configuration.getPassword()));
 
-        WijnDAO wijnDao = jdbi.onDemand(WijnDAO.class);
-        WijnService wijnService = new WijnService(wijnDao);
-        WijnResource wijnResource = new WijnResource(wijnService);
+    WijnDAO wijnDao = jdbi.onDemand(WijnDAO.class);
+    WijnService wijnService = new WijnService(wijnDao);
+    WijnResource wijnResource = new WijnResource(wijnService);
 
-        KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
-        KlantService klantService = new KlantService(klantDAO);
-        KlantResource klantResource = new KlantResource(klantService);
+    KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
+    KlantService klantService = new KlantService(klantDAO);
+    KlantResource klantResource = new KlantResource(klantService);
 
-        InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
+    InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
 
-        ActieDAO actieDAO = jdbi.onDemand(ActieDAO.class);
-        ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
-        ActieResource actieResource = new ActieResource(actieService);
+    ActieDAO actieDAO = jdbi.onDemand(ActieDAO.class);
+    ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
+    ActieResource actieResource = new ActieResource(actieService);
 
         setupAuthentication(environment, klantDAO);
         configureClientFilter(environment);

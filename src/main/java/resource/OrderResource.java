@@ -1,5 +1,6 @@
 package resource;
 
+import io.swagger.annotations.Api;
 import model.Order;
 import service.OrderService;
 
@@ -14,6 +15,7 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
+@Api("/Orders")
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {

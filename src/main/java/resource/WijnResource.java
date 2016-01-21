@@ -1,6 +1,7 @@
 package resource;
 
 import exception.ResponseException;
+import io.swagger.annotations.Api;
 import model.Wijn;
 import service.WijnService;
 
@@ -17,29 +18,30 @@ import java.util.Set;
  * - Roger
  * - Anton
  */
+@Api("/Wijnen")
 @Path("/wijnen")
 @Produces(MediaType.APPLICATION_JSON)
 public class WijnResource {
 
-    private final WijnService wijnService;
+  private final WijnService wijnService;
 
-    public WijnResource(WijnService wijnService) {
-        this.wijnService = wijnService;
-    }
+  public WijnResource(WijnService wijnService) {
+    this.wijnService = wijnService;
+  }
 
-    @GET
-    public Set<Wijn> retrieveAll() {
-        Set<Wijn> wijnSet = wijnService.retrieveAll();
-        return wijnSet;
-    }
+  @GET
+  public Set<Wijn> retrieveAll() {
+    Set<Wijn> wijnSet = wijnService.retrieveAll();
+    return wijnSet;
+  }
 
-    @GET
-    @Path("/{id}")
-    public Wijn retrieve(@PathParam("id") int id) {
-        Wijn bestaandeWijn = wijnService.retrieve(id);
-        if (bestaandeWijn == null) {
-            ResponseException.formatAndThrow(Response.Status.NOT_FOUND, "Content with id " + id + " does not exist");
-        }
-        return bestaandeWijn;
+  @GET
+  @Path("/{id}")
+  public Wijn retrieve(@PathParam("id") int id) {
+    Wijn bestaandeWijn = wijnService.retrieve(id);
+    if (bestaandeWijn == null) {
+      ResponseException.formatAndThrow(Response.Status.NOT_FOUND, "Content with id " + id + " does not exist");
     }
+    return bestaandeWijn;
+  }
 }

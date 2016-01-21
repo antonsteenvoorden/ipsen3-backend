@@ -3,6 +3,7 @@ import io.dropwizard.Configuration;
 import io.dropwizard.bundles.assets.AssetsBundleConfiguration;
 import io.dropwizard.bundles.assets.AssetsConfiguration;
 import io.dropwizard.db.DataSourceFactory;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
@@ -13,46 +14,45 @@ import javax.validation.constraints.NotNull;
  * - Anton
  * - Roger
  */
-public class ApiConfiguration extends Configuration implements AssetsBundleConfiguration
-{
-    @NotEmpty
-    @JsonProperty
-    private String apiName;
+public class ApiConfiguration extends Configuration implements AssetsBundleConfiguration {
+  @NotEmpty
+  @JsonProperty
+  private String apiName;
 
-    /**
-     * Container for the database configuration.
-     */
-    @Valid
-    @NotNull
-    @JsonProperty
-    private DataSourceFactory database = new DataSourceFactory();
+  @JsonProperty("swagger")
+  public SwaggerBundleConfiguration swaggerBundleConfiguration;
 
-    @Valid
-    @NotNull
-    @JsonProperty
-    private final AssetsConfiguration assets = new AssetsConfiguration();
+  /**
+   * Container for the database configuration.
+   */
+  @Valid
+  @NotNull
+  @JsonProperty
+  private DataSourceFactory database = new DataSourceFactory();
 
-    /**
-     * @return the container with the database information
-     */
-    @JsonProperty("database")
-    public DataSourceFactory getDataSourceFactory() {
-        return database;
-    }
+  @Valid
+  @NotNull
+  @JsonProperty
+  private final AssetsConfiguration assets = new AssetsConfiguration();
 
-    public String getApiName()
-    {
-        return apiName;
-    }
+  /**
+   * @return the container with the database information
+   */
+  @JsonProperty("database")
+  public DataSourceFactory getDataSourceFactory() {
+    return database;
+  }
 
-    public void setApiName(String apiName)
-    {
-        this.apiName = apiName;
-    }
+  public String getApiName() {
+    return apiName;
+  }
 
-    @Override
-    public AssetsConfiguration getAssetsConfiguration()
-    {
-        return assets;
-    }
+  public void setApiName(String apiName) {
+    this.apiName = apiName;
+  }
+
+  @Override
+  public AssetsConfiguration getAssetsConfiguration() {
+    return assets;
+  }
 }
