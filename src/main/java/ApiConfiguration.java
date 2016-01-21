@@ -17,6 +17,14 @@ import javax.validation.constraints.NotNull;
 public class ApiConfiguration extends Configuration implements AssetsBundleConfiguration {
   @NotEmpty
   @JsonProperty
+  private String mailUser;
+
+  @NotEmpty
+  @JsonProperty
+  private String mailPassword;
+
+  @NotEmpty
+  @JsonProperty
   private String apiName;
 
   @JsonProperty("swagger")
@@ -47,8 +55,12 @@ public class ApiConfiguration extends Configuration implements AssetsBundleConfi
     return apiName;
   }
 
-  public void setApiName(String apiName) {
-    this.apiName = apiName;
+  public String getMailUser() {
+    return mailUser;
+  }
+
+  public String getMailPassword() {
+    return mailPassword;
   }
 
   @Override

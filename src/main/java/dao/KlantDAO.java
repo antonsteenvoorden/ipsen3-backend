@@ -5,6 +5,8 @@ import model.Klant;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import javax.mail.internet.InternetAddress;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -90,4 +92,8 @@ public abstract class KlantDAO {
   public abstract void updateAccount(@BindBean Klant klant);
 
   public abstract void delete(@Bind("klant_email") String email);
+
+  @SqlQuery("SELECT klant.klant_email FROM klant INNER JOIN account ON klant.klant_email = account.klant_email " +
+          "WHERE account_wantsmail = 1 ")
+  public abstract InternetAddress[] getEmailAdressen();
 }
