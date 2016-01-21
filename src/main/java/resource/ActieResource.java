@@ -51,12 +51,12 @@ public class ActieResource {
     service.update(actie);
   }
 
-  @GET
-  @Path("/{id}/aanmelden")
+  @POST
+  @Path("/{id}/aanmeldingen")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
-  public void aanmelden(@PathParam("id") int actie ,@Auth Klant authenticator){
-    service.aanmelden(actie, authenticator);
+  public void aanmelden(@PathParam("id") int actie ,@Auth Klant authenticator, Klant klant){
+    service.aanmelden(actie, authenticator, klant);
   }
 }

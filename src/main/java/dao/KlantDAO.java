@@ -56,9 +56,9 @@ public abstract class KlantDAO {
 
 
     @Transaction
-    public void update(@Bind("klant_email") String email, @BindBean Klant klant){
-        updateKlant(email, klant);
-        updateAccount(email, klant);
+    public void update(@BindBean Klant klant){
+        updateKlant(klant);
+        updateAccount(klant);
     }
 
     @SqlUpdate("UPDATE klant "

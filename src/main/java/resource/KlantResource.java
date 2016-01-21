@@ -55,7 +55,7 @@ public class KlantResource {
     @JsonView(_View.View.Protected.class)
     @RolesAllowed("GUEST")
     public void update(@PathParam("email") String email, @Auth Klant authenticator, Klant klant) {
-        service.update(authenticator, email, klant);
+        service.update(email, authenticator, klant);
     }
 
     @DELETE

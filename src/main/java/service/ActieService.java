@@ -33,13 +33,12 @@ public class ActieService extends BaseService<Actie> {
     dao.update(actie);
   }
 
-  public void aanmelden(int actie, Klant authenticator) {
-    Klant oldUser = klantDAO.get(authenticator.getEmail());
+  public void aanmelden(int actie, Klant authenticator, Klant klant) {
 
     if (!authenticator.hasRole("ADMIN")) {
       // Vaststellen dat de geauthenticeerde gebruiker
       // zichzelf aan het aanpassen is, tenzij het een admin is
-      assertSelf(authenticator, oldUser);
+      assertSelf(authenticator, klant);
     }
 
     inschrijvingDAO.add(actie, authenticator);
