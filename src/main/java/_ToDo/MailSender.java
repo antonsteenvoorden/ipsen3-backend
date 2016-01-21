@@ -21,38 +21,9 @@
 //import java.util.Date;
 //import java.util.Properties;
 //import java.util.prefs.Preferences;
-//
-///**
-// * deze klas heeft de verantwoordelijkheid om de emails te verzenden.
-// * 1. gmail properties of outlookproperties moeten geset worden
-// * 2. create mail moet de email cre�ren, hier wordt de afzender ook geset.
-// * 3. mailOntvangers toegevoegd en attachments als File toegevoegd.
-// * 4. setOntvanger() methode aangeroepen die "SET" de ontvangers daadwerkelijk als ontvangers.
-// * 5. subject geset
-// * 6. body geset
-// * 7. setFileAttachment() aangeroepen, deze set de PDF bestanden daadwerkelijk in de mail
-// * 8. de setContentInMail() aangeroepen om het mail object te vullen met de opgehaalde informatie.
-// * 9. setTransportReady() om een verbinding met de server op te zetten.
-// * 10.sendMail() het verzenden van de mail over smtp
-// * 11.closeTransport() voor het afsluiten van de connectie met de server
-// * 12. reset() zet alle gegevens vervolgens klaar voor een nieuwe verzending.
-// * een voor een worden ze vervolgens verstuurd, door te kijken hoeveel mails nog te gaan zijn en wat de index is
-// * kunnen de mails
-// * die verstuurd moeten worden verstuurd worden.
-// *
-// * @author dennis
-// */
+
 //public class MailSender {
-//
-//  MailController mc;
-//
-//  private ArrayList<String> ontvangerlijst;
-//  private ArrayList<String> namenLijst;
-//  private ArrayList<String> orderLijst;
-//  private ArrayList<File> fileLijst;
-//
-//  private ArrayList<Order> orders;
-//  private ArrayList<Klant> klanten;
+
 //
 //  /*mail properties*/
 //  private String username;
