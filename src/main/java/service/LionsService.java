@@ -1,6 +1,6 @@
 package service;
 
-import _ToDo.MailSender;
+import model.MailSender;
 import dao.KlantDAO;
 import model.Nieuwsbrief;
 

@@ -1,4 +1,4 @@
-package _ToDo;
+package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import model.Nieuwsbrief;
