@@ -17,6 +17,9 @@ import java.util.Collection;
 @RegisterMapper(InschrijvingMapper.class)
 public interface InschrijvingDAO {
 
+    @SqlQuery("SELECT EXISTS(SELECT 1 FROM actie_inschrijving WHERE klant_email = :email AND actie_id = :id)")
+    boolean checkIngeschreven(@Bind("id") int id, @Bind("email") String email);
+
     @SqlUpdate("INSERT INTO actie_inschrijving (actie_id, klant_email) VALUES (:id, :email);")
     void add(@Bind("id") int id, @BindBean Klant klant);
 

@@ -1,6 +1,8 @@
 package service;
 
 import dao.OrderDAO;
+import model.Actie;
+import model.Klant;
 import model.Order;
 
 import java.util.Set;
@@ -13,10 +15,12 @@ import java.util.Set;
 public class OrderService extends BaseService<Order> {
   private final OrderDAO orderDAO;
   private final OrderRegelService orderRegelService;
+  private final ActieService actieService;
 
-  public OrderService(OrderDAO orderDAO, OrderRegelService orderRegelService) {
+  public OrderService(OrderDAO orderDAO, OrderRegelService orderRegelService, ActieService actieService) {
     this.orderDAO = orderDAO;
     this.orderRegelService = orderRegelService;
+    this.actieService = actieService;
   }
 
   public Set<Order> retrieveEmptyOrders() {
@@ -55,9 +59,16 @@ public class OrderService extends BaseService<Order> {
     return order;
   }
 
-  public Order add(Order order) {
-    int newOrderID = orderDAO.add(order);
-    order.setOrderID(newOrderID);
+  public Order add(int id, Order order, Klant authenticator, Klant klant) {
+    if(actieService.checkIngeschreven(id, authenticator)) {
+      if (!authenticator.hasRole("ADMIN")) {
+        assertSelf(authenticator, klant);
+      }
+      int newOrderID = orderDAO.add(order);
+      order.setOrderID(newOrderID);
+    } else {
+      //niet ingeschreven error
+    }
     return order;
   }
 

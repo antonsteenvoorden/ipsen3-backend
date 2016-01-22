@@ -7,7 +7,7 @@ import model.Inschrijving;
 import model.Klant;
 
 import java.util.Collection;
-
+import javax.ws.rs.ClientErrorException;
 /**
  * Created by Anton on 20/01/2016.
  */
@@ -40,17 +40,25 @@ public class ActieService extends BaseService<Actie> {
   }
 
   public void aanmelden(int id, Klant authenticator, Klant klant) {
+    //checken of de gebruiker nog niet is ingeschreven
+    if(checkIngeschreven(id, authenticator)) {
+      if (!authenticator.hasRole("ADMIN")) {
+        // Vaststellen dat de geauthenticeerde gebruiker
+        // zichzelf aan het aanpassen is, tenzij het een admin is
+        assertSelf(authenticator, klant);
+      }
 
-    if (!authenticator.hasRole("ADMIN")) {
-      // Vaststellen dat de geauthenticeerde gebruiker
-      // zichzelf aan het aanpassen is, tenzij het een admin is
-      assertSelf(authenticator, klant);
+      inschrijvingDAO.add(id, klant);
+    } else {
+      //already ingescrheven error ? .>...
     }
-
-    inschrijvingDAO.add(id, klant);
   }
 
   public Collection<Actie> getActive() {
     return dao.getActive();
+  }
+
+  public boolean checkIngeschreven(int id, Klant authenticator ) {
+    return inschrijvingDAO.checkIngeschreven(id, authenticator.getEmail());
   }
 }

@@ -2,6 +2,8 @@ package resource;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import io.dropwizard.auth.Auth;
+import model.Klant;
 import model.Order;
 import service.OrderService;
 
@@ -51,24 +53,26 @@ public class OrderResource {
     }
   }
 
-  @POST
-  @ApiOperation("Create order")
-  @Path("/single")
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Order create(Order order) {
-    return orderService.add(order);
-  }
 
   @POST
-  @ApiOperation("Create multiple orders")
+  @Path("/{id}")
+  @ApiOperation("Create order")
   @Consumes(MediaType.APPLICATION_JSON)
-  public List<Order> create(Set<Order> orders) {
-    List<Order> updatedList = new ArrayList<>();
-    for (Order order : orders) {
-      updatedList.add(orderService.add(order));
-    }
-    return updatedList;
+  public Order create(@PathParam("id") int id, Order order, @Auth Klant authenticator, Klant klant) {
+    return orderService.add(id, order, authenticator, klant);
   }
+
+//  //je kan maar 1 order tegelijk denk ik.
+//  @POST
+//  @ApiOperation("Create multiple orders")
+//  @Consumes(MediaType.APPLICATION_JSON)
+//  public List<Order> create(Set<Order> orders) {
+//    List<Order> updatedList = new ArrayList<>();
+//    for (Order order : orders) {
+//      updatedList.add(orderService.add(order));
+//    }
+//    return updatedList;
+//  }
 
   @PUT
   @ApiOperation("Update order")
