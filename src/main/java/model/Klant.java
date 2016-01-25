@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.Null;
 import java.security.Principal;
 
 /**
@@ -22,6 +24,7 @@ public class Klant implements Principal {
   @JsonView(_View.View.Public.class)
   private String voornaam;
 
+  @Nullable
   @JsonView(_View.View.Public.class)
   private String tussenvoegsel;
 
@@ -34,6 +37,7 @@ public class Klant implements Principal {
   @JsonView(_View.View.Public.class)
   private int huisNummer;
 
+  @Nullable
   @JsonView(_View.View.Public.class)
   private String huisNummerToevoeging;
 
@@ -48,16 +52,19 @@ public class Klant implements Principal {
   @JsonView(_View.View.Public.class)
   private String plaatsNaam;
 
+  @Nullable
   @JsonView(_View.View.Public.class)
   private String telefoon;
 
-  @NotEmpty
+  @Nullable
   @JsonView(_View.View.Public.class)
   private String gastLid;
 
+  @Nullable
   @JsonView(_View.View.Public.class)
   private String notitie;
 
+  @Nullable
   @JsonView(_View.View.Public.class)
   private int klantActief;
 

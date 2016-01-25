@@ -16,6 +16,9 @@ server:
   applicationConnectors:
     - type: http
       port: 8086
+  adminConnectors:
+    - type: http
+      port: 9006
 
 # Database settings
 database:
@@ -37,3 +40,7 @@ swagger:
   title: KAAS
   version: 9001
   decription: It's over 9000!
+
+mailUser: "de.lions.club.oegstgeest@gmail.com"
+mailPassword: "lionsRules!"
+
