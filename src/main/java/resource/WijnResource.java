@@ -31,7 +31,7 @@ public class WijnResource {
 
   @GET
   @ApiOperation("Get all wijnen")
-  @RolesAllowed("GUEST")
+  @JsonView(_View.View.Public.class)
   public Set<Wijn> retrieveAll() {
     Set<Wijn> wijnSet = wijnService.retrieveAll();
     return wijnSet;
@@ -40,7 +40,6 @@ public class WijnResource {
   @GET
   @Path("/{id}")
   @ApiOperation("Get wijn by id")
-  @RolesAllowed("GUEST")
   @JsonView(_View.View.Public.class)
   public Wijn retrieve(@PathParam("id") int id) {
     Wijn bestaandeWijn = wijnService.retrieve(id);
