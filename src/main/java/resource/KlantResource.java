@@ -57,13 +57,12 @@ public class KlantResource {
     }
 
     @PUT
-    @Path("/{email}")
     @ApiOperation("Update klant")
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
     @RolesAllowed("GUEST")
-    public void update(@PathParam("email") String email, @Auth Klant authenticator, Klant klant) {
-        service.update(email, authenticator, klant);
+    public void update(@Auth Klant authenticator, Klant klant) {
+        service.update(authenticator, klant);
     }
 
 //    @DELETE
