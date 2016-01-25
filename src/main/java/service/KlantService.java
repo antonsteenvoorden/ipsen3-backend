@@ -44,27 +44,69 @@ public class KlantService extends BaseService<Klant> {
       }
 
       Klant existingKlant = dao.get(updateKlant.getEmail());
-      if (updateKlant.getVoornaam() != null) existingKlant.setVoornaam(updateKlant.getVoornaam());
-      if (updateKlant.getTussenvoegsel() != null) existingKlant.setTussenvoegsel(updateKlant.getTussenvoegsel());
-      if (updateKlant.getAchternaam() != null) existingKlant.setAchternaam(updateKlant.getAchternaam());
-      if (updateKlant.getStraatnaam() != null) existingKlant.setStraatnaam(updateKlant.getStraatnaam());
-      if (updateKlant.getHuisNummer() != 0) existingKlant.setHuisNummer(updateKlant.getHuisNummer());
-      if (updateKlant.getHuisNummerToevoeging() != null) existingKlant.setHuisNummerToevoeging(updateKlant.getHuisNummerToevoeging());
-      if (updateKlant.getPostcode() != 0) existingKlant.setPostcode(updateKlant.getPostcode());
-      if (updateKlant.getHuisNummerToevoeging() != null) existingKlant.setHuisNummerToevoeging(updateKlant.getHuisNummerToevoeging());
-      if (updateKlant.getPlaatsNaam() != null) existingKlant.setPlaatsNaam(updateKlant.getPlaatsNaam());
-      if (updateKlant.getTelefoon() != null) existingKlant.setTelefoon(updateKlant.getTelefoon());
-      if (updateKlant.getGastLid() != null) existingKlant.setGastLid(updateKlant.getGastLid());
-      if (updateKlant.getNotitie() != null) existingKlant.setNotitie(updateKlant.getNotitie());
-      if (updateKlant.getKlantActief() != existingKlant.getKlantActief()) existingKlant.setKlantActief(updateKlant.getKlantActief());
-      if (updateKlant.getDateString() != null) existingKlant.setDateString(updateKlant.getDateString());
-      if (updateKlant.getPassword() != null) existingKlant.setPassword(updateKlant.getPassword());
-      if (updateKlant.isKlantRechten() != existingKlant.isKlantRechten()) existingKlant.setKlantRechten(updateKlant.isKlantRechten());
-      if (updateKlant.isLidRechten() != existingKlant.isLidRechten()) existingKlant.setLidRechten(updateKlant.isLidRechten());
-      if (updateKlant.isMsRechten() != existingKlant.isMsRechten()) existingKlant.setMsRechten(updateKlant.isMsRechten());
-      if (updateKlant.isAdminRechten() != existingKlant.isAdminRechten()) existingKlant.setAdminRechten(updateKlant.isAdminRechten());
-      if (updateKlant.isAccountActief() != existingKlant.isAccountActief()) existingKlant.setAccountActief(updateKlant.isAccountActief());
-      if (updateKlant.isWantsMail() != existingKlant.isWantsMail()) existingKlant.setWantsMail(updateKlant.isWantsMail());
+      if (updateKlant.getVoornaam() != null) {
+        existingKlant.setVoornaam(updateKlant.getVoornaam());
+      }
+      if (updateKlant.getTussenvoegsel() != null) {
+        existingKlant.setTussenvoegsel(updateKlant.getTussenvoegsel());
+      }
+      if (updateKlant.getAchternaam() != null) {
+        existingKlant.setAchternaam(updateKlant.getAchternaam());
+      }
+      if (updateKlant.getStraatnaam() != null) {
+        existingKlant.setStraatnaam(updateKlant.getStraatnaam());
+      }
+      if (updateKlant.getHuisNummer() != 0) {
+        existingKlant.setHuisNummer(updateKlant.getHuisNummer());
+      }
+      if (updateKlant.getHuisNummerToevoeging() != null) {
+        existingKlant.setHuisNummerToevoeging(updateKlant.getHuisNummerToevoeging());
+      }
+      if (updateKlant.getPostcode() != 0) {
+        existingKlant.setPostcode(updateKlant.getPostcode());
+      }
+      if (updateKlant.getHuisNummerToevoeging() != null) {
+        existingKlant.setHuisNummerToevoeging(updateKlant.getHuisNummerToevoeging());
+      }
+      if (updateKlant.getPlaatsNaam() != null) {
+        existingKlant.setPlaatsNaam(updateKlant.getPlaatsNaam());
+      }
+      if (updateKlant.getTelefoon() != null) {
+        existingKlant.setTelefoon(updateKlant.getTelefoon());
+      }
+      if (updateKlant.getGastLid() != null) {
+        existingKlant.setGastLid(updateKlant.getGastLid());
+      }
+      if (updateKlant.getNotitie() != null) {
+        existingKlant.setNotitie(updateKlant.getNotitie());
+      }
+      if (updateKlant.getKlantActief() != existingKlant.getKlantActief()) {
+        existingKlant.setKlantActief(updateKlant.getKlantActief());
+      }
+      if (updateKlant.getDateString() != null) {
+        existingKlant.setDateString(updateKlant.getDateString());
+      }
+      if (updateKlant.getPassword() != null) {
+        existingKlant.setPassword(updateKlant.getPassword());
+      }
+      if (updateKlant.isKlantRechten() != existingKlant.isKlantRechten()) {
+        existingKlant.setKlantRechten(updateKlant.isKlantRechten());
+      }
+      if (updateKlant.isLidRechten() != existingKlant.isLidRechten()) {
+        existingKlant.setLidRechten(updateKlant.isLidRechten());
+      }
+      if (updateKlant.isMsRechten() != existingKlant.isMsRechten()) {
+        existingKlant.setMsRechten(updateKlant.isMsRechten());
+      }
+      if (updateKlant.isAdminRechten() != existingKlant.isAdminRechten()) {
+        existingKlant.setAdminRechten(updateKlant.isAdminRechten());
+      }
+      if (updateKlant.isAccountActief() != existingKlant.isAccountActief()) {
+        existingKlant.setAccountActief(updateKlant.isAccountActief());
+      }
+      if (updateKlant.isWantsMail() != existingKlant.isWantsMail()) {
+        existingKlant.setWantsMail(updateKlant.isWantsMail());
+      }
 
       dao.update(existingKlant);
     } else {
