@@ -13,6 +13,12 @@ assets:
 server:
   rootPath: /api/*
   adminContextPath: /adminRechten
+  applicationConnectors:
+    - type: http
+      port: 300
+  adminConnectors:
+    - type: http
+      port: 8068
 
 # Database settings
 database:

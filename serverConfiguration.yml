@@ -13,6 +13,12 @@ assets:
 server:
   rootPath: /api/*
   adminContextPath: /adminRechten
+  applicationConnectors:
+    - type: http
+      port: 8086
+  adminConnectors:
+    - type: http
+      port: 9006
 
 # Database settings
 database:
@@ -27,7 +33,7 @@ database:
   password: Groep6SWAG
 
   # the JDBC URL
-  url: jdbc:mysql://145.97.16.190:3306/IPSEN3G6
+  url: jdbc:mysql://localhost:3306/IPSEN3G6
 
 swagger:
   resourcePackage: resource

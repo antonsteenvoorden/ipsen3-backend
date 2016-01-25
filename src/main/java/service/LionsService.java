@@ -1,8 +1,10 @@
 package service;
 
-import model.MailSender;
 import dao.KlantDAO;
+import model.MailSender;
 import model.Nieuwsbrief;
+
+import javax.mail.internet.AddressException;
 
 /**
  * Created by Anton on 13/01/2016.
@@ -19,7 +21,11 @@ public class LionsService {
   public Nieuwsbrief send(Nieuwsbrief nieuwsbrief) {
     //doe sheit uit dennis's barf controller / model
     mailSender.setNieuwsbrief(nieuwsbrief);
-    mailSender.setOntvangers(klantDAO.getEmailAdressen());
+    try {
+      mailSender.setOntvangers(klantDAO.getEmailAdressen());
+    } catch (AddressException e) {
+      e.printStackTrace();
+    }
     mailSender.sendMail();
     return nieuwsbrief;
   }
