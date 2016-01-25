@@ -7,10 +7,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -34,8 +31,11 @@ public class MailSender {
   public void setNieuwsbrief(Nieuwsbrief nieuwsBrief) {
     this.nieuwsBrief = nieuwsBrief;
   }
-  public void setOntvangers(InternetAddress[] ontvangers) {
-    this.ontvangers = ontvangers;
+  public void setOntvangers(String[] ontvangers) throws AddressException {
+    this.ontvangers = new InternetAddress[ontvangers.length];
+    for(int i = 0; i < ontvangers.length; i++) {
+        this.ontvangers[i] = new InternetAddress(ontvangers[i]);
+    }
   }
 
   public MailSender(String username, String password) {
