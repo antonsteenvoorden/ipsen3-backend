@@ -15,10 +15,7 @@ server:
   adminContextPath: /adminRechten
   applicationConnectors:
     - type: http
-      port: 300
-  adminConnectors:
-    - type: http
-      port: 8068
+      port: 8086
 
 # Database settings
 database:
@@ -33,14 +30,10 @@ database:
   password: Groep6SWAG
 
   # the JDBC URL
-  url: jdbc:mysql://145.97.16.190:3306/IPSEN3G6
+  url: jdbc:mysql://localhost:3306/IPSEN3G6
 
 swagger:
   resourcePackage: resource
   title: KAAS
   version: 9001
   decription: It's over 9000!
-
-mailUser: "de.lions.club.oegstgeest@gmail.com"
-mailPassword: "lionsRules!"
-
