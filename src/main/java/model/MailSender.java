@@ -3,12 +3,11 @@ package model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import model.Nieuwsbrief;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
@@ -31,10 +30,13 @@ public class MailSender {
   public void setNieuwsbrief(Nieuwsbrief nieuwsBrief) {
     this.nieuwsBrief = nieuwsBrief;
   }
-  public void setOntvangers(String[] ontvangers) throws AddressException {
-    this.ontvangers = new InternetAddress[ontvangers.length];
-    for(int i = 0; i < ontvangers.length; i++) {
-        this.ontvangers[i] = new InternetAddress(ontvangers[i]);
+  public void setOntvangers(Collection<Klant> ontvangers) throws AddressException {
+    this.ontvangers = new InternetAddress[ontvangers.size()];
+
+    int i = 0;
+    for (Klant ontvanger : ontvangers) {
+      this.ontvangers[i] = new InternetAddress(ontvanger.getEmail());
+      i++;
     }
   }
 
@@ -50,7 +52,8 @@ public class MailSender {
 
     systeemProperties.put("mail.smtp.host", host);
     systeemProperties.put("mail.smtp.port", portNumber);
-    systeemProperties.put("mail.smtp.user", "username");
+    systeemProperties.put("mail.smtp.user", username);
+    systeemProperties.put("mail.smtp.password", password);
     systeemProperties.put("mail.smtp.auth", "true");
     systeemProperties.put("mail.smtp.starttls.enable", "true");
     systeemProperties.put("mail.smtp.debug", "true");
@@ -58,38 +61,33 @@ public class MailSender {
 
     session = Session.getInstance(systeemProperties);
     session.setDebug(true);
-
-
   }
 
   public void setUpOutlookMailProperties() {
     systeemProperties = new Properties();
     host = "smtp-mail.outlook.com";
     portNumber = 587;
-
     systeemProperties.put("mail.smtp.host", host);
     systeemProperties.put("mail.smtp.port", portNumber);
-    systeemProperties.put("mail.smtp.user", "username");
+    systeemProperties.put("mail.smtp.user", username);
+    systeemProperties.put("mail.smtp.password", password);
     systeemProperties.put("mail.smtp.auth", "true");
     systeemProperties.put("mail.smtp.starttls.enable", "true");
     systeemProperties.put("mail.smtp.debug", "true");
     systeemProperties.put("mail.smtp.reportsucces", true);
     session = Session.getInstance(systeemProperties);
     session.setDebug(true);
-
   }
 
   public void sendMail() {
     if(username.contains("gmail.com")) {
       setUpGmailMailProperties();
+      session = Session.getInstance(systeemProperties, new GMailAuthenticator(username, password));
     } else {
       setUpOutlookMailProperties();
     }
-    Session session = Session.getDefaultInstance(systeemProperties);
     // Create a default MimeMessage object.
     MimeMessage message = new MimeMessage(session);
-    // Get the default Session object.
-
 
     try {
       // Set From: header field of the header.
@@ -102,12 +100,24 @@ public class MailSender {
       // Now set the actual message
       message.setContent(nieuwsBrief.getTekst(), "text/html");
 
-      // Send message
       Transport.send(message);
-
     } catch (MessagingException mex) {
       mex.printStackTrace();
     }
+  }
+}
+class GMailAuthenticator extends Authenticator {
+  String user;
+  String pw;
+  public GMailAuthenticator (String username, String password)
+  {
+    super();
+    this.user = username;
+    this.pw = password;
+  }
+  public PasswordAuthentication getPasswordAuthentication()
+  {
+    return new PasswordAuthentication(user, pw);
   }
 }
 

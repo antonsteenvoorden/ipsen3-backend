@@ -93,5 +93,5 @@ public abstract class KlantDAO {
 
   @SqlQuery("SELECT klant.klant_email FROM klant INNER JOIN account ON klant.klant_email = account.klant_email " +
           "WHERE account_wantsmail = 1 ")
-  public abstract String[] getEmailAdressen();
+  public abstract Collection<Klant> getEmailAdressen();
 }

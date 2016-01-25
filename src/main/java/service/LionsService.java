@@ -1,7 +1,7 @@
 package service;
 
-import model.MailSender;
 import dao.KlantDAO;
+import model.MailSender;
 import model.Nieuwsbrief;
 
 import javax.mail.internet.AddressException;
