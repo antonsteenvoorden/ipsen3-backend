@@ -40,3 +40,7 @@ swagger:
   title: KAAS
   version: 9001
   decription: It's over 9000!
+
+mailUser: "de.lions.club.oegstgeest@gmail.com"
+mailPassword: "lionsRules!"
+

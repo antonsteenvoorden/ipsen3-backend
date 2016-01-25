@@ -21,11 +21,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import resource.ActieResource;
 import resource.KlantResource;
+import resource.LionsResource;
 import resource.WijnResource;
-import service.ActieService;
-import service.AuthenticationService;
-import service.KlantService;
-import service.WijnService;
+import service.*;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
@@ -70,7 +68,6 @@ public class ApiApplication extends Application<ApiConfiguration> {
   @Override
   public void run(ApiConfiguration configuration, Environment environment) {
     name = configuration.getApiName();
-
     logger.info(String.format("Set API name to %s", name));
 
     final DBIFactory dbiFactory = new DBIFactory();
@@ -92,37 +89,42 @@ public class ApiApplication extends Application<ApiConfiguration> {
     ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
     ActieResource actieResource = new ActieResource(actieService);
 
-        setupAuthentication(environment, klantDAO);
-        configureClientFilter(environment);
-        environment.jersey().register(klantResource);
-        environment.jersey().register(wijnResource);
-        environment.jersey().register(actieResource);
-    }
+    LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
+    LionsResource lionsResource = new LionsResource(lionsService);
 
-    private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
-        AuthenticationService authenticationService = new AuthenticationService(klantDAO);
-        ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
+    setupAuthentication(environment, klantDAO);
+    configureClientFilter(environment);
+    //register resources
+    environment.jersey().register(klantResource);
+    environment.jersey().register(wijnResource);
+    environment.jersey().register(actieResource);
+    environment.jersey().register(lionsResource);
+  }
 
-        environment.jersey().register(new AuthDynamicFeature(
-                new BasicCredentialAuthFilter.Builder<Klant>()
-                        .setAuthenticator(authenticationService)
-                        .setAuthorizer(authenticationService)
-                        .setRealm("Niet zichtbaar voor allen")
-                        .setUnauthorizedHandler(unauthorizedHandler)
-                        .buildAuthFilter())
-        );
+  private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
+    AuthenticationService authenticationService = new AuthenticationService(klantDAO);
+    ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
 
-        environment.jersey().register(RolesAllowedDynamicFeature.class);
-        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
-    }
+    environment.jersey().register(new AuthDynamicFeature(
+                    new BasicCredentialAuthFilter.Builder<Klant>()
+                            .setAuthenticator(authenticationService)
+                            .setAuthorizer(authenticationService)
+                            .setRealm("Niet zichtbaar voor allen")
+                            .setUnauthorizedHandler(unauthorizedHandler)
+                            .buildAuthFilter())
+    );
 
-    private void configureClientFilter(Environment environment) {
-        environment.getApplicationContext().addFilter(
-                new FilterHolder(new ClientFilter()),
-                "/*",
-                EnumSet.allOf(DispatcherType.class)
-        );
-    }
+    environment.jersey().register(RolesAllowedDynamicFeature.class);
+    environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
+  }
+
+  private void configureClientFilter(Environment environment) {
+    environment.getApplicationContext().addFilter(
+            new FilterHolder(new ClientFilter()),
+            "/*",
+            EnumSet.allOf(DispatcherType.class)
+    );
+  }
 
 
 }
