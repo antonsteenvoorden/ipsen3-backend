@@ -78,8 +78,8 @@ public abstract class KlantDAO {
           + "WHERE klant_email = :email;")
   public abstract void updateKlant(@BindBean Klant klant);
 
-  @SqlUpdate("UPDATE account"
-          + "SET klant_email = :email,"
+  @SqlUpdate("UPDATE account "
+          + "SET "
           + "account_password = :password,"
           + "account_isklant = :klantRechten,"
           + "account_islid = :lidRechten,"
