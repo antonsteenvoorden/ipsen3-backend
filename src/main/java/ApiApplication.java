@@ -86,12 +86,12 @@ public class ApiApplication extends Application<ApiConfiguration> {
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
 
-    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
-    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
-
-    OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
-    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
-    OrderResource orderResource = new OrderResource(orderService);
+//    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
+//    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
+//
+//    OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
+//    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
+//    OrderResource orderResource = new OrderResource(orderService);
 
     setupAuthentication(environment, klantDAO);
     configureClientFilter(environment);
@@ -100,7 +100,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(wijnResource);
     environment.jersey().register(actieResource);
     environment.jersey().register(lionsResource);
-    environment.jersey().register(orderResource);
+    //environment.jersey().register(orderResource);
   }
 
   private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
