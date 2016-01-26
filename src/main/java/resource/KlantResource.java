@@ -88,7 +88,7 @@ public class KlantResource {
         return service.getOrdersByKlant(email, orderFill, wijnFill);
     }
 
-    @GET
+    @POST
     @Path("/wachtwoordvergeten")
     @JsonView(_View.View.Protected.class)
     public void wachtwoordVergeten(String email) {

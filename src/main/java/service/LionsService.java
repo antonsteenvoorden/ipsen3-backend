@@ -46,7 +46,7 @@ public class LionsService {
       byte[] digest = null;
       try {
         md = MessageDigest.getInstance("SHA-256");
-        md.update(newPassword.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+        md.update(newPassword.getBytes("UTF-16")); // Change this to "UTF-16" if needed
          digest = md.digest();
       } catch (Exception e) {
         e.printStackTrace();
