@@ -25,6 +25,6 @@ public interface WijnDAO {
           + "wijn_type, wijn_jaartal, wijn_isactief, afkomst_naam,"
           + " category_naam FROM `wijn`, `wijn_afkomst`, `wijn_category`"
           + "WHERE wijn.wijn_afkomst = wijn_afkomst.afkomst_id AND "
-          + "wijn_afkomst.category_id = wijn_category.category_id AND wijn_id = :wijnID")
+          + "wijn_afkomst.category_id = wijn_category.category_id AND wijn_serie_id = :wijnID")
     Wijn retrieve(@Bind("wijnID") int wijnID);
 }
