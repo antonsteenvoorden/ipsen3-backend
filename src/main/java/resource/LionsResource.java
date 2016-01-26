@@ -5,6 +5,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import model.Nieuwsbrief;
 import service.LionsService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -24,6 +25,7 @@ public class LionsResource {
   @POST
   @ApiOperation("Verstuur de nieuwsbrief")
   @Path("/verstuurnieuwsbrief")
+  @RolesAllowed("ADMIN")
   @Consumes(MediaType.APPLICATION_JSON)
   public Nieuwsbrief create(Nieuwsbrief nieuwsbrief) {
     return lionsService.send(nieuwsbrief);

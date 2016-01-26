@@ -46,7 +46,7 @@ public class ActieService extends BaseService<Actie> {
         assertSelf(authenticator, klant);
       }
 
-      inschrijvingDAO.add(id, klant);
+      inschrijvingDAO.add(id, klant.getEmail());
     } else {
       //already ingescrheven error ? .>...
       System.out.println("ActieService.aanmelden :  al ingeschreven");

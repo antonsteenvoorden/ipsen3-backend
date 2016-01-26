@@ -76,22 +76,22 @@ public class Klant implements Principal {
   private String password;
 
   @JsonView(_View.View.Public.class)
-  private boolean klantRechten;
+  private Boolean klantRechten;
 
   @JsonView(_View.View.Public.class)
-  private boolean lidRechten;
+  private Boolean lidRechten;
 
   @JsonView(_View.View.Public.class)
-  private boolean msRechten;
+  private Boolean msRechten;
 
   @JsonView(_View.View.Public.class)
-  private boolean adminRechten;
+  private Boolean adminRechten;
 
   @JsonView(_View.View.Public.class)
-  private boolean accountActief;
+  private Boolean accountActief;
 
   @JsonView(_View.View.Public.class)
-  private boolean wantsMail;
+  private Boolean wantsMail;
 
   public String getEmail() {
     return email;
@@ -109,11 +109,12 @@ public class Klant implements Principal {
     this.voornaam = voornaam;
   }
 
+  @Nullable
   public String getTussenvoegsel() {
     return tussenvoegsel;
   }
 
-  public void setTussenvoegsel(String tussenvoegsel) {
+  public void setTussenvoegsel(@Nullable String tussenvoegsel) {
     this.tussenvoegsel = tussenvoegsel;
   }
 
@@ -141,11 +142,12 @@ public class Klant implements Principal {
     this.huisNummer = huisNummer;
   }
 
+  @Nullable
   public String getHuisNummerToevoeging() {
     return huisNummerToevoeging;
   }
 
-  public void setHuisNummerToevoeging(String huisNummerToevoeging) {
+  public void setHuisNummerToevoeging(@Nullable String huisNummerToevoeging) {
     this.huisNummerToevoeging = huisNummerToevoeging;
   }
 
@@ -173,35 +175,39 @@ public class Klant implements Principal {
     this.plaatsNaam = plaatsNaam;
   }
 
+  @Nullable
   public String getTelefoon() {
     return telefoon;
   }
 
-  public void setTelefoon(String telefoon) {
+  public void setTelefoon(@Nullable String telefoon) {
     this.telefoon = telefoon;
   }
 
+  @Nullable
   public String getGastLid() {
     return gastLid;
   }
 
-  public void setGastLid(String gastLid) {
+  public void setGastLid(@Nullable String gastLid) {
     this.gastLid = gastLid;
   }
 
+  @Nullable
   public String getNotitie() {
     return notitie;
   }
 
-  public void setNotitie(String notitie) {
+  public void setNotitie(@Nullable String notitie) {
     this.notitie = notitie;
   }
 
+  @Nullable
   public int getKlantActief() {
     return klantActief;
   }
 
-  public void setKlantActief(int klantActief) {
+  public void setKlantActief(@Nullable int klantActief) {
     this.klantActief = klantActief;
   }
 
@@ -221,59 +227,59 @@ public class Klant implements Principal {
     this.password = password;
   }
 
-  public boolean isKlantRechten() {
+  public Boolean getKlantRechten() {
     return klantRechten;
   }
 
-  public void setKlantRechten(boolean klantRechten) {
+  public void setKlantRechten(Boolean klantRechten) {
     this.klantRechten = klantRechten;
   }
 
-  public boolean isLidRechten() {
+  public Boolean getLidRechten() {
     return lidRechten;
   }
 
-  public void setLidRechten(boolean lidRechten) {
+  public void setLidRechten(Boolean lidRechten) {
     this.lidRechten = lidRechten;
   }
 
-  public boolean isMsRechten() {
+  public Boolean getMsRechten() {
     return msRechten;
   }
 
-  public void setMsRechten(boolean msRechten) {
+  public void setMsRechten(Boolean msRechten) {
     this.msRechten = msRechten;
   }
 
-  public boolean isAdminRechten() {
+  public Boolean getAdminRechten() {
     return adminRechten;
   }
 
-  public void setAdminRechten(boolean adminRechten) {
+  public void setAdminRechten(Boolean adminRechten) {
     this.adminRechten = adminRechten;
   }
 
-  public boolean isAccountActief() {
+  public Boolean getAccountActief() {
     return accountActief;
   }
 
-  public void setAccountActief(boolean accountActief) {
+  public void setAccountActief(Boolean accountActief) {
     this.accountActief = accountActief;
   }
 
-  public boolean isWantsMail() {
+  public Boolean getWantsMail() {
     return wantsMail;
   }
 
-  public void setWantsMail(boolean wantsMail) {
+  public void setWantsMail(Boolean wantsMail) {
     this.wantsMail = wantsMail;
   }
 
   public String toString() {
     return "Email: " +email
-            + " Rechten: " + "GUEST" + isKlantRechten()
-            + " LID" + isLidRechten() + " MS " + isMsRechten()
-            + " ADMIN" + isAdminRechten();
+            + " Rechten: " + "GUEST" + getKlantRechten()
+            + " LID" + getLidRechten() + " MS " + getMsRechten()
+            + " ADMIN" + getAdminRechten();
   }
 
   public boolean hasRole(String role) {

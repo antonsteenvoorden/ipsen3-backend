@@ -21,7 +21,7 @@ public interface InschrijvingDAO {
     boolean checkIngeschreven(@Bind("id") int id, @Bind("email") String email);
 
     @SqlUpdate("INSERT INTO actie_inschrijving (actie_id, klant_email) VALUES (:id, :email);")
-    void add(@Bind("id") int id, @BindBean Klant klant);
+    void add(@Bind("id") int id, @Bind("email") String email);
 
     @SqlQuery("SELECT actie_id, klant_email, actie_inschrijving_timestamp FROM actie_inschrijving " +
             "WHERE actie_id = :id")

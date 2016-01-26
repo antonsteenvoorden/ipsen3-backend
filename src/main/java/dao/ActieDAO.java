@@ -16,8 +16,8 @@ import java.util.Collection;
 @RegisterMapper(ActieMapper.class)
 public interface ActieDAO {
 
-  @SqlUpdate("INSERT INTO `actie` (`actie_start_timestamp`, `actie_eind_timestamp`, `actie_referentie_naam`, " +
-          "`actie_beschrijving`) VALUES (:startTimestamp, :eindTimestamp, :referentieNaam, :beschrijving);")
+  @SqlUpdate("INSERT INTO `actie` (`actie_isactief`, `actie_start_timestamp`, `actie_eind_timestamp`, `actie_referentie_naam`, " +
+          "`actie_beschrijving`) VALUES (:actieActief, :startTimestamp, :eindTimestamp, :referentieNaam, :beschrijving);")
   void add(@BindBean Actie actie);
 
   @SqlQuery("SELECT actie_id, actie_isactief, actie_start_timestamp, actie_eind_timestamp, actie_referentie_naam, " +

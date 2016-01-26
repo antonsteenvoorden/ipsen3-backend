@@ -65,7 +65,6 @@ public class ActieResource {
   }
 
   @PUT
-  @Path("/{id}")
   @ApiOperation("Update actie")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("LID")
@@ -75,7 +74,7 @@ public class ActieResource {
   }
 
   @POST
-  @Path("/{id}")
+  @Path("/{id}/aanmeldingen")
   @ApiOperation("Klanten aanmelden")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")

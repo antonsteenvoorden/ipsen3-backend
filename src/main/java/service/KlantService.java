@@ -89,23 +89,23 @@ public class KlantService extends BaseService<Klant> {
             if (updateKlant.getPassword() != null) {
                 existingKlant.setPassword(updateKlant.getPassword());
             }
-            if (updateKlant.isKlantRechten() != existingKlant.isKlantRechten()) {
-                existingKlant.setKlantRechten(updateKlant.isKlantRechten());
+            if (updateKlant.getKlantRechten() != null && (updateKlant.getKlantRechten() != existingKlant.getKlantRechten())) {
+                existingKlant.setKlantRechten(updateKlant.getKlantRechten());
             }
-            if (updateKlant.isLidRechten() != existingKlant.isLidRechten()) {
-                existingKlant.setLidRechten(updateKlant.isLidRechten());
+            if (updateKlant.getLidRechten() != null && (updateKlant.getLidRechten() != existingKlant.getLidRechten())) {
+                existingKlant.setLidRechten(updateKlant.getLidRechten());
             }
-            if (updateKlant.isMsRechten() != existingKlant.isMsRechten()) {
-                existingKlant.setMsRechten(updateKlant.isMsRechten());
+            if (updateKlant.getMsRechten() != null && (updateKlant.getMsRechten() != existingKlant.getMsRechten())) {
+                existingKlant.setMsRechten(updateKlant.getMsRechten());
             }
-            if (updateKlant.isAdminRechten() != existingKlant.isAdminRechten()) {
-                existingKlant.setAdminRechten(updateKlant.isAdminRechten());
+            if (updateKlant.getAdminRechten() != null && (updateKlant.getAdminRechten() != existingKlant.getAdminRechten())) {
+                existingKlant.setAdminRechten(updateKlant.getAdminRechten());
             }
-            if (updateKlant.isAccountActief() != existingKlant.isAccountActief()) {
-                existingKlant.setAccountActief(updateKlant.isAccountActief());
+            if (updateKlant.getAccountActief() != null && (updateKlant.getAccountActief() != existingKlant.getAccountActief())) {
+                existingKlant.setAccountActief(updateKlant.getAccountActief());
             }
-            if (updateKlant.isWantsMail() != existingKlant.isWantsMail()) {
-                existingKlant.setWantsMail(updateKlant.isWantsMail());
+            if (updateKlant.getWantsMail() != null && (updateKlant.getWantsMail() != existingKlant.getWantsMail())) {
+                existingKlant.setWantsMail(updateKlant.getWantsMail());
             }
 
             dao.update(existingKlant);
