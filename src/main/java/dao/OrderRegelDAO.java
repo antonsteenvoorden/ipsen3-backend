@@ -1,7 +1,9 @@
 package dao;
 
+import mappers.OrderRegelMapper;
 import model.OrderRegel;
 import org.skife.jdbi.v2.sqlobject.*;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Set;
 
@@ -9,6 +11,7 @@ import java.util.Set;
  * Edited by:
  * - Roger
  */
+@RegisterMapper(OrderRegelMapper.class)
 public interface OrderRegelDAO {
   @SqlQuery("SELECT orderregel_id, orderregel_wijnid, orderregel_wijnnaam, orderregel_wijnjaartal, " +
                 "orderregel_aantal, orderregel_orderid, orderregel_isactief, orderregel_wijnprijs " +

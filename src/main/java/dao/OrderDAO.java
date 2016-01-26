@@ -27,4 +27,7 @@ public interface OrderDAO {
 
   @SqlUpdate("UPDATE `order` SET order_klantemail = :klantEmail, order_factuuradres = :factuurAdres, order_isactief = :isActief WHERE order_id = :orderID")
   void update(@BindBean Order order);
+
+  @SqlQuery("SELECT order_id FROM `order` WHERE order_klantemail = :klantEmail")
+  Set<Integer> retrieveOrderIDs(@Bind("klantEmail") String klantEmail);
 }

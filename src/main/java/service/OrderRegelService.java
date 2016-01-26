@@ -32,7 +32,12 @@ public class OrderRegelService extends BaseService<OrderRegel> {
   }
 
   public Set<OrderRegel> retrieveEmptyOrderRegels(int orderID) {
-    return orderRegelDAO.retrieve(orderID);
+    System.out.println("Calling retrieve with orderID: " + orderID);
+    Set<OrderRegel> verwijderDit =  orderRegelDAO.retrieve(orderID);
+    for (OrderRegel orderRegel : verwijderDit) {
+      System.out.println("orderregel found with id: " + orderRegel.getOrderRegelID());
+    }
+    return verwijderDit;
   }
 
   public Set<OrderRegel> retrieveOrderRegelsWithWijn(int orderID) {

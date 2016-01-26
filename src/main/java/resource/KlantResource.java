@@ -1,15 +1,17 @@
 package resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import io.dropwizard.auth.Auth;
-import com.wordnik.swagger.annotations.Api;
 import model.Klant;
+import model.Order;
 import service.KlantService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -74,6 +76,16 @@ public class KlantResource {
     public void updateWachtwoord(@Auth Klant authenticator, Klant klant) {
         service.updateWachtwoord(authenticator, klant);
     }
+
+    @GET
+    @Path("/{email}/orders")
+    @ApiOperation("Get all orders of klant")
+    @JsonView(_View.View.Protected.class)
+    @RolesAllowed("GUEST")
+    public ArrayList<Order> getOrders(@PathParam("email") String email, @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
+        return service.getOrdersByKlant(email, orderFill, wijnFill);
+    }
+
 
 //    @DELETE
 //    @Path("/{email}")

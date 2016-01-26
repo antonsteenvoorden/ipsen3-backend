@@ -2,8 +2,10 @@ package service;
 
 import dao.KlantDAO;
 import model.Klant;
+import model.Order;
 
 import javax.ws.rs.ForbiddenException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -11,9 +13,11 @@ import java.util.Collection;
  */
 public class KlantService extends BaseService<Klant> {
     private final KlantDAO dao;
+    private final OrderService orderService;
 
-    public KlantService(KlantDAO dao) {
+    public KlantService(KlantDAO dao, OrderService orderService) {
         this.dao = dao;
+        this.orderService = orderService;
     }
 
     public Collection<Klant> getAll() {
@@ -125,6 +129,10 @@ public class KlantService extends BaseService<Klant> {
         } else {
             throw new ForbiddenException();
         }
+    }
+
+    public ArrayList<Order> getOrdersByKlant(String email, boolean orderFill, boolean wijnFill) {
+        return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill);
     }
 
 //    public void delete(String email) {

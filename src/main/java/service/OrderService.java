@@ -1,10 +1,9 @@
 package service;
 
 import dao.OrderDAO;
-import model.Actie;
-import model.Klant;
 import model.Order;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -30,7 +29,7 @@ public class OrderService extends BaseService<Order> {
   public Set<Order> retrieveOrdersWithOrderRegels() {
     Set<Order> orders = retrieveEmptyOrders();
     for (Order order : orders) {
-      orderRegelService.retrieveEmptyOrderRegels(order.getOrderID());
+      order.setOrderRegelSet(orderRegelService.retrieveEmptyOrderRegels(order.getOrderID()));
     }
     return orders;
   }
@@ -38,7 +37,7 @@ public class OrderService extends BaseService<Order> {
   public Set<Order> retrieveOrdersWithOrderRegelsWithWijn() {
     Set<Order> orders = retrieveEmptyOrders();
     for (Order order : orders) {
-      orderRegelService.retrieveOrderRegelsWithWijn(order.getOrderID());
+      order.setOrderRegelSet(orderRegelService.retrieveOrderRegelsWithWijn(order.getOrderID()));
     }
     return orders;
   }
@@ -59,16 +58,9 @@ public class OrderService extends BaseService<Order> {
     return order;
   }
 
-  public Order add(int id, Order order, Klant authenticator, Klant klant) {
-    if(!actieService.checkIngeschreven(id, authenticator)) {
-      if (!authenticator.hasRole("ADMIN")) {
-        assertSelf(authenticator, klant);
-      }
-      int newOrderID = orderDAO.add(order);
-      order.setOrderID(newOrderID);
-    } else {
-      //niet ingeschreven error
-    }
+  public Order add(Order order) {
+    int newOrderID = orderDAO.add(order);
+    order.setOrderID(newOrderID);
     return order;
   }
 
@@ -84,5 +76,20 @@ public class OrderService extends BaseService<Order> {
       existingOrder.setIsActief(newOrder.getIsActief());
     }
     orderDAO.update(existingOrder);
+  }
+
+  public ArrayList<Order> getOrdersByKlantEmail(String email, boolean orderFill, boolean wijnFill) {
+    Set<Integer> orderIDs = orderDAO.retrieveOrderIDs(email);
+    ArrayList<Order> orders = new ArrayList<>();
+    for (Integer id : orderIDs) {
+      if (wijnFill) {
+        orders.add(this.retrieveOrderWithOrderRegelsWithWijn(id));
+      } else if (orderFill) {
+        orders.add(this.retrieveOrderWithOrderRegels(id));
+      } else {
+        orders.add(this.retrieveEmptyOrder(id));
+      }
+    }
+    return orders;
   }
 }

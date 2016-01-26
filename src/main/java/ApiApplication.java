@@ -73,25 +73,25 @@ public class ApiApplication extends Application<ApiConfiguration> {
     WijnService wijnService = new WijnService(wijnDao);
     WijnResource wijnResource = new WijnResource(wijnService);
 
-    KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
-    KlantService klantService = new KlantService(klantDAO);
-    KlantResource klantResource = new KlantResource(klantService);
-
     InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
 
     ActieDAO actieDAO = jdbi.onDemand(ActieDAO.class);
     ActieService actieService = new ActieService(actieDAO, inschrijvingDAO);
     ActieResource actieResource = new ActieResource(actieService);
 
+    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
+    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
+
+    OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
+    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
+    OrderResource orderResource = new OrderResource(orderService);
+
+    KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
+    KlantService klantService = new KlantService(klantDAO, orderService);
+    KlantResource klantResource = new KlantResource(klantService);
+
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
-
-//    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
-//    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
-//
-//    OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
-//    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
-//    OrderResource orderResource = new OrderResource(orderService);
 
     setupAuthentication(environment, klantDAO);
     configureClientFilter(environment);
@@ -100,7 +100,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(wijnResource);
     environment.jersey().register(actieResource);
     environment.jersey().register(lionsResource);
-    //environment.jersey().register(orderResource);
+    environment.jersey().register(orderResource);
   }
 
   private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
