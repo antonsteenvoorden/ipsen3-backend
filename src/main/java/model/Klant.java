@@ -71,7 +71,6 @@ public class Klant implements Principal {
   @JsonView(_View.View.Public.class)
   private String dateString;
 
-  @NotEmpty
   @Length(min = 8)
   @JsonView(_View.View.Protected.class)
   private String password;

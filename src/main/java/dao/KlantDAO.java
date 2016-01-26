@@ -61,7 +61,7 @@ public abstract class KlantDAO {
   }
 
   @SqlUpdate("UPDATE klant "
-          + "SET klant_email = :email, "
+          + "SET "
           + "klant_voornaam = :voornaam,"
           + "klant_tussenvoegsel = :tussenvoegsel,"
           + "klant_achternaam = :achternaam,"
@@ -71,23 +71,27 @@ public abstract class KlantDAO {
           + "klant_postcode = :postcode, "
           + "klant_postcode_toevoeging = :postcodeToevoeging,"
           + "klant_plaatsnaam = :plaatsNaam, "
-          + "klant_telefoon :telefoon, "
+          + "klant_telefoon =:telefoon, "
           + "klant_gastlid = :gastLid, "
           + "klant_notitie = :notitie, "
           + "klant_isactief = :klantActief "
           + "WHERE klant_email = :email;")
   public abstract void updateKlant(@BindBean Klant klant);
 
-  @SqlUpdate("UPDATE account"
-          + "SET klant_email = :email,"
-          + "account_password = :password"
+  @SqlUpdate("UPDATE account "
+          + "SET "
           + "account_isklant = :klantRechten,"
           + "account_islid = :lidRechten,"
           + "account_isms = :msRechten,"
           + "account_isadmin = :adminRechten,"
-          + "account_isactief =:inMailingList"
+          + "account_isactief =:wantsMail "
           + "WHERE klant_email = :email;")
   public abstract void updateAccount(@BindBean Klant klant);
+
+  @SqlUpdate("UPDATE account "
+          + "SET account_password = :password " +
+          "WHERE klant_email = :email;")
+  public abstract void updateWachtwoord(@BindBean Klant klant);
 
   public abstract void delete(@Bind("klant_email") String email);
 
