@@ -2,6 +2,7 @@ package service;
 
 import dao.KlantDAO;
 import model.Klant;
+import model.MailSender;
 
 import javax.ws.rs.ForbiddenException;
 import java.util.Collection;
@@ -126,6 +127,8 @@ public class KlantService extends BaseService<Klant> {
             throw new ForbiddenException();
         }
     }
+
+
 
 //    public void delete(String email) {
 //        // Controleren of deze gebruiker wel bestaat

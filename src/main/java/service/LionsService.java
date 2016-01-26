@@ -1,8 +1,8 @@
 package service;
 
 import dao.KlantDAO;
+import model.Mail;
 import model.MailSender;
-import model.Nieuwsbrief;
 
 import javax.mail.internet.AddressException;
 
@@ -18,16 +18,27 @@ public class LionsService {
     this.klantDAO = klantDAO;
   }
 
-  public Nieuwsbrief send(Nieuwsbrief nieuwsbrief) {
+  public Mail send(Mail mail) {
     //doe sheit uit dennis's barf controller / model
-    mailSender.setNieuwsbrief(nieuwsbrief);
+    mailSender.setNieuwsbrief(mail);
     try {
       mailSender.setOntvangers(klantDAO.getEmailAdressen());
     } catch (AddressException e) {
       e.printStackTrace();
     }
     mailSender.sendMail();
-    return nieuwsbrief;
+    return mail;
+  }
+
+  public void wachtwoordVergeten(String email) {
+    try {
+      Mail mail = new Mail();
+      mail.setOnderwerp("Wachtwoord resetten Lions club");
+      //mail.setTekst();
+      mailSender.setOntvangers(email);
+    } catch (AddressException e) {
+      e.printStackTrace();
+    }
   }
 
 }
