@@ -31,7 +31,7 @@ public class KlantService extends BaseService<Klant> {
             // zichzelf aan het aanpassen is, tenzij het een admin is
             assertSelf(authenticator, klant);
         }
-        return requireResult(dao.get(email));
+        return requireResult(klant);
     }
 
     public void add(Klant klant) {
@@ -134,6 +134,7 @@ public class KlantService extends BaseService<Klant> {
     public ArrayList<Order> getOrdersByKlant(String email, boolean orderFill, boolean wijnFill) {
         return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill);
     }
+
 
 //    public void delete(String email) {
 //        // Controleren of deze gebruiker wel bestaat

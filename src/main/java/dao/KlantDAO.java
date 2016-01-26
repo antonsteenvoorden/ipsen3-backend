@@ -15,12 +15,12 @@ import java.util.Collection;
 @RegisterMapper(KlantMapper.class)
 public abstract class KlantDAO {
 
-  @SqlQuery("SELECT klant.klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, "
-          + "klant_straatnaam, klant_huisnummer, klant_huisnummer_toevoeging, "
-          + "klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, klant_telefoon,"
-          + " klant_gastlid, klant_notitie, klant_isactief, klant_date, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
-          + "FROM klant, account WHERE klant.klant_email = :klant_email AND account.klant_email = klant.klant_email")
-  public abstract Klant get(@Bind("klant_email") String username);
+  @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
+          + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
+          + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
+          + " klant.klant_gastlid, klant.klant_notitie, klant.klant_isactief, klant.klant_date, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
+          + "FROM klant LEFT JOIN account ON account.klant_email = klant.klant_email WHERE klant.klant_email = :email; ")
+  public abstract Klant get(@Bind("email") String email);
 
 
   @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
@@ -34,7 +34,7 @@ public abstract class KlantDAO {
 
   @SqlQuery("SELECT klant_email, account_password, account_isklant, " +
           "account_islid, account_isms, account_isadmin FROM account " +
-          "WHERE account.klant_email = :klant_email")
+          "WHERE account.klant_email = :klant_email AND account_isactief = 1")
   public abstract Klant getAuthStub(@Bind("klant_email") String username);
 
   @Transaction

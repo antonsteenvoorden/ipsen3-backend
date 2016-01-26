@@ -2,7 +2,7 @@ package resource;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import model.Nieuwsbrief;
+import model.Mail;
 import service.LionsService;
 
 import javax.annotation.security.RolesAllowed;
@@ -23,12 +23,12 @@ public class LionsResource {
   }
 
   @POST
-  @ApiOperation("Verstuur de nieuwsbrief")
+  @ApiOperation("Verstuur de mail")
   @Path("/verstuurnieuwsbrief")
   @RolesAllowed("ADMIN")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Nieuwsbrief create(Nieuwsbrief nieuwsbrief) {
-    return lionsService.send(nieuwsbrief);
+  public Mail create(Mail mail) {
+    return lionsService.send(mail);
   }
 
 }

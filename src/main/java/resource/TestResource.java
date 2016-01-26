@@ -1,8 +1,7 @@
 package resource;
 
 import com.wordnik.swagger.annotations.Api;
-import model.Nieuwsbrief;
-import service.LionsService;
+import model.Mail;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,8 +20,8 @@ public class TestResource {
   @GET
 //  @Path("/verstuurnieuwsbrief")
 //  @Consumes(MediaType.APPLICATION_JSON)
-  public void create(Nieuwsbrief nieuwsbrief) {
-//    lionsService.send(nieuwsbrief);
+  public void create(Mail mail) {
+//    lionsService.send(mail);
   }
 
 }

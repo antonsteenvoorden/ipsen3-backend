@@ -1,14 +1,8 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import model.Nieuwsbrief;
-
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Properties;
 
 public class MailSender {
@@ -23,13 +17,14 @@ public class MailSender {
   private Transport transport;
   private Properties systeemProperties;
 
-  private Nieuwsbrief nieuwsBrief;
+  private Mail bericht;
   private InternetAddress[] ontvangers;
 
 
-  public void setNieuwsbrief(Nieuwsbrief nieuwsBrief) {
-    this.nieuwsBrief = nieuwsBrief;
+  public void setNieuwsbrief(Mail bericht) {
+    this.bericht = bericht;
   }
+
   public void setOntvangers(Collection<Klant> ontvangers) throws AddressException {
     this.ontvangers = new InternetAddress[ontvangers.size()];
 
@@ -38,6 +33,11 @@ public class MailSender {
       this.ontvangers[i] = new InternetAddress(ontvanger.getEmail());
       i++;
     }
+  }
+
+  public void setOntvangers(String ontvanger) throws AddressException {
+    this.ontvangers = new InternetAddress[1];
+    ontvangers[0] =  new InternetAddress(ontvanger);
   }
 
   public MailSender(String username, String password) {
@@ -95,10 +95,10 @@ public class MailSender {
       message.setRecipients(Message.RecipientType.BCC, ontvangers);
 
       // Set Subject: header field
-      message.setSubject(nieuwsBrief.getOnderwerp());
+      message.setSubject(bericht.getOnderwerp());
 
       // Now set the actual message
-      message.setContent(nieuwsBrief.getTekst(), "text/html");
+      message.setContent(bericht.getTekst(), "text/html");
 
       Transport.send(message);
     } catch (MessagingException mex) {

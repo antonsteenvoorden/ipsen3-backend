@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Created by Anton on 13/01/2016.
  */
-public class Nieuwsbrief {
+public class Mail {
 
   @NotEmpty
   private String onderwerp;
