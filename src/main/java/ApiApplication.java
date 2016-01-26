@@ -75,7 +75,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
     KlantService klantService = new KlantService(klantDAO);
-    KlantResource klantResource = new KlantResource(klantService);
+
 
     InschrijvingDAO inschrijvingDAO = jdbi.onDemand(InschrijvingDAO.class);
 
@@ -85,7 +85,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
-
+    KlantResource klantResource = new KlantResource(klantService,lionsService);
 //    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
 //    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
 //
