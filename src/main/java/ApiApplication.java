@@ -1,7 +1,4 @@
-import dao.ActieDAO;
-import dao.InschrijvingDAO;
-import dao.KlantDAO;
-import dao.WijnDAO;
+import dao.*;
 import io.dropwizard.Application;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
@@ -19,10 +16,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import resource.ActieResource;
-import resource.KlantResource;
-import resource.LionsResource;
-import resource.WijnResource;
+import resource.*;
 import service.*;
 
 import javax.servlet.DispatcherType;
@@ -92,6 +86,13 @@ public class ApiApplication extends Application<ApiConfiguration> {
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
 
+    OrderRegelDAO orderRegelDAO = jdbi.onDemand(OrderRegelDAO.class);
+    OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
+
+    OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
+    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
+    OrderResource orderResource = new OrderResource(orderService);
+
     setupAuthentication(environment, klantDAO);
     configureClientFilter(environment);
     //register resources
@@ -99,6 +100,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(wijnResource);
     environment.jersey().register(actieResource);
     environment.jersey().register(lionsResource);
+    environment.jersey().register(orderResource);
   }
 
   private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
