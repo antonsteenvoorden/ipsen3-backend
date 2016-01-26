@@ -65,6 +65,16 @@ public class KlantResource {
         service.update(authenticator, klant);
     }
 
+    @PUT
+    @Path("/wachtwoord")
+    @ApiOperation("Update wachtwoord")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JsonView(_View.View.Protected.class)
+    @RolesAllowed("GUEST")
+    public void updateWachtwoord(@Auth Klant authenticator, Klant klant) {
+        service.updateWachtwoord(authenticator, klant);
+    }
+
 //    @DELETE
 //    @Path("/{email}")
 //    @RolesAllowed("ADMIN")

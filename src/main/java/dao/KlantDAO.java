@@ -80,7 +80,6 @@ public abstract class KlantDAO {
 
   @SqlUpdate("UPDATE account "
           + "SET "
-          + "account_password = :password,"
           + "account_isklant = :klantRechten,"
           + "account_islid = :lidRechten,"
           + "account_isms = :msRechten,"
@@ -88,6 +87,11 @@ public abstract class KlantDAO {
           + "account_isactief =:wantsMail "
           + "WHERE klant_email = :email;")
   public abstract void updateAccount(@BindBean Klant klant);
+
+  @SqlUpdate("UPDATE account "
+          + "SET account_password = :password " +
+          "WHERE klant_email = :email;")
+  public abstract void updateWachtwoord(@BindBean Klant klant);
 
   public abstract void delete(@Bind("klant_email") String email);
 
