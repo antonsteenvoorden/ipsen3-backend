@@ -60,7 +60,7 @@ public class OrderService extends BaseService<Order> {
   }
 
   public Order add(int id, Order order, Klant authenticator, Klant klant) {
-    if(actieService.checkIngeschreven(id, authenticator)) {
+    if(!actieService.checkIngeschreven(id, authenticator)) {
       if (!authenticator.hasRole("ADMIN")) {
         assertSelf(authenticator, klant);
       }
