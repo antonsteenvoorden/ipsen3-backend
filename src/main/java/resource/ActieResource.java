@@ -75,7 +75,7 @@ public class ActieResource {
   }
 
   @POST
-  @Path("/{id}/aanmeldingen")
+  @Path("/{id}")
   @ApiOperation("Klanten aanmelden")
   @Consumes(MediaType.APPLICATION_JSON)
   @RolesAllowed("GUEST")
