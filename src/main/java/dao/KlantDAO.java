@@ -85,7 +85,7 @@ public abstract class KlantDAO {
           + "account_islid = :lidRechten,"
           + "account_isms = :msRechten,"
           + "account_isadmin = :adminRechten,"
-          + "account_isactief =:inMailingList "
+          + "account_isactief =:wantsMail "
           + "WHERE klant_email = :email;")
   public abstract void updateAccount(@BindBean Klant klant);
 
