@@ -24,7 +24,7 @@ public class LionsResource {
 
   @POST
   @ApiOperation("Verstuur de mail")
-  @Path("/verstuurnieuwsbrief")
+  @Path("/nieuwsbrief")
   @RolesAllowed("ADMIN")
   @Consumes(MediaType.APPLICATION_JSON)
   public Mail create(Mail mail) {
