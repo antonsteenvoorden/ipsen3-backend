@@ -1,11 +1,17 @@
 package service;
 
 import dao.KlantDAO;
+import model.Klant;
 import model.Mail;
 import model.MailSender;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.eclipse.jetty.util.security.Credential;
 import org.glassfish.jersey.internal.util.Base64;
 
 import javax.mail.internet.AddressException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Anton on 13/01/2016.
@@ -35,13 +41,30 @@ public class LionsService {
     try {
       Mail mail = new Mail();
       mail.setOnderwerp("Wachtwoord resetten Lions club");
-      String emailZout = email + "KaasIsBaas";
-      byte[] encodedBytes = Base64.encode(emailZout.getBytes());
+      String newPassword = RandomStringUtils.randomAlphanumeric(8);
+      MessageDigest md = null;
+      byte[] digest = null;
+      try {
+        md = MessageDigest.getInstance("SHA-256");
+        md.update(newPassword.getBytes("UTF-8")); // Change this to "UTF-16" if needed
+         digest = md.digest();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      String password = new String(digest);
+
+      Klant tmpKlant = new Klant();
+      tmpKlant.setEmail(email);
+      tmpKlant.setPassword(password);
+      klantDAO.updateWachtwoord(tmpKlant);
+
       String mailTekst = "Beste meneer/mevrouw" +
-              "Klik hier om uw wachtwoord te resetten http://145.97.16.190:8086/api/klanten/wachtwoord" +
+              "Uw nieuwe wachtwoord is: " + newPassword + "Voor gebruikersnaam: " + email +
               "Lionsclub Oegstgeest/Warmond" ;
-      System.out.println("encodedBytes " + new String(encodedBytes));
+      mail.setTekst(mailTekst);
+      mailSender.setNieuwsbrief(mail);
       mailSender.setOntvangers(email);
+      mailSender.sendMail();
     } catch (AddressException e) {
       e.printStackTrace();
     }

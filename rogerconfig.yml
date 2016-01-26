@@ -33,7 +33,7 @@ database:
   password: groep6
 
   # the JDBC URL
-  url: jdbc:mysql://192.168.2.170:3306/IPSEN3G6
+  url: jdbc:mysql://86.81.110.15:3306/IPSEN3G6
 
 swagger:
   resourcePackage: resource

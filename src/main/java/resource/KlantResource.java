@@ -92,6 +92,7 @@ public class KlantResource {
     @Path("/wachtwoordvergeten")
     @JsonView(_View.View.Protected.class)
     public void wachtwoordVergeten(String email) {
+        System.out.println("KlantResource.wachtwoordVergeten : " + email);
         lionsService.wachtwoordVergeten(email);
     }
 
