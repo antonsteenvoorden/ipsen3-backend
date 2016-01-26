@@ -37,7 +37,7 @@ public class KlantResource {
     @GET
     @ApiOperation("Get all klanten")
     @JsonView(_View.View.Public.class)
-    @RolesAllowed("GUEST")
+    @RolesAllowed("LID")
     public Collection<Klant> retrieveAll() {
         return service.getAll();
     }
