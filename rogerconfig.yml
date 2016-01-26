@@ -1,0 +1,47 @@
+#Edited by:
+#- Roger
+#- Anton
+
+apiName: "IPSEN3"
+
+assets:
+  mappings:
+    /assets: /
+  overrides:
+    /: ../workshop-client/public_html/
+
+server:
+  rootPath: /api/*
+  adminContextPath: /admin
+  applicationConnectors:
+  - type: http
+    port: 9000
+  adminConnectors:
+  - type: http
+    port: 9001
+
+# Database settings
+database:
+
+  # the name of the JDBC driver
+  driverClass: com.mysql.jdbc.Driver
+
+  # the username
+  user: dropwizzard
+
+  # the password
+  password: 12345
+
+  # the JDBC URL
+#  url: jdbc:mysql://145.97.16.190:3306/IPSEN3G6
+  url: jdbc:mysql://localhost:3306
+
+swagger:
+  resourcePackage: resource
+  title: KAAS
+  version: 9001
+  decription: It's over 9000!
+
+mailUser: "de.lions.club.oegstgeest@gmail.com"
+mailPassword: "lionsRules!"
+
