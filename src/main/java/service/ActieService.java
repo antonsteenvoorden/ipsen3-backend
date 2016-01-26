@@ -41,16 +41,15 @@ public class ActieService extends BaseService<Actie> {
 
   public void aanmelden(int id, Klant authenticator, Klant klant) {
     //checken of de gebruiker nog niet is ingeschreven
-    if(checkIngeschreven(id, authenticator)) {
+    if(!checkIngeschreven(id, authenticator)) {
       if (!authenticator.hasRole("ADMIN")) {
-        // Vaststellen dat de geauthenticeerde gebruiker
-        // zichzelf aan het aanpassen is, tenzij het een admin is
         assertSelf(authenticator, klant);
       }
 
       inschrijvingDAO.add(id, klant);
     } else {
       //already ingescrheven error ? .>...
+      System.out.println("ActieService.aanmelden :  al ingeschreven");
     }
   }
 
