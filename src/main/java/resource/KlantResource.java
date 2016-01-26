@@ -7,6 +7,7 @@ import io.dropwizard.auth.Auth;
 import model.Klant;
 import model.Order;
 import service.KlantService;
+import service.LionsService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -16,7 +17,7 @@ import java.util.Collection;
 
 /**
  * Meer informatie over resources:
- *  https://jersey.java.net/documentation/latest/Klant-guide.html#jaxrs-resources
+ * https://jersey.java.net/documentation/latest/Klant-guide.html#jaxrs-resources
  *
  * @author Peter van Vliet
  */
@@ -25,10 +26,12 @@ import java.util.Collection;
 @Produces(MediaType.APPLICATION_JSON)
 public class KlantResource {
     private final KlantService service;
+    private final LionsService lionsService;
 
-    public KlantResource(KlantService service)
-    {
+    public KlantResource(KlantService service, LionsService lionsService) {
         this.service = service;
+        this.lionsService = lionsService;
+
     }
 
     @GET
@@ -52,7 +55,6 @@ public class KlantResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @JsonView(_View.View.Protected.class)
     @ApiOperation("Create klant")
-    @RolesAllowed("LID")
     public void create(Klant klant) {
         System.out.println("KlantResource.create" + klant.toString());
         service.add(klant);
@@ -86,6 +88,12 @@ public class KlantResource {
         return service.getOrdersByKlant(email, orderFill, wijnFill);
     }
 
+    @GET
+    @Path("/wachtwoordvergeten")
+    @JsonView(_View.View.Protected.class)
+    public void wachtwoordVergeten(String email) {
+        lionsService.wachtwoordVergeten(email);
+    }
 
 //    @DELETE
 //    @Path("/{email}")

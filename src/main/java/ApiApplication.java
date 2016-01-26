@@ -88,10 +88,10 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);
     KlantService klantService = new KlantService(klantDAO, orderService);
-    KlantResource klantResource = new KlantResource(klantService);
 
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
+    KlantResource klantResource = new KlantResource(klantService,lionsService);
 
     setupAuthentication(environment, klantDAO);
     configureClientFilter(environment);
