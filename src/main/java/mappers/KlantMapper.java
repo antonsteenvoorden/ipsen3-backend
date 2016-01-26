@@ -22,6 +22,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     }
     if(hasColumn(resultSet, "klant_voornaam")){
       klant.setVoornaam((resultSet.getString("klant_voornaam")));
+      System.out.println("KlantMapper.map : " +klant.getVoornaam());
     }
 
     if(hasColumn(resultSet, "klant_tussenvoegsel")){
@@ -45,7 +46,7 @@ public class KlantMapper implements ResultSetMapper<Klant> {
     }
 
     if(hasColumn(resultSet, "klant_postcode")){
-      klant.setVoornaam((resultSet.getString("klant_postcode")));
+      klant.setPostcode((resultSet.getInt("klant_postcode")));
     }
 
     if(hasColumn(resultSet, "klant_postcode_toevoeging")){

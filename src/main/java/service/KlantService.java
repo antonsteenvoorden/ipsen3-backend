@@ -27,7 +27,7 @@ public class KlantService extends BaseService<Klant> {
             // zichzelf aan het aanpassen is, tenzij het een admin is
             assertSelf(authenticator, klant);
         }
-        return requireResult(dao.get(email));
+        return requireResult(klant);
     }
 
     public void add(Klant klant) {
