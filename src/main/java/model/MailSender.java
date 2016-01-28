@@ -5,6 +5,11 @@ import javax.mail.internet.*;
 import java.util.Collection;
 import java.util.Properties;
 
+/**
+ * @author Anton Steenvoorden
+ * Verstuurd de mail vanaf het email adres dat in de .yml staat
+ * Maakt gebruikt van of GMAIL SMTP server of die van Microsoft
+ */
 public class MailSender {
 
   /*mail properties*/
@@ -25,6 +30,12 @@ public class MailSender {
     this.bericht = bericht;
   }
 
+  /**
+   * Ontvangt een Collectie van Klanten als ontvangers, loopt hier doorheen om de bijhorende
+   * email adressen als InternetAdress te converteren.
+   * @param ontvangers
+   * @throws AddressException
+   */
   public void setOntvangers(Collection<Klant> ontvangers) throws AddressException {
     this.ontvangers = new InternetAddress[ontvangers.size()];
 
@@ -35,6 +46,12 @@ public class MailSender {
     }
   }
 
+  /**
+   * Ontvangt een enkel emailadres in de parameter, deze wordt gebruikt voor het verzenden
+   * van het wachtwoord naar de gebruiker, en eventueel een confirmatie mail
+   * @param ontvanger
+   * @throws AddressException
+   */
   public void setOntvangers(String ontvanger) throws AddressException {
     this.ontvangers = new InternetAddress[1];
     ontvangers[0] =  new InternetAddress(ontvanger);
@@ -45,6 +62,10 @@ public class MailSender {
     this.password = password;
   }
 
+  /**
+   * Maakt de mailsender gereed om vanaf een gmail host de mail te versturen
+   * Hierbij worden de gebruiker, wachtwoord, host, poortnummer en protocol eigenschappen gevuld
+   */
   public void setUpGmailMailProperties() {
     systeemProperties = new Properties();
     host = "smtp.gmail.com";
@@ -63,6 +84,10 @@ public class MailSender {
     session.setDebug(true);
   }
 
+  /**
+   * Maakt de mailsender gereed om vanaf een outlook host de mail te versturen
+   * * Hierbij worden de gebruiker, wachtwoord, host, poortnummer en protocol eigenschappen gevuld
+   */
   public void setUpOutlookMailProperties() {
     systeemProperties = new Properties();
     host = "smtp-mail.outlook.com";
@@ -79,6 +104,14 @@ public class MailSender {
     session.setDebug(true);
   }
 
+  /**
+   * Methode die de mail daadwerkelijk verstuurd,
+   * controleert of de mail waar vanaf wordt verzonden gmail of van microsoft is en kiest een van
+   * de twee set properties methodes.
+   * Gebruikt de ontvangers en het bericht om de mail te verzenden.
+   * Gebruikt ook een GMailAuthenticator om het wachtwoord en de gebruikersnaam als authenticatie
+   * te gebruiken
+   */
   public void sendMail() {
     if(username.contains("gmail.com")) {
       setUpGmailMailProperties();
@@ -106,18 +139,5 @@ public class MailSender {
     }
   }
 }
-class GMailAuthenticator extends Authenticator {
-  String user;
-  String pw;
-  public GMailAuthenticator (String username, String password)
-  {
-    super();
-    this.user = username;
-    this.pw = password;
-  }
-  public PasswordAuthentication getPasswordAuthentication()
-  {
-    return new PasswordAuthentication(user, pw);
-  }
-}
+
 

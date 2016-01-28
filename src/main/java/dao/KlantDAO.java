@@ -11,10 +11,20 @@ import java.util.Collection;
 
 /**
  * Created by Anton on 11/01/2016.
+ * Gebruikt KlantMapper om de resultset te binden aan de Klant model klasse.
+ * Enkele klant ophalen, alle klanten ophalen, alleen de rijen nodig voor de authenticate ophalen,
+ * een nieuwe klant invoeren, een klant updaten, alleen het wachtwoord van de klant updaten
+ * en het ophalen van de emailadressen van de klanten die mail willen ontvangen.
  */
 @RegisterMapper(KlantMapper.class)
 public abstract class KlantDAO {
 
+  /**
+   * Geeft een enkele klant terug op basis van emailadres
+   * Maakt gebruik van een join om uit de tabel klant en account gegevens te halen
+   * @param email
+   * @return Klant
+   */
   @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
           + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
           + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
@@ -22,7 +32,11 @@ public abstract class KlantDAO {
           + "FROM klant LEFT JOIN account ON account.klant_email = klant.klant_email WHERE klant.klant_email = :email; ")
   public abstract Klant get(@Bind("email") String email);
 
-
+  /**
+   * Geeft alle klanten terug.
+   * Maakt gebruik van een join om uit de tabel klant en account gegevens te halen
+   * @return Collection<Klant>
+   */
   @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
           + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
           + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
@@ -31,18 +45,34 @@ public abstract class KlantDAO {
           + "FROM klant INNER JOIN account ON klant.klant_email = account.klant_email")
   public abstract Collection<Klant> getAll();
 
-
+  /**
+   * Haalt de rijen nodig voor het authentiseren van de klant op
+   * ontvangt een emailadres (username)
+   * @param username
+   * @return Klant
+   */
   @SqlQuery("SELECT klant_email, account_password, account_isklant, " +
           "account_islid, account_isms, account_isadmin FROM account " +
           "WHERE account.klant_email = :klant_email AND account_isactief = 1")
   public abstract Klant getAuthStub(@Bind("klant_email") String username);
 
+  /**
+   * Transactie om een nieuwe klant toe te voegen,
+   * insert eerst de klantgegevens in de klant tabel, en vervolgens aan de hand van het email adres
+   * ook in de account tabel.
+   * Ontvangt een Klant Bean en haalt hier alle waarden uit op.
+   * @param klant
+   */
   @Transaction
   public void add(@BindBean Klant klant){
     inserIntoKlant(klant);
     insertIntoAccount(klant);
   }
 
+  /**
+   * Insert gegevens in de klant tabel, hoort bij de transactie van het toevoegen van een klant
+   * @param klant
+   */
   @SqlUpdate("INSERT INTO `klant` (klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, klant_straatnaam, " +
           "klant_huisnummer, klant_huisnummer_toevoeging,klant_postcode, klant_postcode_toevoeging, klant_plaatsnaam, "+
           "klant_telefoon) VALUES (:email, :voornaam, :tussenvoegsel, " +

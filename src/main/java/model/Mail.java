@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Anton on 13/01/2016.
+ * Model klasse die de mail bevat. Wordt gebruikt door de nieuwsbrief en de wachtwoordvergeten
+ * functies.
  */
 public class Mail {
 
