@@ -26,6 +26,7 @@ import java.util.EnumSet;
  * Edited by:
  * - Anton
  * - Roger
+ * Main class, voegt alle resources en services toe.
  */
 public class ApiApplication extends Application<ApiConfiguration> {
   private final Logger logger = LoggerFactory.getLogger(ApiApplication.class);
@@ -59,6 +60,11 @@ public class ApiApplication extends Application<ApiConfiguration> {
     });
   }
 
+  /**
+   * Begin van de API. Maakt gebruik van de in de run-parameter meegegeven .YML bestand.
+   * @param configuration
+   * @param environment
+     */
   @Override
   public void run(ApiConfiguration configuration, Environment environment) {
     name = configuration.getApiName();
@@ -66,8 +72,6 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     final DBIFactory dbiFactory = new DBIFactory();
     final DBI jdbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
-
-//        final DBI jdbi = new DBI(String.format("jdbc:mysql://localhost/test", configuration.getUser(), configuration.getPassword()));
 
     WijnDAO wijnDao = jdbi.onDemand(WijnDAO.class);
     WijnService wijnService = new WijnService(wijnDao);
@@ -103,6 +107,12 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(orderResource);
   }
 
+  /**
+   * Voegt hier de authenticatie toe aan de API, ontvangt de KlantDAO om klanten op te halen uit de DB zodra iemand
+   * zich authentiseert. Dit is voor de vergelijking van de opgevraagde en de meegegeven klant.
+   * @param environment
+   * @param klantDAO
+     */
   private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
     AuthenticationService authenticationService = new AuthenticationService(klantDAO);
     ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
@@ -120,6 +130,11 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Klant.class));
   }
 
+  /**
+   * Zorgt ervoor dat er geen onzin requests worden geplaatst op de API,
+   * Geeft een mooie HTTP foutmelding.
+   * @param environment
+     */
   private void configureClientFilter(Environment environment) {
     environment.getApplicationContext().addFilter(
             new FilterHolder(new ClientFilter()),

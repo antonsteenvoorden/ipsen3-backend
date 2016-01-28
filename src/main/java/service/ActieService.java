@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.ws.rs.ClientErrorException;
 /**
  * Created by Anton on 20/01/2016.
+ * Service waar gebruik van wordt gemaakt door de ActieResource.
+ * Regelt de inschrijvingen en het aanmaken en ophalen van acties.
  */
 public class ActieService extends BaseService<Actie> {
   private final ActieDAO dao;
@@ -24,6 +26,10 @@ public class ActieService extends BaseService<Actie> {
     return dao.get(id);
   }
 
+  /**
+   * Haalt alle acties op.
+   * @return
+     */
   public Collection<Actie> getAll() {
     return dao.getAll();
   }
@@ -39,6 +45,13 @@ public class ActieService extends BaseService<Actie> {
     dao.update(actie);
   }
 
+  /**
+   * Krijgt mee een actie nummer (id), een authenticator (Credentials waarmee zijn ingelogd)
+   * En de klant die wordt ingeschreven voor de actie
+   * @param id
+   * @param authenticator
+   * @param klant
+     */
   public void aanmelden(int id, Klant authenticator, Klant klant) {
     //checken of de gebruiker nog niet is ingeschreven
     if(!checkIngeschreven(id, authenticator)) {
@@ -53,6 +66,10 @@ public class ActieService extends BaseService<Actie> {
     }
   }
 
+  /**
+   * Haalt alle actieve acties op
+   * @return
+     */
   public Collection<Actie> getActive() {
     return dao.getActive();
   }

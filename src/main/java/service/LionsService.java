@@ -23,7 +23,6 @@ public class LionsService {
   }
 
   public Mail send(Mail mail) {
-    //doe sheit uit dennis's barf controller / model
     mailSender.setNieuwsbrief(mail);
     try {
       mailSender.setOntvangers(klantDAO.getEmailAdressen());

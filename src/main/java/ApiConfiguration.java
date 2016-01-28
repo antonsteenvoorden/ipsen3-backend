@@ -51,14 +51,24 @@ public class ApiConfiguration extends Configuration implements AssetsBundleConfi
     return database;
   }
 
+  /**
+   * Haalt de API naam op uit het opgegeven .yml bestand
+   * @return String apiName
+     */
   public String getApiName() {
     return apiName;
   }
-
+  /**
+   * Haalt de EMail gebruikersnaam op uit het opgegeven .yml bestand
+   * @return String mailUser
+   */
   public String getMailUser() {
     return mailUser;
   }
-
+  /**
+   * Haalt het Email wachtwoord op uit het opgegeven .yml bestand
+   * @return String mailPassword
+   */
   public String getMailPassword() {
     return mailPassword;
   }
