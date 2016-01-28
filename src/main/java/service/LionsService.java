@@ -45,10 +45,9 @@ public class LionsService {
       tmpKlant.setEmail(email);
       tmpKlant.setPassword(password);
       klantDAO.updateWachtwoord(tmpKlant);
-
-      String mailTekst = "Beste meneer/mevrouw" +
+      String mailTekst = "Beste meneer/mevrouw, <br><br>" +
               "Uw nieuwe wachtwoord is: " + newPassword + " Voor gebruikersnaam: " + email +
-              "Lionsclub Oegstgeest/Warmond" ;
+              "<br><br>Lionsclub Oegstgeest/Warmond" ;
       mail.setTekst(mailTekst);
       mailSender.setNieuwsbrief(mail);
       mailSender.setOntvangers(email);
