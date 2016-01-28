@@ -89,6 +89,7 @@ public class KlantResource {
     }
 
     @POST
+    @ApiOperation("Nieuw wachtwoord versturen naar gebruiker")
     @Path("/wachtwoordvergeten")
     @JsonView(_View.View.Protected.class)
     public void wachtwoordVergeten(String email) {

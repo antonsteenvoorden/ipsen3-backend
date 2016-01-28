@@ -36,6 +36,7 @@ public class KlantService extends BaseService<Klant> {
 
     public void add(Klant klant) {
         klant.setKlantRechten(true);
+        klant.setPassword(HashService.getHash(klant.getPassword()));
         dao.add(klant);
     }
 
@@ -119,6 +120,7 @@ public class KlantService extends BaseService<Klant> {
     }
 
     public void updateWachtwoord(Klant authenticator, Klant updateKlant) {
+        updateKlant.setPassword(HashService.getHash(updateKlant.getPassword()));
         if (authenticator.getEmail().equals(updateKlant.getEmail())) {
             if (!authenticator.hasRole("ADMIN")) {
                 // Vaststellen dat de geauthenticeerde gebruiker

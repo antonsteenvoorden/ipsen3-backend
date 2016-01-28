@@ -22,10 +22,12 @@ public class AuthenticationService
 
     @Override
     public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
-        System.out.println("AuthenticationService.authenticate");
+        System.out.println("AuthenticationService.authenticate " + credentials.getPassword());
         Klant klant = klantDAO.getAuthStub(credentials.getUsername());
-
-        if (klant != null && klant.getPassword().equals(credentials.getPassword())) {
+        String password = HashService.getHash(credentials.getPassword());
+        System.out.println("Klant password: "+ klant.getPassword());
+        System.out.println("uthenticate password: " + password);
+        if (klant != null && klant.getPassword().equals(password)) {
             System.out.println("AuthenticationService.authenticate: returning " + klant.toString());
             return Optional.of(klant);
         }
