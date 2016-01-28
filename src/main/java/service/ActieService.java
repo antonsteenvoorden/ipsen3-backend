@@ -67,13 +67,20 @@ public class ActieService extends BaseService<Actie> {
   }
 
   /**
-   * Haalt alle actieve acties op
-   * @return
+   * Haalt alle actieve acties op uit de DAO
+   * @return Collection<Actie>
      */
   public Collection<Actie> getActive() {
     return dao.getActive();
   }
 
+  /**
+   * Controleert of de klant staat ingeschreven voor de opgegeven actie (id)
+   * Ontvangt de klant als authenticatie en geeft true of false terug
+   * @param id
+   * @param authenticator
+   * @return boolean
+     */
   public boolean checkIngeschreven(int id, Klant authenticator ) {
     return inschrijvingDAO.checkIngeschreven(id, authenticator.getEmail());
   }
