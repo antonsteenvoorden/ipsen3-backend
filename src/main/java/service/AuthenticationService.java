@@ -20,6 +20,13 @@ public class AuthenticationService
         this.klantDAO = klantDAO;
     }
 
+  /**
+   * Hashed de meegekregen credentials naar MD5 en vergelijkt deze met het wachtwoord in de database
+   * Ontvangt een base64 credentials (username:password)
+   * @param credentials
+   * @return Klant or absent
+   * @throws AuthenticationException
+   */
     @Override
     public Optional<Klant> authenticate(BasicCredentials credentials) throws AuthenticationException {
         System.out.println("AuthenticationService.authenticate " + credentials.getPassword());
@@ -35,7 +42,14 @@ public class AuthenticationService
         return Optional.absent();
     }
 
-    @Override
+
+  /**
+   * Controlleert of de klant de opgevraagde rol heeft. Ontvangt een klant object en een rol(String)
+   * @param klant
+   * @param roleName
+   * @return boolean
+   */
+  @Override
     public boolean authorize(Klant klant, String roleName) {
         return klant.hasRole(roleName);
     }

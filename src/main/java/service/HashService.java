@@ -4,9 +4,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Anton on 28/01/2016.
+ * Created by Anton on 28/01/2016.#
+ * Statische methode zodat er overal vandaan kan worden gehashed
  */
 public class HashService {
+  /**
+   * Hashed het meegekregen wachtwoord met het MD5 algorithme en zet deze om naar een hexadecimale
+   * string zodat er geen vreemde unicode tekens in de database worden geschreven.
+   * Returned het wachtwoord maar dan gehashed.
+   * @param password
+   * @return String password
+   */
     public static String getHash(String password) {
         MessageDigest md = null;
         StringBuffer sb = null;

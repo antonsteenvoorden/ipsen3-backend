@@ -12,6 +12,8 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Anton on 13/01/2016.
+ * Service die wordt gebruikt door de LionsResource en de KlantResource(voor het wachtwoord vergeten)
+ * Gebruikt voor het verzenden van mail
  */
 public class LionsService {
   MailSender mailSender;
@@ -22,6 +24,14 @@ public class LionsService {
     this.klantDAO = klantDAO;
   }
 
+  /**
+   * Ontvangt een Mail, wordt gebruikt om nieuwsbrieven mee te versturen
+   * Haalt de ontvangers op uit de klantDAO met de getEmailAdressen methode
+   * Geeft de verstuurde mail mee terug voor feedback aan de front end
+   *
+   * @param mail
+   * @return Mail
+   */
   public Mail send(Mail mail) {
     mailSender.setNieuwsbrief(mail);
     try {
@@ -33,6 +43,13 @@ public class LionsService {
     return mail;
   }
 
+  /**
+   * Ontvangt een email adres, hier wordt een random gegenereerd wachtwoord voor weggeschreven
+   * in de database en deze wordt ongehashed verzonden met de mail, zodat bij de authenticatie de
+   * hashing niet verkeerd gaat.
+   * Het email wordt gebonden aan een nieuw klant object dat naar de DAO verstuurd word.
+   * @param email
+   */
   public void wachtwoordVergeten(String email) {
     try {
       Mail mail = new Mail();

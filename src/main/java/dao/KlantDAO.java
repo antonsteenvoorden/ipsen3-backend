@@ -71,6 +71,8 @@ public abstract class KlantDAO {
 
   /**
    * Insert gegevens in de klant tabel, hoort bij de transactie van het toevoegen van een klant
+   * insert in klant tabel
+   * Ontvangt een Klant object voor de JDBI connectie
    * @param klant
    */
   @SqlUpdate("INSERT INTO `klant` (klant_email, klant_voornaam, klant_tussenvoegsel, klant_achternaam, klant_straatnaam, " +
@@ -79,17 +81,33 @@ public abstract class KlantDAO {
           ":achternaam, :straatnaam, :huisNummer, :huisNummerToevoeging, :postcode, :postcodeToevoeging,:plaatsNaam, :telefoon)")
   public abstract void inserIntoKlant(@BindBean Klant klant);
 
+  /**
+   * Insert gegevens in de klant tabel, hoort bij de transactie van het toevoegen van een klant
+   * insert in account tabel
+   * Ontvangt een Klant object voor de JDBI connectie
+   * @param klant
+   */
   @SqlUpdate("INSERT INTO `account` (account.klant_email, account_password)"+
           "VALUES(:email, :password)")
   public abstract void insertIntoAccount(@BindBean Klant klant);
 
 
+  /**
+   * Transactie om de klant up te daten in klant tabel en in account tabel
+   * Ontvangt een hele klant als object parameter
+   * @param klant
+   */
   @Transaction
   public void update(@BindBean Klant klant){
     updateKlant(klant);
     updateAccount(klant);
   }
 
+  /**
+   * Insert de gegevens van het klantobject in de klant tabel
+   * Ontvangt een klant object voor de JDBI
+   * @param klant
+   */
   @SqlUpdate("UPDATE klant "
           + "SET "
           + "klant_voornaam = :voornaam,"
@@ -108,6 +126,11 @@ public abstract class KlantDAO {
           + "WHERE klant_email = :email;")
   public abstract void updateKlant(@BindBean Klant klant);
 
+  /**
+   * Insert de gegevens van het klantobject in de account tabel
+   * Ontvangt een klant object voor de JDBI
+   * @param klant
+   */
   @SqlUpdate("UPDATE account "
           + "SET "
           + "account_isklant = :klantRechten,"
@@ -118,6 +141,10 @@ public abstract class KlantDAO {
           + "WHERE klant_email = :email;")
   public abstract void updateAccount(@BindBean Klant klant);
 
+  /**
+   * Update het wachtwoord voor de meegestuurde klant in de account tabel.
+   * @param klant
+   */
   @SqlUpdate("UPDATE account "
           + "SET account_password = :password " +
           "WHERE klant_email = :email;")
@@ -125,6 +152,12 @@ public abstract class KlantDAO {
 
   public abstract void delete(@Bind("klant_email") String email);
 
+  /**
+   * Haalt alleen de emailadressen op uit de klant/account tabel waarbij wantsmail 1 is (true)
+   * Returned Klant objecten die alleen een emailadres hebben. Dit kon niet direct naar
+   * InternetAddress worden gemaakt.
+   * @return Collection<Klant>
+   */
   @SqlQuery("SELECT klant.klant_email FROM klant INNER JOIN account ON klant.klant_email = account.klant_email " +
           "WHERE account_wantsmail = 1 ")
   public abstract Collection<Klant> getEmailAdressen();
