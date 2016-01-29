@@ -47,7 +47,7 @@ public class KlantResource {
   @GET
   @ApiOperation("Get all klanten")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("LID")
+  @RolesAllowed({"LID","MS","ADMIN"})
   public Collection<Klant> retrieveAll() {
     return service.getAll();
   }
@@ -65,7 +65,7 @@ public class KlantResource {
   @GET @Path("/{email}")
   @ApiOperation("Get klant by email")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public Klant retrieve(@PathParam("email") String email, @Auth Klant authenticator) {
     return service.get(email, authenticator);
   }
@@ -95,7 +95,7 @@ public class KlantResource {
   @ApiOperation("Update klant")
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public void update(@Auth Klant authenticator, Klant klant) {
     service.update(authenticator, klant);
   }
@@ -110,7 +110,7 @@ public class KlantResource {
   @ApiOperation("Update wachtwoord")
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public void updateWachtwoord(@Auth Klant authenticator, Klant klant) {
     service.updateWachtwoord(authenticator, klant);
   }
@@ -129,7 +129,7 @@ public class KlantResource {
   @Path("/{email}/orders")
   @ApiOperation("Get all orders of klant")
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public ArrayList<Order> getOrders(@PathParam("email") String email,
       @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     return service.getOrdersByKlant(email, orderFill, wijnFill);

@@ -33,7 +33,7 @@ public class LionsResource {
   @POST
   @ApiOperation("Verstuur de mail")
   @Path("/nieuwsbrief")
-  @RolesAllowed("ADMIN")
+  @RolesAllowed({"LID","MS","ADMIN"})
   @Consumes(MediaType.APPLICATION_JSON)
   public Mail create(Mail mail) {
     return lionsService.send(mail);

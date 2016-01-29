@@ -8,7 +8,10 @@ import java.security.Principal;
 
 /**
  * Edited by:
+ * - Anton
  * - Roger
+ * Model klasse voor de Wijn objecten
+ * Wordt gebruikt door de WijnService/WijnDAO/WijnResource
  */
 public class Wijn implements Principal {
     @JsonView(View.Public.class)

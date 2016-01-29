@@ -42,7 +42,7 @@ public class ActieResource {
   @ApiOperation("Get all active acties")
   @Path("/actief")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public Collection<Actie> retreiveActive() {
     return service.getActive();
   }
@@ -59,7 +59,7 @@ public class ActieResource {
   @Path("/{id}")
   @ApiOperation("Get actie by id")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public Actie retreive(@PathParam("id") int id) {
     return service.get(id);
   }
@@ -73,7 +73,7 @@ public class ActieResource {
      */
   @GET
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   @ApiOperation("Get all acties")
   public Collection<Actie> retrieveAll() {
     return service.getAll();
@@ -89,7 +89,7 @@ public class ActieResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Public.class)
-  @RolesAllowed("LID")
+  @RolesAllowed({"LID","MS","ADMIN"})
   @ApiOperation("Create actie")
   public void create(Actie actie) {
     service.add(actie);
@@ -105,7 +105,7 @@ public class ActieResource {
   @PUT
   @ApiOperation("Update actie")
   @Consumes(MediaType.APPLICATION_JSON)
-  @RolesAllowed("LID")
+  @RolesAllowed({"LID","MS","ADMIN"})
   @JsonView(_View.View.Public.class)
   public void update(@PathParam("id") int id, Actie actie) {
     service.update(actie);
@@ -124,7 +124,7 @@ public class ActieResource {
   @Path("/{id}/aanmeldingen")
   @ApiOperation("Klanten aanmelden")
   @Consumes(MediaType.APPLICATION_JSON)
-  @RolesAllowed("GUEST")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   @JsonView(_View.View.Public.class)
   public void aanmelden(@PathParam("id") int id ,@Auth Klant authenticator, Klant klant){
     service.aanmelden(id, authenticator, klant);
@@ -140,7 +140,7 @@ public class ActieResource {
   @GET
   @Path("/{id}/aanmeldingen")
   @ApiOperation("Get all inschrijvingen")
-  @RolesAllowed("LID")
+  @RolesAllowed({"LID","MS","ADMIN"})
   @JsonView(_View.View.Public.class)
   public Collection<Inschrijving> getAll(@PathParam("id")int id) {
     return service.getInschrijvingen(id);
