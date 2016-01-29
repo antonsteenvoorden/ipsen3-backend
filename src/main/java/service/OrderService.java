@@ -64,6 +64,7 @@ public class OrderService extends BaseService<Order> {
     order.setOrderID(newOrderID);
     if (order.getOrderRegelSet() != null) {
       for(OrderRegel orderRegel : order.getOrderRegelSet()) {
+        orderRegel.setOrderID(newOrderID);
         orderRegel.setOrderRegelID(orderRegelService.addOrderRegel(orderRegel));
       }
     }
