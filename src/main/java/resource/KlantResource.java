@@ -141,7 +141,7 @@ public class KlantResource {
    * @param email
    * @param order
    */
-  @GET
+  @POST
   @Path("/{email}/orders")
   @ApiOperation("Create order for klant")
   @JsonView(_View.View.Protected.class)
