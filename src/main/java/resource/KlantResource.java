@@ -136,6 +136,21 @@ public class KlantResource {
   }
 
   /**
+   * POST request op /klanten/{email}/orders
+   * maakt een order aan voor een klant
+   * @param email
+   * @param order
+   */
+  @GET
+  @Path("/{email}/orders")
+  @ApiOperation("Create order for klant")
+  @JsonView(_View.View.Protected.class)
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  public void makeOrder(@PathParam("email") String email, Order order) {
+    service.makeOrderForKlant(email, order);
+  }
+
+  /**
    * POST reqeust op /klanten/wachtwoordvergeten
    * Ontvangt een email adres en stuurt deze door naar lionservice, daar wordt een mail verzonden
    * @param email
@@ -148,6 +163,8 @@ public class KlantResource {
     System.out.println("KlantResource.wachtwoordVergeten : " + email);
     lionsService.wachtwoordVergeten(email);
   }
+
+
 
   //    @DELETE
   //    @Path("/{email}")

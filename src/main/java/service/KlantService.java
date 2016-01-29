@@ -137,6 +137,10 @@ public class KlantService extends BaseService<Klant> {
         return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill);
     }
 
+    public void makeOrderForKlant(String klantemail, Order order) {
+        orderService.add(order);
+    }
+
 
 //    public void delete(String email) {
 //        // Controleren of deze gebruiker wel bestaat
