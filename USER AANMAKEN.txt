@@ -23,3 +23,5 @@ CREATE USER 'username'@'localhost' IDENTIFIED BY 'password'
   "isAccountActief":true,
   "wantsMail": true
 }
+
+
