@@ -2,6 +2,7 @@ package service;
 
 import dao.OrderDAO;
 import model.Order;
+import model.OrderRegel;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -61,6 +62,11 @@ public class OrderService extends BaseService<Order> {
   public Order add(Order order) {
     int newOrderID = orderDAO.add(order);
     order.setOrderID(newOrderID);
+    if (order.getOrderRegelSet() != null) {
+      for(OrderRegel orderRegel : order.getOrderRegelSet()) {
+        orderRegel.setOrderRegelID(orderRegelService.addOrderRegel(orderRegel));
+      }
+    }
     return order;
   }
 

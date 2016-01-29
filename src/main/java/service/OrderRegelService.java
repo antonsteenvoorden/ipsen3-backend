@@ -61,4 +61,8 @@ public class OrderRegelService extends BaseService<OrderRegel> {
     orderRegel.setWijn(wijnService.retrieve(orderRegel.getWijnID()));
     return orderRegel;
   }
+
+  public int addOrderRegel(OrderRegel orderRegel) {
+    return orderRegelDAO.add(orderRegel);
+  }
 }

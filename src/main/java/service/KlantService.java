@@ -133,8 +133,8 @@ public class KlantService extends BaseService<Klant> {
         return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill);
     }
 
-    public void makeOrderForKlant(String klantemail, Order order) {
-        orderService.add(order);
+    public Order makeOrderForKlant(String klantemail, Order order) {
+        return orderService.add(order);
     }
 
 

@@ -146,8 +146,8 @@ public class KlantResource {
   @ApiOperation("Create order for klant")
   @JsonView(_View.View.Protected.class)
   @RolesAllowed({"GUEST","LID","MS","ADMIN"})
-  public void makeOrder(@PathParam("email") String email, Order order) {
-    service.makeOrderForKlant(email, order);
+  public Order makeOrder(@PathParam("email") String email, Order order) {
+    return service.makeOrderForKlant(email, order);
   }
 
   /**
