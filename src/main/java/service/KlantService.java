@@ -41,7 +41,6 @@ public class KlantService extends BaseService<Klant> {
     }
 
     public void update(Klant authenticator, Klant updateKlant) {
-        if (authenticator.getEmail().equals(updateKlant.getEmail())) {
             if (!authenticator.hasRole("ADMIN")) {
                 // Vaststellen dat de geauthenticeerde gebruiker
                 // zichzelf aan het aanpassen is, tenzij het een admin is
@@ -114,9 +113,6 @@ public class KlantService extends BaseService<Klant> {
             }
 
             dao.update(existingKlant);
-        } else {
-            throw new ForbiddenException();
-        }
     }
 
     public void updateWachtwoord(Klant authenticator, Klant updateKlant) {
