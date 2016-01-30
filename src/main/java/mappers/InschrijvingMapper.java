@@ -9,6 +9,9 @@ import java.sql.SQLException;
 
 /**
  * Created by Anton on 20/01/2016.
+ * InschrijvingMapper mapt de resultset van de InschrijvingDAO naar een Inschrijving
+ * @see dao.InschrijvingDAO
+ * @see Inschrijving
  */
 public class InschrijvingMapper implements ResultSetMapper<Inschrijving> {
 

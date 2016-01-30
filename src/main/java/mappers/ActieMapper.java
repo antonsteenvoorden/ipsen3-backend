@@ -9,6 +9,9 @@ import java.sql.SQLException;
 
 /**
  * Created by Anton on 20/01/2016.
+ * Acitemapper mapt de resultset van de ActieDAO naar een Actie
+ * @see dao.ActieDAO
+ * @see Actie
  */
 public class ActieMapper implements ResultSetMapper<Actie> {
   @Override

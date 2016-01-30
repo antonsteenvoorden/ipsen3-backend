@@ -10,6 +10,9 @@ import java.sql.SQLException;
 /**
  * Edited by:
  * - Roger
+ * WijnMapper mapt de resultset van de WijnDAO naar een Wijn
+ * @see dao.WijnDAO
+ * @see Wijn
  */
 public class WijnMapper implements ResultSetMapper<Wijn> {
     @Override

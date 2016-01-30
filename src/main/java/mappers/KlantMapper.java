@@ -10,6 +10,9 @@ import java.sql.SQLException;
 /**
  * Edited by:
  * - Roger
+ * KlantMapper mapt de resultset van de KlantDAO naar een Klant
+ * @see dao.KlantDAO
+ * @see Klant
  */
 public class KlantMapper implements ResultSetMapper<Klant> {
 
