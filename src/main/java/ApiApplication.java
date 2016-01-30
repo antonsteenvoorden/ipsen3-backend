@@ -96,6 +96,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
     KlantResource klantResource = new KlantResource(klantService,lionsService);
+    RogerKPIResource rogerKPIResource = new RogerKPIResource();
 
     setupAuthentication(environment, klantDAO);
     configureClientFilter(environment);
@@ -105,6 +106,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     environment.jersey().register(actieResource);
     environment.jersey().register(lionsResource);
     environment.jersey().register(orderResource);
+    environment.jersey().register(rogerKPIResource);
   }
 
   /**
