@@ -84,7 +84,7 @@ public class OrderResource {
   }
 
   /**
-   *
+   * updated een order
    * @param order
    */
   @PUT
