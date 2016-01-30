@@ -111,7 +111,6 @@ public class KlantService extends BaseService<Klant> {
             if (updateKlant.getWantsMail() != null && (updateKlant.getWantsMail() != existingKlant.getWantsMail())) {
                 existingKlant.setWantsMail(updateKlant.getWantsMail());
             }
-
             dao.update(existingKlant);
     }
 

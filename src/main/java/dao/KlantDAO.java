@@ -28,7 +28,7 @@ public abstract class KlantDAO {
   @SqlQuery("SELECT klant.klant_email, klant.klant_voornaam, klant.klant_tussenvoegsel, klant.klant_achternaam, "
           + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
           + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
-          + " klant.klant_gastlid, klant.klant_notitie, klant.klant_isactief, klant.klant_date, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin "
+          + " klant.klant_gastlid, klant.klant_notitie, klant.klant_isactief, klant.klant_date, account_wantsmail, account_isklant, account_islid, account_isms, account_isadmin, account.account_isactief  "
           + "FROM klant LEFT JOIN account ON account.klant_email = klant.klant_email WHERE klant.klant_email = :email; ")
   public abstract Klant get(@Bind("email") String email);
 
@@ -41,7 +41,7 @@ public abstract class KlantDAO {
           + "klant.klant_straatnaam, klant.klant_huisnummer, klant.klant_huisnummer_toevoeging, "
           + "klant.klant_postcode, klant.klant_postcode_toevoeging, klant.klant_plaatsnaam, klant.klant_telefoon,"
           + "klant.klant_gastlid, klant.klant_notitie, klant.klant_isactief, klant.klant_date, "
-          + "account.account_wantsmail, account.account_isklant, account.account_islid, account.account_isms, account.account_isadmin "
+          + "account.account_wantsmail, account.account_isklant, account.account_islid, account.account_isms, account.account_isadmin, account.account_isactief "
           + "FROM klant INNER JOIN account ON klant.klant_email = account.klant_email")
   public abstract Collection<Klant> getAll();
 
@@ -137,7 +137,8 @@ public abstract class KlantDAO {
           + "account_islid = :lidRechten,"
           + "account_isms = :msRechten,"
           + "account_isadmin = :adminRechten,"
-          + "account_isactief =:wantsMail "
+          + "account_wantsmail = :wantsMail,"
+          + "account_isactief = :accountActief "
           + "WHERE klant_email = :email;")
   public abstract void updateAccount(@BindBean Klant klant);
 
