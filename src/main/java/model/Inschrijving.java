@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Anton on 20/01/2016.
+ * Model klasse die word gebruikt om gebruikers in te schrijven voor een actie
  */
 public class Inschrijving {
   @NotEmpty

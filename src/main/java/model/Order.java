@@ -12,6 +12,7 @@ import java.util.Set;
  * Edited by:
  * - Anton
  * - Roger
+ * Model klasse die gebruikt word als representatie van een order in de applicatie.
  */
 public class Order implements Principal {
   @JsonView(View.Public.class)

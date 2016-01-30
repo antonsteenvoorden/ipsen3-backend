@@ -6,13 +6,13 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.annotation.Nullable;
-import javax.validation.constraints.Null;
 import java.security.Principal;
 
 /**
  * Edited by:
  * - Anton
  * - Roger
+ * Model klasse die gebruikt word als representatie van een gebruiker in de applicatie.
  */
 public class Klant implements Principal {
 

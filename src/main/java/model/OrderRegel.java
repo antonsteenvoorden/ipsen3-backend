@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 /**
  * Edited by:
  * - Roger
+ * Model klasse die gebruikt word als representatie van een orderregel in de applicatie.
  */
 public class OrderRegel {
   @JsonView(_View.View.Public.class)

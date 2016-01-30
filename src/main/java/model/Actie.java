@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created by Anton on 20/01/2016.
+ * Model klasse die een actie represententeerd.
+ * Word gebruikt om de online acties van de Lion's te representeren
  */
 public class Actie {
   @NotEmpty
