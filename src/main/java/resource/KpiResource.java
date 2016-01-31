@@ -3,6 +3,8 @@ package resource;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import io.dropwizard.auth.Auth;
+import model.Klant;
 import model.Kpi;
 import service.KpiService;
 
@@ -27,7 +29,7 @@ public class KpiResource {
   @GET
   @ApiOperation("Get KPI")
   @JsonView(_View.View.Public.class)
-  public Kpi getREKT() {
-    return kpiService.getKpi();
+  public Kpi get(@Auth Klant authorisation) {
+    return kpiService.getKpi(authorisation);
   }
 }
