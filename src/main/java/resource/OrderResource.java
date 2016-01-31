@@ -2,9 +2,12 @@ package resource;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import io.dropwizard.auth.Auth;
+import model.Klant;
 import model.Order;
 import service.OrderService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Set;
@@ -36,6 +39,7 @@ public class OrderResource {
    * @return
    */
   @GET
+  @RolesAllowed({"MS","ADMIN"})
   @ApiOperation("Get all orders")
   public Set<Order> retrieveAll(@QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     System.out.println("Oderfill = " + orderFill + ", wijnFill = " + wijnFill);
@@ -61,13 +65,13 @@ public class OrderResource {
   @GET
   @ApiOperation("Get specific order")
   @Path("/{id}")
-  public Order retrieve(@PathParam("id") int id, @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
+  public Order retrieve(@PathParam("id") int id, @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill, @Auth Klant authenticator) {
     if (wijnFill) {
-      return orderService.retrieveOrderWithOrderRegelsWithWijn(id);
+      return orderService.retrieveOrderWithOrderRegelsWithWijn(id, authenticator);
     } else if (orderFill) {
-      return orderService.retrieveOrderWithOrderRegels(id);
+      return orderService.retrieveOrderWithOrderRegels(id, authenticator);
     } else {
-      return orderService.retrieveEmptyOrder(id);
+      return orderService.retrieveEmptyOrder(id, authenticator);
     }
   }
 
@@ -79,8 +83,8 @@ public class OrderResource {
   @POST
   @ApiOperation("Create order")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Order create(Order order) {
-    return orderService.add(order);
+  public Order create(Order order, @Auth Klant authenticator) {
+    return orderService.add(order, authenticator);
   }
 
   /**
@@ -90,7 +94,7 @@ public class OrderResource {
   @PUT
   @ApiOperation("Update order")
   @Consumes(MediaType.APPLICATION_JSON)
-  public void update(Order order) {
-    orderService.update(order);
+  public void update(Order order, @Auth Klant authenticator) {
+    orderService.update(order, authenticator);
   }
 }

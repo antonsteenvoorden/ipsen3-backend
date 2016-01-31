@@ -19,5 +19,17 @@ public class BaseService<T> {
         }
     }
 
+    public void assertSelf(String klantEmail1, String klantEmail2) {
+        if (!klantEmail1.equals(klantEmail2)) {
+            throw new ForbiddenException();
+        }
+    }
+
+    public void assertRole(Klant authenticator, String role) {
+        if(!authenticator.hasRole(role)) {
+            throw new ForbiddenException();
+        }
+    }
+
 }
 

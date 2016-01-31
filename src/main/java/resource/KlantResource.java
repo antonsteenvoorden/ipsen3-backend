@@ -131,8 +131,8 @@ public class KlantResource {
   @JsonView(_View.View.Protected.class)
   @RolesAllowed({"GUEST","LID","MS","ADMIN"})
   public ArrayList<Order> getOrders(@PathParam("email") String email,
-      @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
-    return service.getOrdersByKlant(email, orderFill, wijnFill);
+      @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill, @Auth Klant authenticator) {
+    return service.getOrdersByKlant(email, orderFill, wijnFill, authenticator);
   }
 
   /**
