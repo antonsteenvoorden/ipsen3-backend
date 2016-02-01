@@ -128,8 +128,8 @@ public class KlantService extends BaseService<Klant> {
         }
     }
 
-    public ArrayList<Order> getOrdersByKlant(String email, boolean orderFill, boolean wijnFill) {
-        return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill);
+    public ArrayList<Order> getOrdersByKlant(String email, boolean orderFill, boolean wijnFill, Klant authenticator) {
+        return orderService.getOrdersByKlantEmail(email, orderFill, wijnFill, authenticator);
     }
 
 

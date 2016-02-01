@@ -1,6 +1,7 @@
 package service;
 
 import dao.OrderDAO;
+import model.Klant;
 import model.Order;
 import model.OrderRegel;
 
@@ -63,8 +64,12 @@ public class OrderService extends BaseService<Order> {
    * @param id
    * @return
    */
-  public Order retrieveEmptyOrder(int id) {
-    return requireResult(orderDAO.retrieve(id));
+  public Order retrieveEmptyOrder(int id, Klant authenticator) {
+    Order order = requireResult(orderDAO.retrieve(id));
+    if (!authenticator.hasRole("ADMIN")) {
+      assertSelf(authenticator.getEmail(), order.getKlantEmail());
+    }
+    return order;
   }
 
   /**
@@ -74,8 +79,8 @@ public class OrderService extends BaseService<Order> {
    * @param id
    * @return
    */
-  public Order retrieveOrderWithOrderRegels(int id) {
-    Order order = this.retrieveEmptyOrder(id);
+  public Order retrieveOrderWithOrderRegels(int id, Klant authenticator) {
+    Order order = this.retrieveEmptyOrder(id, authenticator);
     order.setOrderRegelSet(orderRegelService.retrieveEmptyOrderRegels(order.getOrderID()));
     return order;
   }
@@ -87,8 +92,8 @@ public class OrderService extends BaseService<Order> {
    * @param id
    * @return
    */
-  public Order retrieveOrderWithOrderRegelsWithWijn(int id) {
-    Order order = this.retrieveEmptyOrder(id);
+  public Order retrieveOrderWithOrderRegelsWithWijn(int id, Klant authenticator) {
+    Order order = this.retrieveEmptyOrder(id, authenticator);
     order.setOrderRegelSet(orderRegelService.retrieveOrderRegelsWithWijn(order.getOrderID()));
     return order;
   }
@@ -100,7 +105,10 @@ public class OrderService extends BaseService<Order> {
    * @param order
    * @return
    */
-  public Order add(Order order) {
+  public Order add(Order order, Klant authenticator) {
+    if (!authenticator.hasRole("ADMIN")) {
+      assertSelf(authenticator.getEmail(), order.getKlantEmail());
+    }
     int newOrderID = orderDAO.add(order);
     order.setOrderID(newOrderID);
     if (order.getOrderRegelSet() != null) {
@@ -116,8 +124,8 @@ public class OrderService extends BaseService<Order> {
    * updated een order.
    * @param newOrder
    */
-  public void update(Order newOrder) {
-    Order existingOrder = retrieveOrderWithOrderRegels(newOrder.getOrderID());
+  public void update(Order newOrder, Klant authenticator) {
+    Order existingOrder = retrieveOrderWithOrderRegels(newOrder.getOrderID(), authenticator);
     if (newOrder.getKlantEmail() != null) {
       existingOrder.setKlantEmail(newOrder.getKlantEmail());
     }
@@ -140,16 +148,16 @@ public class OrderService extends BaseService<Order> {
    * @param wijnFill
    * @return
    */
-  public ArrayList<Order> getOrdersByKlantEmail(String email, boolean orderFill, boolean wijnFill) {
+  public ArrayList<Order> getOrdersByKlantEmail(String email, boolean orderFill, boolean wijnFill, Klant authenticator) {
     Set<Integer> orderIDs = orderDAO.retrieveOrderIDs(email);
     ArrayList<Order> orders = new ArrayList<>();
     for (Integer id : orderIDs) {
       if (wijnFill) {
-        orders.add(this.retrieveOrderWithOrderRegelsWithWijn(id));
+        orders.add(this.retrieveOrderWithOrderRegelsWithWijn(id, authenticator));
       } else if (orderFill) {
-        orders.add(this.retrieveOrderWithOrderRegels(id));
+        orders.add(this.retrieveOrderWithOrderRegels(id, authenticator));
       } else {
-        orders.add(this.retrieveEmptyOrder(id));
+        orders.add(this.retrieveEmptyOrder(id, authenticator));
       }
     }
     return orders;
