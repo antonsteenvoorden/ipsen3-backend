@@ -89,7 +89,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
     OrderRegelService orderRegelService = new OrderRegelService(orderRegelDAO, wijnService);
 
     OrderDAO orderDAO = jdbi.onDemand(OrderDAO.class);
-    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService);
+    OrderService orderService = new OrderService(orderDAO, orderRegelService, actieService, wijnService);
     OrderResource orderResource = new OrderResource(orderService);
 
     KlantDAO klantDAO = jdbi.onDemand(KlantDAO.class);

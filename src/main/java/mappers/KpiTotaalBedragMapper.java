@@ -26,7 +26,7 @@ public class KpiTotaalBedragMapper implements ResultSetMapper<KpiTotaalBedrag> {
   @Override
   public KpiTotaalBedrag map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     KpiTotaalBedrag kpiTotaalBedrag = new KpiTotaalBedrag();
-    kpiTotaalBedrag.setTotaalBedrag(resultSet.getInt("orderRegelTotaal"));
+    kpiTotaalBedrag.setTotaalBedrag(resultSet.getInt("orderRegelTotaal") * 6);
     return kpiTotaalBedrag;
   }
 }

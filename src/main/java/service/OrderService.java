@@ -17,11 +17,13 @@ public class OrderService extends BaseService<Order> {
   private final OrderDAO orderDAO;
   private final OrderRegelService orderRegelService;
   private final ActieService actieService;
+  private final WijnService wijnService;
 
-  public OrderService(OrderDAO orderDAO, OrderRegelService orderRegelService, ActieService actieService) {
+  public OrderService(OrderDAO orderDAO, OrderRegelService orderRegelService, ActieService actieService, WijnService wijnService) {
     this.orderDAO = orderDAO;
     this.orderRegelService = orderRegelService;
     this.actieService = actieService;
+    this.wijnService = wijnService;
   }
 
   /**
@@ -113,6 +115,9 @@ public class OrderService extends BaseService<Order> {
     order.setOrderID(newOrderID);
     if (order.getOrderRegelSet() != null) {
       for(OrderRegel orderRegel : order.getOrderRegelSet()) {
+        if (orderRegel.getWijnPrijs() == 0) {
+          orderRegel.setWijnPrijs(wijnService.retrieve(orderRegel.getWijnID()).getPrijs());
+        }
         orderRegel.setOrderID(newOrderID);
         orderRegel.setOrderRegelID(orderRegelService.addOrderRegel(orderRegel));
       }
