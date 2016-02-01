@@ -25,6 +25,9 @@ public class MailSender {
   private Mail bericht;
   private InternetAddress[] ontvangers;
 
+  public String getUsername() {
+    return username;
+  }
 
   public void setNieuwsbrief(Mail bericht) {
     this.bericht = bericht;

@@ -44,6 +44,25 @@ public class LionsService {
   }
 
   /**
+   * Ontvangt een Mail, wordt gebruikt om het contactformulier mee te versturen
+   * verstuurt het naar de email van de lions
+   * @param mail
+   * @return Mail
+   */
+  public Mail sendContactFormulier(Mail mail) {
+    mailSender.setNieuwsbrief(mail);
+    try {
+      mailSender.setOntvangers(mailSender.getUsername());
+    } catch (AddressException e) {
+      e.printStackTrace();
+    }
+    mailSender.sendMail();
+    return mail;
+  }
+
+
+
+  /**
    * Ontvangt een email adres, hier wordt een random gegenereerd wachtwoord voor weggeschreven
    * in de database en deze wordt ongehashed verzonden met de mail, zodat bij de authenticatie de
    * hashing niet verkeerd gaat.

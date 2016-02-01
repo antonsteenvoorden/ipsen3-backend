@@ -42,4 +42,14 @@ public class LionsResource {
     return lionsService.send(mail);
   }
 
+  @POST
+  @ApiOperation("Verstuur het contactformulier")
+  @Path("/contact")
+  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Mail createContactFormulier(Mail mail) {
+    return lionsService.sendContactFormulier(mail);
+  }
+
+
 }
