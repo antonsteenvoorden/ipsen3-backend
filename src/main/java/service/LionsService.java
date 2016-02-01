@@ -5,13 +5,13 @@ import model.Klant;
 import model.Mail;
 import model.MailSender;
 import org.apache.commons.lang3.RandomStringUtils;
+
 import javax.mail.internet.AddressException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Anton on 13/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Service die wordt gebruikt door de LionsResource en de KlantResource(voor het wachtwoord vergeten)
  * Gebruikt voor het verzenden van mail
  */
@@ -48,6 +48,7 @@ public class LionsService {
    * in de database en deze wordt ongehashed verzonden met de mail, zodat bij de authenticatie de
    * hashing niet verkeerd gaat.
    * Het email wordt gebonden aan een nieuw klant object dat naar de DAO verstuurd word.
+   *
    * @param email
    */
   public void wachtwoordVergeten(String email) {
@@ -62,8 +63,8 @@ public class LionsService {
       tmpKlant.setPassword(password);
       klantDAO.updateWachtwoord(tmpKlant);
       String mailTekst = "Beste meneer/mevrouw, <br><br>" +
-              "Uw nieuwe wachtwoord is: " + newPassword + " Voor gebruikersnaam: " + email +
-              "<br><br>Lionsclub Oegstgeest/Warmond" ;
+          "Uw nieuwe wachtwoord is: " + newPassword + " Voor gebruikersnaam: " + email +
+          "<br><br>Lionsclub Oegstgeest/Warmond";
       mail.setTekst(mailTekst);
       mailSender.setNieuwsbrief(mail);
       mailSender.setOntvangers(email);

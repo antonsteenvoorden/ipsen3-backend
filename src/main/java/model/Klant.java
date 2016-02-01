@@ -12,6 +12,7 @@ import java.security.Principal;
  * Edited by:
  * - Anton
  * - Roger
+ * <p/>
  * Model klasse die gebruikt word als representatie van een gebruiker in de applicatie.
  */
 public class Klant implements Principal {
@@ -276,10 +277,10 @@ public class Klant implements Principal {
   }
 
   public String toString() {
-    return "Email: " +email
-            + " Rechten: " + "GUEST" + getKlantRechten()
-            + " LID" + getLidRechten() + " MS " + getMsRechten()
-            + " ADMIN" + getAdminRechten();
+    return "Email: " + email
+        + " Rechten: " + "GUEST" + getKlantRechten()
+        + " LID" + getLidRechten() + " MS " + getMsRechten()
+        + " ADMIN" + getAdminRechten();
   }
 
   public boolean hasRole(String role) {

@@ -7,9 +7,11 @@ import model.Inschrijving;
 import model.Klant;
 
 import java.util.Collection;
-import javax.ws.rs.ClientErrorException;
+
 /**
- * Created by Anton on 20/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Service waar gebruik van wordt gemaakt door de ActieResource.
  * Regelt de inschrijvingen en het aanmaken en ophalen van acties.
  */
@@ -28,8 +30,9 @@ public class ActieService extends BaseService<Actie> {
 
   /**
    * Haalt alle acties op.
+   *
    * @return
-     */
+   */
   public Collection<Actie> getAll() {
     return dao.getAll();
   }
@@ -37,6 +40,7 @@ public class ActieService extends BaseService<Actie> {
   public Collection<Inschrijving> getInschrijvingen(int id) {
     return inschrijvingDAO.getAll(id);
   }
+
   public void add(Actie actie) {
     dao.add(actie);
   }
@@ -48,13 +52,14 @@ public class ActieService extends BaseService<Actie> {
   /**
    * Krijgt mee een actie nummer (id), een authenticator (Credentials waarmee zijn ingelogd)
    * En de klant die wordt ingeschreven voor de actie
+   *
    * @param id
    * @param authenticator
    * @param klant
-     */
+   */
   public void aanmelden(int id, Klant authenticator, Klant klant) {
     //checken of de gebruiker nog niet is ingeschreven
-    if(!checkIngeschreven(id, authenticator)) {
+    if (!checkIngeschreven(id, authenticator)) {
       if (!authenticator.hasRole("ADMIN")) {
         assertSelf(authenticator, klant);
       }
@@ -68,8 +73,9 @@ public class ActieService extends BaseService<Actie> {
 
   /**
    * Haalt alle actieve acties op uit de DAO
+   *
    * @return Collection<Actie>
-     */
+   */
   public Collection<Actie> getActive() {
     return dao.getActive();
   }
@@ -77,11 +83,12 @@ public class ActieService extends BaseService<Actie> {
   /**
    * Controleert of de klant staat ingeschreven voor de opgegeven actie (id)
    * Ontvangt de klant als authenticatie en geeft true of false terug
+   *
    * @param id
    * @param authenticator
    * @return boolean
-     */
-  public boolean checkIngeschreven(int id, Klant authenticator ) {
+   */
+  public boolean checkIngeschreven(int id, Klant authenticator) {
     return inschrijvingDAO.checkIngeschreven(id, authenticator.getEmail());
   }
 }

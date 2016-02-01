@@ -16,6 +16,7 @@ import java.util.Set;
  * Edited by:
  * - Roger
  * - Anton
+ * <p/>
  * Resource die alle requests afhandelt op /api/orders
  */
 @Api("Orders")
@@ -34,12 +35,13 @@ public class OrderResource {
    * Als wijnFill niet meegegeven word of false is word gekeken naar orderFill.
    * Als orderFill megegeven en true is worden de orders gevuld met orderregels, maar worden die orderregels niet met wijnen gevuld.
    * Mochten zowel orderFill als wijnFill niet meegegeven worden of false zijn worden alleen de lege orders.
+   *
    * @param orderFill
    * @param wijnFill
    * @return
    */
   @GET
-  @RolesAllowed({"MS","ADMIN"})
+  @RolesAllowed({"MS", "ADMIN"})
   @ApiOperation("Get all orders")
   public Set<Order> retrieveAll(@QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill) {
     System.out.println("Oderfill = " + orderFill + ", wijnFill = " + wijnFill);
@@ -58,6 +60,7 @@ public class OrderResource {
    * Als wijnFill niet meegegeven word of false is word gekeken naar orderFill.
    * Als orderFill megegeven en true is worden de orders gevuld met orderregels, maar worden die orderregels niet met wijnen gevuld.
    * Mochten zowel orderFill als wijnFill niet meegegeven worden of false zijn worden alleen de lege orders.
+   *
    * @param orderFill
    * @param wijnFill
    * @return
@@ -77,6 +80,7 @@ public class OrderResource {
 
   /**
    * Maakt een order aan
+   *
    * @param order
    * @return
    */
@@ -89,6 +93,7 @@ public class OrderResource {
 
   /**
    * updated een order
+   *
    * @param order
    */
   @PUT

@@ -8,9 +8,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by roger on 31-1-2016.
+ Edited by:
+ * -Jordan
+ * -Sidney
+ * -Dennis
+ * -Roger
  */
 public class KpiTotaalBedragMapper implements ResultSetMapper<KpiTotaalBedrag> {
+  /**
+   * Mapt de resultset naar een KpitotaalBedrag object
+   * @param i
+   * @param resultSet
+   * @param statementContext
+   * @return
+   * @throws SQLException
+   */
   @Override
   public KpiTotaalBedrag map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
     KpiTotaalBedrag kpiTotaalBedrag = new KpiTotaalBedrag();

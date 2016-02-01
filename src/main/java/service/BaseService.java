@@ -5,6 +5,12 @@ import model.Klant;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 
+/**
+ *  * Edited by:
+ * - Anton
+ * - Roger
+ * @param <T>
+ */
 public class BaseService<T> {
     public T requireResult(T model) {
         if (model == null) {

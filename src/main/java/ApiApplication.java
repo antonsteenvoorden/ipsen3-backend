@@ -26,6 +26,7 @@ import java.util.EnumSet;
  * Edited by:
  * - Anton
  * - Roger
+ * <p/>
  * Main class, voegt alle resources en services toe.
  */
 public class ApiApplication extends Application<ApiConfiguration> {
@@ -62,9 +63,10 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
   /**
    * Begin van de API. Maakt gebruik van de in de run-parameter meegegeven .YML bestand.
+   *
    * @param configuration
    * @param environment
-     */
+   */
   @Override
   public void run(ApiConfiguration configuration, Environment environment) {
     name = configuration.getApiName();
@@ -95,7 +97,7 @@ public class ApiApplication extends Application<ApiConfiguration> {
 
     LionsService lionsService = new LionsService(configuration.getMailUser(), configuration.getMailPassword(), klantDAO);
     LionsResource lionsResource = new LionsResource(lionsService);
-    KlantResource klantResource = new KlantResource(klantService,lionsService);
+    KlantResource klantResource = new KlantResource(klantService, lionsService);
 
     KpiDAO kpiDAO = jdbi.onDemand(KpiDAO.class);
     KpiTotaalBedragDAO kpiTotaalBedragDAO = jdbi.onDemand(KpiTotaalBedragDAO.class);
@@ -116,20 +118,21 @@ public class ApiApplication extends Application<ApiConfiguration> {
   /**
    * Voegt hier de authenticatie toe aan de API, ontvangt de KlantDAO om klanten op te halen uit de DB zodra iemand
    * zich authentiseert. Dit is voor de vergelijking van de opgevraagde en de meegegeven klant.
+   *
    * @param environment
    * @param klantDAO
-     */
+   */
   private void setupAuthentication(Environment environment, KlantDAO klantDAO) {
     AuthenticationService authenticationService = new AuthenticationService(klantDAO);
     ApiUnauthorizedHandler unauthorizedHandler = new ApiUnauthorizedHandler();
 
     environment.jersey().register(new AuthDynamicFeature(
-                    new BasicCredentialAuthFilter.Builder<Klant>()
-                            .setAuthenticator(authenticationService)
-                            .setAuthorizer(authenticationService)
-                            .setRealm("Niet zichtbaar voor allen")
-                            .setUnauthorizedHandler(unauthorizedHandler)
-                            .buildAuthFilter())
+        new BasicCredentialAuthFilter.Builder<Klant>()
+            .setAuthenticator(authenticationService)
+            .setAuthorizer(authenticationService)
+            .setRealm("Niet zichtbaar voor allen")
+            .setUnauthorizedHandler(unauthorizedHandler)
+            .buildAuthFilter())
     );
 
     environment.jersey().register(RolesAllowedDynamicFeature.class);
@@ -139,13 +142,14 @@ public class ApiApplication extends Application<ApiConfiguration> {
   /**
    * Zorgt ervoor dat er geen onzin requests worden geplaatst op de API,
    * Geeft een mooie HTTP foutmelding.
+   *
    * @param environment
-     */
+   */
   private void configureClientFilter(Environment environment) {
     environment.getApplicationContext().addFilter(
-            new FilterHolder(new ClientFilter()),
-            "/*",
-            EnumSet.allOf(DispatcherType.class)
+        new FilterHolder(new ClientFilter()),
+        "/*",
+        EnumSet.allOf(DispatcherType.class)
     );
   }
 

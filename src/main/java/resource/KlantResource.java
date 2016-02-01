@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author Anton
+ * Edited by:
+ * - Anton
+ * - Roger
+ * <p/>
  * Resource die alle requests afhandelt op /api/klanten
  * Heeft een get request voor alle klanten, voor een enkele klant
  * Heeft een post request om een nieuwe klant aan te maken
@@ -47,7 +50,7 @@ public class KlantResource {
   @GET
   @ApiOperation("Get all klanten")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"LID","MS","ADMIN"})
+  @RolesAllowed({"LID", "MS", "ADMIN"})
   public Collection<Klant> retrieveAll() {
     return service.getAll();
   }
@@ -62,10 +65,11 @@ public class KlantResource {
    * @param authenticator
    * @return Klant
    */
-  @GET @Path("/{email}")
+  @GET
+  @Path("/{email}")
   @ApiOperation("Get klant by email")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public Klant retrieve(@PathParam("email") String email, @Auth Klant authenticator) {
     return service.get(email, authenticator);
   }
@@ -88,6 +92,7 @@ public class KlantResource {
   /**
    * PUT Request, ontvangt de authenticator,
    * de gegevens van de nieuwe klant en update deze in de klant service
+   *
    * @param authenticator
    * @param klant
    */
@@ -95,7 +100,7 @@ public class KlantResource {
   @ApiOperation("Update klant")
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public void update(@Auth Klant authenticator, Klant klant) {
     service.update(authenticator, klant);
   }
@@ -103,6 +108,7 @@ public class KlantResource {
   /**
    * PUT request op /klanten/wachtwoord om het wachtwoord te veranderen, ontvangt de authenticator,
    * email en het wachtwoord en roept de update methode aan in de klantservice
+   *
    * @param klant
    */
   @PUT
@@ -110,7 +116,7 @@ public class KlantResource {
   @ApiOperation("Update wachtwoord")
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public void updateWachtwoord(@Auth Klant authenticator, Klant klant) {
     service.updateWachtwoord(authenticator, klant);
   }
@@ -120,6 +126,7 @@ public class KlantResource {
    * haalt alle orders op voor de meegegeven email/klant
    * Ontvangt de authenticator, email adres, of de orders moeten worden weergeven
    * en of de wijnen in de orders moeten worden weergeven
+   *
    * @param email
    * @param orderFill
    * @param wijnFill
@@ -129,15 +136,16 @@ public class KlantResource {
   @Path("/{email}/orders")
   @ApiOperation("Get all orders of klant")
   @JsonView(_View.View.Protected.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public ArrayList<Order> getOrders(@PathParam("email") String email,
-      @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill, @Auth Klant authenticator) {
+                                    @QueryParam("orderFill") boolean orderFill, @QueryParam("wijnFill") boolean wijnFill, @Auth Klant authenticator) {
     return service.getOrdersByKlant(email, orderFill, wijnFill, authenticator);
   }
 
   /**
    * POST reqeust op /klanten/wachtwoordvergeten
    * Ontvangt een email adres en stuurt deze door naar lionservice, daar wordt een mail verzonden
+   *
    * @param email
    */
   @POST
@@ -148,7 +156,6 @@ public class KlantResource {
     System.out.println("KlantResource.wachtwoordVergeten : " + email);
     lionsService.wachtwoordVergeten(email);
   }
-
 
 
   //    @DELETE

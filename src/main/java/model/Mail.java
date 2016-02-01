@@ -3,7 +3,9 @@ package model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Created by Anton on 13/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Model klasse die de mail bevat. Wordt gebruikt door de nieuwsbrief en de wachtwoordvergeten
  * functies.
  */

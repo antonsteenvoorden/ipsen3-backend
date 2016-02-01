@@ -15,7 +15,9 @@ import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
 /**
- * Created by Anton on 20/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Vangt alle requests af op het basis pad + /actie
  * Ontvangt en produceert JSON strings
  * Comments en code geschreven door Anton
@@ -26,8 +28,7 @@ import java.util.Collection;
 public class ActieResource {
   private final ActieService service;
 
-  public ActieResource(ActieService service)
-  {
+  public ActieResource(ActieService service) {
     this.service = service;
   }
 
@@ -36,13 +37,14 @@ public class ActieResource {
    * Toegestaan voor GASTEN of hoger
    * Haalt alle actieve acties op
    * Produceert een collectie van Actie's
+   *
    * @return Collectie<Actie>
    */
   @GET
   @ApiOperation("Get all active acties")
   @Path("/actief")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public Collection<Actie> retreiveActive() {
     return service.getActive();
   }
@@ -52,14 +54,15 @@ public class ActieResource {
    * Haalt alleen een enkele opgevraagde actie op aan de hand van het actie nummer
    * Toegestaan voor gasten of hoger
    * Produceert een enkele Actie
+   *
    * @param id
    * @return Actie
-     */
+   */
   @GET
   @Path("/{id}")
   @ApiOperation("Get actie by id")
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   public Actie retreive(@PathParam("id") int id) {
     return service.get(id);
   }
@@ -69,11 +72,12 @@ public class ActieResource {
    * haalt ALLE acties op uit de database
    * Toegestaan voor gasten of hoger
    * Produceert een collectie van Actie's
+   *
    * @return Collection<Actie>
-     */
+   */
   @GET
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   @ApiOperation("Get all acties")
   public Collection<Actie> retrieveAll() {
     return service.getAll();
@@ -84,12 +88,13 @@ public class ActieResource {
    * Ontvangt de nieuwe actie
    * maakt een nieuwe actie aan.
    * Toegestaan voor LID of hoger
+   *
    * @param actie
-     */
+   */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @JsonView(_View.View.Public.class)
-  @RolesAllowed({"LID","MS","ADMIN"})
+  @RolesAllowed({"LID", "MS", "ADMIN"})
   @ApiOperation("Create actie")
   public void create(Actie actie) {
     service.add(actie);
@@ -100,12 +105,13 @@ public class ActieResource {
    * Ontvangt een actie met nieuwe waarden
    * wijzigt de actie
    * Toegestaan voor LID of hoger
+   *
    * @param actie
    */
   @PUT
   @ApiOperation("Update actie")
   @Consumes(MediaType.APPLICATION_JSON)
-  @RolesAllowed({"LID","MS","ADMIN"})
+  @RolesAllowed({"LID", "MS", "ADMIN"})
   @JsonView(_View.View.Public.class)
   public void update(@PathParam("id") int id, Actie actie) {
     service.update(actie);
@@ -116,17 +122,18 @@ public class ActieResource {
    * Meld een nieuwe klant / schrijft een klant in voor de gespecificeerde actie
    * Ontvangt een actie nummer (id) de authenticatie credentials en de desbetreffende klant
    * Toegestaan voor GASTEN of hoger
+   *
    * @param id
    * @param authenticator
    * @param klant
-     */
+   */
   @POST
   @Path("/{id}/aanmeldingen")
   @ApiOperation("Klanten aanmelden")
   @Consumes(MediaType.APPLICATION_JSON)
-  @RolesAllowed({"GUEST","LID","MS","ADMIN"})
+  @RolesAllowed({"GUEST", "LID", "MS", "ADMIN"})
   @JsonView(_View.View.Public.class)
-  public void aanmelden(@PathParam("id") int id ,@Auth Klant authenticator, Klant klant){
+  public void aanmelden(@PathParam("id") int id, @Auth Klant authenticator, Klant klant) {
     service.aanmelden(id, authenticator, klant);
   }
 
@@ -134,15 +141,16 @@ public class ActieResource {
    * GET request op /actie/{id}/aanmeldingen
    * Haalt alle aanmeldingen op voor de gespecificeerde actie
    * Ontvangt een actie nummer(id)
+   *
    * @param id
    * @return
-     */
+   */
   @GET
   @Path("/{id}/aanmeldingen")
   @ApiOperation("Get all inschrijvingen")
-  @RolesAllowed({"LID","MS","ADMIN"})
+  @RolesAllowed({"LID", "MS", "ADMIN"})
   @JsonView(_View.View.Public.class)
-  public Collection<Inschrijving> getAll(@PathParam("id")int id) {
+  public Collection<Inschrijving> getAll(@PathParam("id") int id) {
     return service.getInschrijvingen(id);
   }
 }

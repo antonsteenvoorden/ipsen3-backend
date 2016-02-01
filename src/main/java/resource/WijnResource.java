@@ -1,23 +1,25 @@
 package resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import exception.ResponseException;
-import com.wordnik.swagger.annotations.Api;
 import model.Wijn;
 import service.WijnService;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Edited by:
  * - Roger
  * - Anton
+ * <p/>
  * Resource die alle api calls afhandelt voor de wijnen.
  * Ondersteuning voor alleen ophalen, aanpassen en toevoegen gaat via IPSEN2
  */
@@ -35,6 +37,7 @@ public class WijnResource {
   /**
    * GET request op /wijnen
    * Haalt alle wijnen op
+   *
    * @return Collection<Wijn>
    */
   @GET
@@ -48,6 +51,7 @@ public class WijnResource {
   /**
    * GET request op /wijnen/actief
    * Haalt alleen de actieve wijnen op
+   *
    * @return Collection<Wijn>
    */
   @GET
@@ -62,6 +66,7 @@ public class WijnResource {
   /**
    * Get request op een /wijnen/{id}
    * waar id een wijn_serie_id is, haalt een enkele wijn op aan de hand van het meegegeven id
+   *
    * @param id
    * @return Wijn
    */

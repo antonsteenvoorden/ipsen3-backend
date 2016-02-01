@@ -8,7 +8,8 @@ import javax.ws.rs.core.Response;
 import java.util.Set;
 
 /**
- * Created by roger on 11-1-2016.
+ * Edited by:
+ * - Roger
  */
 public class OrderRegelService extends BaseService<OrderRegel> {
   private final OrderRegelDAO orderRegelDAO;

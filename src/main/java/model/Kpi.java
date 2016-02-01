@@ -3,7 +3,13 @@ package model;
 import com.fasterxml.jackson.annotation.JsonView;
 
 /**
- * Created by roger on 30-1-2016.
+ * Edited by:
+ * -Jordan
+ * -Sidney
+ * -Dennis
+ * -Roger
+ * <p/>
+ * Represententeerd een kpi welke het aantal klanten, aantal orders en totaalbedrag aan orders bevat.
  */
 public class Kpi {
   @JsonView(_View.View.Public.class)

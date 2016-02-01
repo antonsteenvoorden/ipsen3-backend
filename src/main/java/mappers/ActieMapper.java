@@ -8,8 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Anton on 20/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Acitemapper mapt de resultset van de ActieDAO naar een Actie
+ *
  * @see dao.ActieDAO
  * @see Actie
  */

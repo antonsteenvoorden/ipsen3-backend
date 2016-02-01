@@ -4,7 +4,10 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
 /**
- * Created by Anton on 29/01/2016.
+ * Edited by:
+ * - Anton
+ * - Roger
+ * <p/>
  * Klasse waarmee de gebruiker en wachtwoord naar een gmail authenticatie wordt geconverteerd
  */
 public class GMailAuthenticator extends Authenticator {

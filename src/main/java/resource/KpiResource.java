@@ -14,7 +14,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by roger on 31-1-2016.
+ * Edited by:
+ * -Jordan
+ * -Sidney
+ * -Dennis
+ * -Roger
  */
 @Api("kpi")
 @Path("/kpi")
@@ -26,6 +30,11 @@ public class KpiResource {
     this.kpiService = kpiService;
   }
 
+  /**
+   * Haalt het kpi object op
+   * @param authorisation
+   * @return
+   */
   @GET
   @ApiOperation("Get KPI")
   @JsonView(_View.View.Public.class)

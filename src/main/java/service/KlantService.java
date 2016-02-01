@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author Anton Steenvoorden
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class KlantService extends BaseService<Klant> {
     private final KlantDAO dao;

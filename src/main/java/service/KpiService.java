@@ -10,7 +10,11 @@ import javax.ws.rs.ForbiddenException;
 import java.util.Set;
 
 /**
- * Created by roger on 31-1-2016.
+ * Edited by:
+ * -Jordan
+ * -Sidney
+ * -Dennis
+ * -Roger
  */
 public class KpiService extends BaseService<Kpi> {
   private KpiDAO kpiDAO;
@@ -21,6 +25,13 @@ public class KpiService extends BaseService<Kpi> {
     this.kpiTotaalBedragDAO = kpiTotaalBedragDAO;
   }
 
+  /**
+   * Haalt eerst een Kpi op zonder totaalbedrag.
+   * Haalt de totaalbedragset op.
+   * Telt deze bij elkaar op en het resultaat word gezet in het Kpi object.
+   * @param authorisation
+   * @return
+   */
   public Kpi getKpi(Klant authorisation) {
     if (authorisation.hasRole("ADMIN") || authorisation.hasRole("MS")) {
 

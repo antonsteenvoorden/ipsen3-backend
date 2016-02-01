@@ -10,7 +10,9 @@ import model.Klant;
 
 
 /**
- * @author Anton Steenvoorden
+ * Edited by:
+ * - Anton
+ * - Roger
  */
 public class AuthenticationService
     implements Authenticator<BasicCredentials, Klant>, Authorizer<Klant> {

@@ -3,6 +3,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ *  * Edited by:
+ * - Anton
+ * - Roger
+ */
 public class ClientFilter implements Filter {
   private static final String[] allowedExtensions =
           {

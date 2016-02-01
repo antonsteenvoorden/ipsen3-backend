@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 /**
  * Edited by:
  * - Roger
+ * <p/>
  * Model klasse die gebruikt word als representatie van een orderregel in de applicatie.
  */
 public class OrderRegel {

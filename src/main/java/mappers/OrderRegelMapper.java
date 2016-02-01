@@ -10,7 +10,9 @@ import java.sql.SQLException;
 /**
  * Edited by:
  * - Roger
+ * <p/>
  * OrderRegelMapper mapt de resultset van de OrderRegelDAO naar een OrderRegel
+ *
  * @see dao.OrderRegelDAO
  * @see OrderRegel
  */

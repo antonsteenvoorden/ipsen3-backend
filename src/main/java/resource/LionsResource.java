@@ -10,7 +10,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by Anton on 13/01/2016.
+ * Edited by:
+ * - Anton
+ * <p/>
  * Hierin staan een aantal functies van de lions
  * Tot nu toe hebben we alleen het verzenden van de nieuwsbrief
  */
@@ -27,13 +29,14 @@ public class LionsResource {
   /**
    * Maakt en verstuurd een nieuwsbrief naar alle klanten die wantsmail op true hebben
    * Ontvangt een mail met een onderwerp en tekst
+   *
    * @param mail
    * @return
    */
   @POST
   @ApiOperation("Verstuur de mail")
   @Path("/nieuwsbrief")
-  @RolesAllowed({"LID","MS","ADMIN"})
+  @RolesAllowed({"LID", "MS", "ADMIN"})
   @Consumes(MediaType.APPLICATION_JSON)
   public Mail create(Mail mail) {
     return lionsService.send(mail);

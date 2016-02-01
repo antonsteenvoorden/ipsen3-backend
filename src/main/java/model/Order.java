@@ -12,6 +12,7 @@ import java.util.Set;
  * Edited by:
  * - Anton
  * - Roger
+ * <p/>
  * Model klasse die gebruikt word als representatie van een order in de applicatie.
  */
 public class Order implements Principal {
@@ -74,7 +75,8 @@ public class Order implements Principal {
     this.isActief = isActief;
   }
 
-  @Nullable public Set<OrderRegel> getOrderRegelSet() {
+  @Nullable
+  public Set<OrderRegel> getOrderRegelSet() {
     return orderRegelSet;
   }
 

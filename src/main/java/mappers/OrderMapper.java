@@ -11,7 +11,9 @@ import java.sql.SQLException;
  * Edited by:
  * - Anton
  * - Roger
+ * <p/>
  * OrderMapper mapt de resultset van de OrderDAO naar een Order
+ *
  * @see dao.OrderDAO
  * @see Order
  */
